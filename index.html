@@ -10,8 +10,9 @@
     <meta property="og:title" content="Nani-me — Anime Streaming, Redefined">
     <meta property="og:description" content="A premium anime discovery and streaming experience for Android phones and Android TV. Offline downloads, smart library, and remote-friendly playback.">
     <meta property="og:type" content="website">
-    <!-- Favicon (inline SVG, no extra request) -->
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%238B5CF6'/%3E%3Cstop offset='1' stop-color='%23EC4899'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Ctext x='32' y='44' font-family='Arial, sans-serif' font-size='34' font-weight='800' fill='%23fff' text-anchor='middle'%3EN%3C/text%3E%3C/svg%3E">
+    <!-- Favicon (app icon) -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/app-icon.png">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,6 +27,7 @@
         <div class="header-container">
             <a href="#" class="logo-link">
                 <span class="logo-glow"></span>
+                <img src="images/app-icon.png" alt="Nani-me app icon" class="logo-icon" width="36" height="36">
                 <span class="logo-text">Nani-<span class="highlight-text">me</span></span>
             </a>
 
@@ -40,9 +42,6 @@
                 </ul>
             </nav>
 
-            <div class="header-cta">
-                <a href="#download" id="header-download-btn" class="btn btn-sm btn-primary">Get App</a>
-            </div>
         </div>
     </header>
 
@@ -56,7 +55,7 @@
 
             <div class="container hero-container">
                 <div class="hero-content">
-                    <span class="badge">Mobile v2.1.0 &nbsp;·&nbsp; TV v1.1.0</span>
+                    <span class="badge">Mobile v2.1.0 &nbsp;·&nbsp; TV v2.0.0</span>
                     <h1 class="hero-title">Anime Streaming, <br><span class="gradient-text">Redefined</span>.</h1>
                     <p class="hero-description">
                         Nani-me is a modern, premium anime discovery and streaming experience built for Android. Browse thousands of titles, track your progress, download episodes for offline viewing, and stream on both your smartphone and your television.
@@ -64,7 +63,7 @@
                     <div class="hero-actions">
                         <a href="#download" id="hero-mobile-dl" class="btn btn-lg btn-primary btn-glow">
                             <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                                <path d="M17.5 9.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5m-11 0c-.83 0-1.5-.67-1.5-1.5S5.67 6.5 6.5 6.5 8 7.17 8 8s-.67 1.5-1.5 1.5M16 1.01L14.17 2.9c-.31-.15-.65-.25-1-.29L14.7 1.01c-.13-.37-.53-.57-.9-.44l-2.03.73-.01.01c-.8-.28-1.68-.42-2.56-.42-1.92 0-3.78.69-5.18 1.95L2 1.01C1.63 1.14 1.43 1.54 1.56 1.91l1.53 4.14C1.94 7.69 1.18 9.3 1.03 11H23c-.15-1.7-.91-3.31-2.06-4.95l1.53-4.14c.13-.37-.07-.77-.44-.9L20.2 1.74l-.01-.01L18 2.61c-.35.04-.69.14-1 .29L18.83 1.01c-.13-.37-.53-.57-.9-.44zM1.03 12.01c.21 4.54 3.98 8.01 8.47 8.01.59 0 1.17-.06 1.75-.18l-.94-2.54c-.27.02-.54.03-.81.03-3.15 0-5.78-2.31-6.19-5.32H1.03zm21.94 0h-2.28c-.41 3.01-3.04 5.32-6.19 5.32-.27 0-.54-.01-.81-.03l-.94 2.54c.58.12 1.16.18 1.75.18 4.49 0 8.26-3.47 8.47-8.01z"/>
+                                <path d="M18.4395 5.5586c-.675 1.1664-1.352 2.3318-2.0274 3.498-.0366-.0155-.0742-.0286-.1113-.043-1.8249-.6957-3.484-.8-4.42-.787-1.8551.0185-3.3544.4643-4.2597.8203-.084-.1494-1.7526-3.021-2.0215-3.4864a1.1451 1.1451 0 0 0-.1406-.1914c-.3312-.364-.9054-.4859-1.379-.203-.475.282-.7136.9361-.3886 1.5019 1.9466 3.3696-.0966-.2158 1.9473 3.3593.0172.031-.4946.2642-1.3926 1.0177C2.8987 12.176.452 14.772 0 18.9902h24c-.119-1.1108-.3686-2.099-.7461-3.0683-.7438-1.9118-1.8435-3.2928-2.7402-4.1836a12.1048 12.1048 0 0 0-2.1309-1.6875c.6594-1.122 1.312-2.2559 1.9649-3.3848.2077-.3615.1886-.7956-.0079-1.1191a1.1001 1.1001 0 0 0-.8515-.5332c-.5225-.0536-.9392.3128-1.0488.5449zm-.0391 8.461c.3944.5926.324 1.3306-.1563 1.6503-.4799.3197-1.188.0985-1.582-.4941-.3944-.5927-.324-1.3307.1563-1.6504.4727-.315 1.1812-.1086 1.582.4941zM7.207 13.5273c.4803.3197.5506 1.0577.1563 1.6504-.394.5926-1.1038.8138-1.584.4941-.48-.3197-.5503-1.0577-.1563-1.6504.4008-.6021 1.1087-.8106 1.584-.4941z"/>
                             </svg>
                             Get Mobile App
                         </a>
@@ -490,7 +489,7 @@
                         <div class="dl-card-content">
                             <div class="dl-platform">
                                 <svg class="dl-icon color-purple" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                                    <path d="M17.5 9.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5m-11 0c-.83 0-1.5-.67-1.5-1.5S5.67 6.5 6.5 6.5 8 7.17 8 8s-.67 1.5-1.5 1.5M16 1.01L14.17 2.9c-.31-.15-.65-.25-1-.29L14.7 1.01c-.13-.37-.53-.57-.9-.44l-2.03.73-.01.01c-.8-.28-1.68-.42-2.56-.42-1.92 0-3.78.69-5.18 1.95L2 1.01C1.63 1.14 1.43 1.54 1.56 1.91l1.53 4.14C1.94 7.69 1.18 9.3 1.03 11H23c-.15-1.7-.91-3.31-2.06-4.95l1.53-4.14c.13-.37-.07-.77-.44-.9L20.2 1.74l-.01-.01L18 2.61c-.35.04-.69.14-1 .29L18.83 1.01c-.13-.37-.53-.57-.9-.44zM1.03 12.01c.21 4.54 3.98 8.01 8.47 8.01.59 0 1.17-.06 1.75-.18l-.94-2.54c-.27.02-.54.03-.81.03-3.15 0-5.78-2.31-6.19-5.32H1.03zm21.94 0h-2.28c-.41 3.01-3.04 5.32-6.19 5.32-.27 0-.54-.01-.81-.03l-.94 2.54c.58.12 1.16.18 1.75.18 4.49 0 8.26-3.47 8.47-8.01z"/>
+                                    <path d="M18.4395 5.5586c-.675 1.1664-1.352 2.3318-2.0274 3.498-.0366-.0155-.0742-.0286-.1113-.043-1.8249-.6957-3.484-.8-4.42-.787-1.8551.0185-3.3544.4643-4.2597.8203-.084-.1494-1.7526-3.021-2.0215-3.4864a1.1451 1.1451 0 0 0-.1406-.1914c-.3312-.364-.9054-.4859-1.379-.203-.475.282-.7136.9361-.3886 1.5019 1.9466 3.3696-.0966-.2158 1.9473 3.3593.0172.031-.4946.2642-1.3926 1.0177C2.8987 12.176.452 14.772 0 18.9902h24c-.119-1.1108-.3686-2.099-.7461-3.0683-.7438-1.9118-1.8435-3.2928-2.7402-4.1836a12.1048 12.1048 0 0 0-2.1309-1.6875c.6594-1.122 1.312-2.2559 1.9649-3.3848.2077-.3615.1886-.7956-.0079-1.1191a1.1001 1.1001 0 0 0-.8515-.5332c-.5225-.0536-.9392.3128-1.0488.5449zm-.0391 8.461c.3944.5926.324 1.3306-.1563 1.6503-.4799.3197-1.188.0985-1.582-.4941-.3944-.5927-.324-1.3307.1563-1.6504.4727-.315 1.1812-.1086 1.582.4941zM7.207 13.5273c.4803.3197.5506 1.0577.1563 1.6504-.394.5926-1.1038.8138-1.584.4941-.48-.3197-.5503-1.0577-.1563-1.6504.4008-.6021 1.1087-.8106 1.584-.4941z"/>
                                 </svg>
                                 <div>
                                     <h3>Nani-me Mobile</h3>
