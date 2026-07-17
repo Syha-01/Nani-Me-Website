@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nani-me — Anime Streaming & Discovery for Android and Android TV</title>
+    <meta name="description" content="Nani-me is a beautiful, self-contained anime streaming and discovery app for Android phones and Android TV. No accounts, offline downloads, watchlist tracking, D-pad-first TV controls, and over-the-air updates.">
+    <meta name="theme-color" content="#0F0F1A">
+    <!-- Open Graph / social sharing -->
+    <meta property="og:title" content="Nani-me — Anime Streaming, Redefined">
+    <meta property="og:description" content="A premium anime discovery and streaming experience for Android phones and Android TV. Offline downloads, smart library, and remote-friendly playback.">
+    <meta property="og:type" content="website">
+    <!-- Favicon (inline SVG, no extra request) -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%238B5CF6'/%3E%3Cstop offset='1' stop-color='%23EC4899'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Ctext x='32' y='44' font-family='Arial, sans-serif' font-size='34' font-weight='800' fill='%23fff' text-anchor='middle'%3EN%3C/text%3E%3C/svg%3E">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header id="main-header" class="header-fixed">
+        <div class="header-container">
+            <a href="#" class="logo-link">
+                <span class="logo-glow"></span>
+                <span class="logo-text">Nani-<span class="highlight-text">me</span></span>
+            </a>
+
+            <nav id="navbar" class="nav-menu">
+                <ul>
+                    <li><a href="#hero" class="nav-link active">Home</a></li>
+                    <li><a href="#features" class="nav-link">Features</a></li>
+                    <li><a href="#showcase" class="nav-link">Editions</a></li>
+                    <li><a href="#compare" class="nav-link">Compare</a></li>
+                    <li><a href="#install" class="nav-link">Install</a></li>
+                    <li><a href="#download" class="nav-link">Download</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-cta">
+                <a href="#download" id="header-download-btn" class="btn btn-sm btn-primary">Get App</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="glow-bg glow-primary"></div>
+            <div class="glow-bg glow-accent"></div>
+
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <span class="badge">Mobile v2.1.0 &nbsp;·&nbsp; TV v1.1.0</span>
+                    <h1 class="hero-title">Anime Streaming, <br><span class="gradient-text">Redefined</span>.</h1>
+                    <p class="hero-description">
+                        Nani-me is a modern, premium anime discovery and streaming experience built for Android. Browse thousands of titles, track your progress, download episodes for offline viewing, and stream on both your smartphone and your television.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#download" id="hero-mobile-dl" class="btn btn-lg btn-primary btn-glow">
+                            <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M17.5 9.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5m-11 0c-.83 0-1.5-.67-1.5-1.5S5.67 6.5 6.5 6.5 8 7.17 8 8s-.67 1.5-1.5 1.5M16 1.01L14.17 2.9c-.31-.15-.65-.25-1-.29L14.7 1.01c-.13-.37-.53-.57-.9-.44l-2.03.73-.01.01c-.8-.28-1.68-.42-2.56-.42-1.92 0-3.78.69-5.18 1.95L2 1.01C1.63 1.14 1.43 1.54 1.56 1.91l1.53 4.14C1.94 7.69 1.18 9.3 1.03 11H23c-.15-1.7-.91-3.31-2.06-4.95l1.53-4.14c.13-.37-.07-.77-.44-.9L20.2 1.74l-.01-.01L18 2.61c-.35.04-.69.14-1 .29L18.83 1.01c-.13-.37-.53-.57-.9-.44zM1.03 12.01c.21 4.54 3.98 8.01 8.47 8.01.59 0 1.17-.06 1.75-.18l-.94-2.54c-.27.02-.54.03-.81.03-3.15 0-5.78-2.31-6.19-5.32H1.03zm21.94 0h-2.28c-.41 3.01-3.04 5.32-6.19 5.32-.27 0-.54-.01-.81-.03l-.94 2.54c.58.12 1.16.18 1.75.18 4.49 0 8.26-3.47 8.47-8.01z"/>
+                            </svg>
+                            Get Mobile App
+                        </a>
+                        <a href="#download" id="hero-tv-dl" class="btn btn-lg btn-accent btn-glow">
+                            <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/>
+                            </svg>
+                            Get TV App
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hero-image-container">
+                    <!--
+                        SCREENSHOT PLACEHOLDER — hero showcase (wide, ~16:10).
+                        To use a real image, replace the <div class="ph ph-hero">…</div> below with:
+                        <div class="showcase-frame">
+                            <img src="images/hero-showcase.png" alt="Nani-me mobile and TV apps" class="hero-showcase-img">
+                        </div>
+                    -->
+                    <div class="ph ph-hero" role="img" aria-label="Screenshot placeholder: Nani-me on phone and TV">
+                        <div class="ph-skeleton">
+                            <div class="sk-banner"></div>
+                            <div class="sk-rail"><span></span><span></span><span></span><span></span></div>
+                            <div class="sk-rail"><span></span><span></span><span></span><span></span></div>
+                        </div>
+                        <div class="ph-caption">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                            <span>Screenshot coming soon</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Highlights -->
+        <section id="features" class="highlights-section">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="sub-title">Local Power & Speed</span>
+                    <h2>A Better Way to Watch</h2>
+                    <p class="section-desc">Nani-me values privacy, flexibility, and performance above all — everything important lives on your device.</p>
+                </div>
+
+                <div class="grid grid-3">
+                    <!-- Highlight 1 -->
+                    <div class="highlight-card card-glow-purple">
+                        <div class="card-icon-container">
+                            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                        </div>
+                        <h3>No Accounts, No Tracking</h3>
+                        <p>No sign-up, no profile, nothing phoning home. Everything runs on your device and works the moment you open it — the same on both the phone and TV editions.</p>
+                    </div>
+
+                    <!-- Highlight 2 -->
+                    <div class="highlight-card card-glow-pink">
+                        <div class="card-icon-container">
+                            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                        </div>
+                        <h3>Offline Downloads</h3>
+                        <p>Take your shows anywhere. Download episodes on mobile, organized neatly per series with progress bars and file sizes — then watch fully offline with resume, next/previous episode, and shared watch history.</p>
+                    </div>
+
+                    <!-- Highlight 3 -->
+                    <div class="highlight-card card-glow-purple">
+                        <div class="card-icon-container">
+                            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                        </div>
+                        <h3>Smart Local Library</h3>
+                        <p>Track your anime with saved statuses — "Watching," "Watch Later," and "Completed" — plus automatic watch history and resume points. Everything is stored offline on your own device.</p>
+                    </div>
+
+                    <!-- Highlight 4 -->
+                    <div class="highlight-card card-glow-pink">
+                        <div class="card-icon-container">
+                            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                            </svg>
+                        </div>
+                        <h3>Premium Playback</h3>
+                        <p>Hassle-free HLS streaming with playback speeds from 0.5× to 2×, double-tap gesture seeking, and auto-play of the next episode with a countdown. All streams are hard-subbed — subtitles are always part of the picture, no setup needed.</p>
+                    </div>
+
+                    <!-- Highlight 5 -->
+                    <div class="highlight-card card-glow-purple">
+                        <div class="card-icon-container">
+                            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                        </div>
+                        <h3>Release Schedule</h3>
+                        <p>Never miss a premiere. A comprehensive, timezone-aware weekly calendar tracks upcoming and recently aired episodes so you always know what drops next.</p>
+                    </div>
+
+                    <!-- Highlight 6 -->
+                    <div class="highlight-card card-glow-pink">
+                        <div class="card-icon-container">
+                            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <polyline points="23 4 23 10 17 10"></polyline>
+                                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                            </svg>
+                        </div>
+                        <h3>Self-Updating</h3>
+                        <p>Both editions receive over-the-air updates. When something breaks or improves, the fix arrives automatically the next time you open the app — no reinstall, no waiting.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Showcase / App Editions Tab Menu -->
+        <section id="showcase" class="showcase-section">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="sub-title">Interactive Showcase</span>
+                    <h2>Explore the App Editions</h2>
+                    <p class="section-desc">Switch below to discover the tailored experience built for each screen size.</p>
+                </div>
+
+                <!-- Tab Controls -->
+                <div class="tab-controls" role="tablist">
+                    <button id="tab-mobile-btn" class="tab-btn active" role="tab" aria-selected="true" aria-controls="panel-mobile" tabindex="0">
+                        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                            <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                        </svg>
+                        Mobile App
+                    </button>
+                    <button id="tab-tv-btn" class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-tv" tabindex="-1">
+                        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                        </svg>
+                        Android TV App
+                    </button>
+                </div>
+
+                <!-- Tab Panels Container -->
+                <div class="tab-panels-wrapper">
+                    <!-- Mobile Panel -->
+                    <div id="panel-mobile" class="tab-panel active" role="tabpanel" aria-labelledby="tab-mobile-btn">
+                        <div class="showcase-grid">
+                            <div class="showcase-img-col">
+                                <!--
+                                    SCREENSHOT PLACEHOLDER — mobile app (portrait phone, ~9:19).
+                                    To use a real screenshot, replace the <div class="ph ph-phone">…</div> below with:
+                                    <div class="showcase-frame phone-frame">
+                                        <img src="images/phone-mockup.png" alt="Nani-me mobile app interface" class="showcase-mockup-img">
+                                    </div>
+                                -->
+                                <div class="ph ph-phone" role="img" aria-label="Screenshot placeholder: Nani-me mobile app">
+                                    <span class="ph-notch"></span>
+                                    <div class="ph-skeleton">
+                                        <div class="sk-banner"></div>
+                                        <div class="sk-rail"><span></span><span></span><span></span></div>
+                                        <div class="sk-rail"><span></span><span></span><span></span></div>
+                                        <div class="sk-tabbar"></div>
+                                    </div>
+                                    <div class="ph-caption">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                                        <span>Screenshot coming soon</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="showcase-info-col">
+                                <span class="badge badge-purple">Phone & Tablet Optimized</span>
+                                <h3>Nani-me Mobile</h3>
+                                <p class="panel-intro">A modern, smooth experience built with Expo and React Native, putting the massive anime world in your pocket — fast, private, and fully self-contained.</p>
+
+                                <ul class="feature-bullets">
+                                    <li>
+                                        <span class="bullet-num">01</span>
+                                        <div>
+                                            <strong>Dynamic Spotlight Home</strong>
+                                            <p>A featured spotlight carousel backed by living rails: Continue Watching, Trending Now, Episode Released, Upcoming, and Finished Airing — with See All pages for each.</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="bullet-num">02</span>
+                                        <div>
+                                            <strong>Deep Catalog & Instant Search</strong>
+                                            <p>Detailed pages with synopses, scores, studios, related titles, and recommendations. Search shows live suggestions with posters as you type, and every genre is browsable.</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="bullet-num">03</span>
+                                        <div>
+                                            <strong>Offline Downloads</strong>
+                                            <p>Download episodes straight from the episode list. Downloads are organized per series, show live progress, and play back offline with resume and next/previous episode support.</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="bullet-num">04</span>
+                                        <div>
+                                            <strong>Library & Weekly Schedule</strong>
+                                            <p>Mark shows as Watching, Watch Later, or Completed, and follow a timezone-aware weekly release calendar. Everything is saved locally, keeping your watchlist private.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TV Panel -->
+                    <div id="panel-tv" class="tab-panel" role="tabpanel" aria-labelledby="tab-tv-btn" hidden>
+                        <div class="showcase-grid">
+                            <div class="showcase-img-col">
+                                <!--
+                                    SCREENSHOT PLACEHOLDER — TV app (landscape, 16:9).
+                                    To use a real screenshot, replace the <div class="ph ph-tv">…</div> below with:
+                                    <div class="showcase-frame tv-frame">
+                                        <img src="images/tv-mockup.png" alt="Nani-me Android TV interface" class="showcase-mockup-img">
+                                    </div>
+                                -->
+                                <div class="ph ph-tv" role="img" aria-label="Screenshot placeholder: Nani-me on Android TV">
+                                    <div class="ph-skeleton">
+                                        <div class="sk-banner"></div>
+                                        <div class="sk-rail"><span></span><span></span><span></span><span></span><span></span></div>
+                                        <div class="sk-rail"><span></span><span></span><span></span><span></span><span></span></div>
+                                    </div>
+                                    <div class="ph-caption">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                                        <span>Screenshot coming soon</span>
+                                    </div>
+                                    <span class="ph-stand"></span>
+                                </div>
+                            </div>
+                            <div class="showcase-info-col">
+                                <span class="badge badge-accent">10-Foot Leanback Experience</span>
+                                <h3>Nani-me TV</h3>
+                                <p class="panel-intro">A dedicated port built on <code>react-native-tvos</code>, designed to make watching anime on your living room screen extremely comfortable.</p>
+
+                                <ul class="feature-bullets">
+                                    <li>
+                                        <span class="bullet-num">01</span>
+                                        <div>
+                                            <strong>D-Pad Native Focus Rails</strong>
+                                            <p>Navigate comfortably from your couch with focus-driven TV rows and card outlines designed specifically for remote controls, plus a Leanback launcher banner.</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="bullet-num">02</span>
+                                        <div>
+                                            <strong>Continue Watching Rail</strong>
+                                            <p>Pick up exactly where you left off. A home-screen rail updates with your history, and playback progress is saved automatically every few seconds.</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="bullet-num">03</span>
+                                        <div>
+                                            <strong>Remote-First Player</strong>
+                                            <p>Press OK to play or pause, tap left/right to seek 10s, or hold to accelerate to 30s and 60s jumps with a live indicator. Press up any time to reveal the controls.</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="bullet-num">04</span>
+                                        <div>
+                                            <strong>Smart Playback Tools</strong>
+                                            <p>Press down for an integrated episode picker with a full episode strip. Episodes auto-mark as watched at 90%, auto-advance to the next one, and intros can be skipped with a single press when markers are available.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Edition Comparison -->
+        <section id="compare" class="compare-section">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="sub-title">Side by Side</span>
+                    <h2>Which Edition Has What?</h2>
+                    <p class="section-desc">Both editions share your library concepts — here is exactly how they differ.</p>
+                </div>
+
+                <div class="compare-table-wrapper">
+                    <table class="compare-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Feature</th>
+                                <th scope="col">Mobile</th>
+                                <th scope="col">TV</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Home rails (Spotlight, Trending, New Episodes)</th>
+                                <td><span class="check yes" aria-label="Yes">✓</span></td>
+                                <td><span class="check yes" aria-label="Yes">✓</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Continue Watching with resume</th>
+                                <td><span class="check yes" aria-label="Yes">✓</span></td>
+                                <td><span class="check yes" aria-label="Yes">✓</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Saved library (Watching / Watch Later / Completed)</th>
+                                <td><span class="check yes" aria-label="Yes">✓</span></td>
+                                <td><span class="check yes" aria-label="Yes">✓</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Weekly release schedule</th>
+                                <td><span class="check yes" aria-label="Yes">✓</span></td>
+                                <td><span class="check yes" aria-label="Yes">✓</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Genre browsing</th>
+                                <td><span class="check yes" aria-label="Yes">✓</span></td>
+                                <td><span class="check yes" aria-label="Yes">✓</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Search</th>
+                                <td>Instant suggestions</td>
+                                <td>D-pad friendly</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Offline downloads</th>
+                                <td><span class="check yes" aria-label="Yes">✓</span></td>
+                                <td><span class="check no" aria-label="No">—</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Playback speed (0.5× – 2×)</th>
+                                <td><span class="check yes" aria-label="Yes">✓</span></td>
+                                <td><span class="check no" aria-label="No">—</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Skip intro</th>
+                                <td><span class="check no" aria-label="No">—</span></td>
+                                <td><span class="check yes" aria-label="Yes">✓</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Auto-play next episode</th>
+                                <td><span class="check yes" aria-label="Yes">✓</span></td>
+                                <td><span class="check yes" aria-label="Yes">✓</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Subtitles</th>
+                                <td>Hard subs only</td>
+                                <td>Hard subs only</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Seeking controls</th>
+                                <td>Double-tap gestures</td>
+                                <td>Hold-to-accelerate (10s/30s/60s)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Over-the-air updates</th>
+                                <td><span class="check yes" aria-label="Yes">✓</span></td>
+                                <td><span class="check yes" aria-label="Yes">✓</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Install Guide -->
+        <section id="install" class="install-section">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="sub-title">Quick Setup</span>
+                    <h2>Install in Under a Minute</h2>
+                    <p class="section-desc">Nani-me is distributed as a direct APK — install once, and updates arrive over-the-air.</p>
+                </div>
+
+                <div class="grid grid-2 install-grid">
+                    <!-- Mobile install -->
+                    <div class="install-card border-purple">
+                        <h3><span class="install-icon color-purple">📱</span> On Your Phone</h3>
+                        <ol class="install-steps">
+                            <li><strong>Download the APK</strong> from the button below.</li>
+                            <li><strong>Allow the install</strong> — if prompted, enable "Install unknown apps" for your browser in Android settings.</li>
+                            <li><strong>Open the APK</strong> and tap Install. That's it.</li>
+                            <li><strong>Stay current automatically</strong> — future fixes are applied over-the-air when you open the app.</li>
+                        </ol>
+                    </div>
+
+                    <!-- TV install -->
+                    <div class="install-card border-pink">
+                        <h3><span class="install-icon color-pink">📺</span> On Your TV</h3>
+                        <ol class="install-steps">
+                            <li><strong>Get the TV APK</strong> onto your TV — the easiest route is the free <em>Downloader</em> app from your TV's app store.</li>
+                            <li><strong>Enter the APK link</strong> in Downloader (or sideload via USB / <code>adb install</code>).</li>
+                            <li><strong>Install and launch</strong> — Nani-me appears in your apps row with its own TV banner.</li>
+                            <li><strong>Updates apply themselves</strong> over-the-air on launch, so you rarely need to sideload again.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Section -->
+        <section id="download" class="download-section">
+            <div class="glow-bg glow-primary"></div>
+
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="sub-title">Get Started</span>
+                    <h2>Download Nani-me</h2>
+                    <p class="section-desc">Choose your platform below to download the latest APK files directly.</p>
+                </div>
+
+                <div class="grid grid-2 download-grid">
+                    <!-- Mobile Card -->
+                    <div class="download-card border-purple">
+                        <div class="card-glow"></div>
+                        <div class="dl-card-content">
+                            <div class="dl-platform">
+                                <svg class="dl-icon color-purple" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path d="M17.5 9.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5m-11 0c-.83 0-1.5-.67-1.5-1.5S5.67 6.5 6.5 6.5 8 7.17 8 8s-.67 1.5-1.5 1.5M16 1.01L14.17 2.9c-.31-.15-.65-.25-1-.29L14.7 1.01c-.13-.37-.53-.57-.9-.44l-2.03.73-.01.01c-.8-.28-1.68-.42-2.56-.42-1.92 0-3.78.69-5.18 1.95L2 1.01C1.63 1.14 1.43 1.54 1.56 1.91l1.53 4.14C1.94 7.69 1.18 9.3 1.03 11H23c-.15-1.7-.91-3.31-2.06-4.95l1.53-4.14c.13-.37-.07-.77-.44-.9L20.2 1.74l-.01-.01L18 2.61c-.35.04-.69.14-1 .29L18.83 1.01c-.13-.37-.53-.57-.9-.44zM1.03 12.01c.21 4.54 3.98 8.01 8.47 8.01.59 0 1.17-.06 1.75-.18l-.94-2.54c-.27.02-.54.03-.81.03-3.15 0-5.78-2.31-6.19-5.32H1.03zm21.94 0h-2.28c-.41 3.01-3.04 5.32-6.19 5.32-.27 0-.54-.01-.81-.03l-.94 2.54c.58.12 1.16.18 1.75.18 4.49 0 8.26-3.47 8.47-8.01z"/>
+                                </svg>
+                                <div>
+                                    <h3>Nani-me Mobile</h3>
+                                    <span>Android App (Phones & Tablets)</span>
+                                </div>
+                            </div>
+
+                            <ul class="dl-specs">
+                                <li><span>Version</span> <strong>v2.1.0</strong></li>
+                                <li><span>Size</span> <strong>~45 MB</strong></li>
+                                <li><span>Requirement</span> <strong>Android 7.0+</strong></li>
+                                <li><span>Downloads</span> <strong>Offline supported</strong></li>
+                                <li><span>Updates</span> <strong>Over-the-air</strong></li>
+                            </ul>
+
+                            <!-- TODO: point href at the hosted mobile APK file -->
+                            <a href="#" id="dl-mobile-apk" class="btn btn-block btn-primary btn-glow">Download APK (Mobile)</a>
+                        </div>
+                    </div>
+
+                    <!-- TV Card -->
+                    <div class="download-card border-pink">
+                        <div class="card-glow"></div>
+                        <div class="dl-card-content">
+                            <div class="dl-platform">
+                                <svg class="dl-icon color-pink" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/>
+                                </svg>
+                                <div>
+                                    <h3>Nani-me TV</h3>
+                                    <span>Android TV App (Fire TV / Leanback)</span>
+                                </div>
+                            </div>
+
+                            <ul class="dl-specs">
+                                <li><span>Version</span> <strong>v2.0.0</strong></li>
+                                <li><span>Size</span> <strong>~84 MB</strong></li>
+                                <li><span>Requirement</span> <strong>Android TV / Fire OS</strong></li>
+                                <li><span>Input</span> <strong>D-Pad Remote Control</strong></li>
+                                <li><span>Updates</span> <strong>Over-the-air</strong></li>
+                            </ul>
+
+                            <a href="https://github.com/Syha-01/Nani-Me/releases/download/tv-v2.0.0/nanime-tv-v2.0.0.apk" download id="dl-tv-apk" class="btn btn-block btn-accent btn-glow">Download APK (TV Edition)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="faq-section">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="sub-title">Questions</span>
+                    <h2>Frequently Asked</h2>
+                </div>
+
+                <div class="faq-list">
+                    <details class="faq-item">
+                        <summary>Is Nani-me free?</summary>
+                        <p>Yes. There are no accounts, no subscriptions, and the app adds no advertising of its own. Everything — your library, history, and downloads — lives on your device.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Are there dubs or subtitle options?</summary>
+                        <p>No — Nani-me streams hard-subbed video only. Subtitles are burned directly into the picture, so they always work on every device. There are no separate subtitle tracks, subtitle settings, or dubbed audio options.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>How do updates work?</summary>
+                        <p>Both editions use over-the-air updates: when you open the app, it checks for the latest fixes and applies them automatically. You only need to install a new APK for major releases.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Why isn't it on the Play Store?</summary>
+                        <p>Nani-me is distributed as a direct APK download from this page. Installing takes under a minute (see the install guide above), and after that the app keeps itself up to date.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Where is my watchlist stored? Is anything tracked?</summary>
+                        <p>Your saved shows, watch history, and downloads are stored only in the app's local storage on your device. There are no accounts and no analytics — nothing leaves your device except the requests needed to fetch content.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Does Nani-me host any videos?</summary>
+                        <p>No. Nani-me does not host, upload, or store any media. It simply links to content available on third-party services — see the disclaimer below for details.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <span class="logo-text">Nani-<span class="highlight-text">me</span></span>
+                    <p>Providing the absolute best anime discovery and streaming UI on Android platforms.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="#hero">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#showcase">Editions</a></li>
+                        <li><a href="#compare">Compare</a></li>
+                        <li><a href="#install">Install</a></li>
+                        <li><a href="#download">Download</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="disclaimer-box">
+                    <p><strong>Disclaimer:</strong> Nani-me is developed strictly for educational and research purposes. This application does not host, upload, or store any video files, media, or copyrighted material. All data and streams are sourced on demand from external, publicly available services. The developers assume no liability for misuse of this software.</p>
+                    <p class="dmca-text"><strong>DMCA Notice:</strong> Nani-me does not store files on its servers. All content is fetched live from non-affiliated third parties. If you believe copyrighted content is linked to, please contact the respective hosting websites directly for removal.</p>
+                </div>
+                <div class="copyright">
+                    &copy; 2026 Nani-me. Built for fans, by fans.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Script -->
+    <script src="script.js"></script>
+</body>
+</html>
