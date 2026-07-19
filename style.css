@@ -906,6 +906,24 @@ header.shrinked {
     color: #FFFFFF;
 }
 
+.dl-fallback {
+    margin-top: 14px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.dl-fallback a {
+    color: var(--primary-light);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.dl-fallback a:hover {
+    color: var(--text-primary);
+}
+
 /* ==========================================================================
    Screenshot Placeholders (swap for real screenshots later)
    ========================================================================== */
