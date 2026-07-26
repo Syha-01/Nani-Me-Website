@@ -290,6 +290,7 @@ ul {
     height: 20px;
 }
 
+
 /* ==========================================================================
    Header Navigation (Glassmorphic)
    ========================================================================== */
@@ -794,6 +795,63 @@ header.shrinked {
     gap: 32px;
 }
 
+/* The card itself clips its glow blob, so the badge can't live inside it —
+   it hangs off this shell and straddles the card's top border. */
+.dl-card-shell {
+    position: relative;
+    display: flex;
+}
+
+.dl-card-shell > .download-card {
+    width: 100%;
+}
+
+.dl-badge {
+    position: absolute;
+    top: -13px;
+    right: 28px;
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 5px 13px;
+    border-radius: var(--radius-full);
+    background: var(--bg-secondary);
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.dl-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    animation: dl-badge-pulse 2.6s ease-out infinite;
+}
+
+@keyframes dl-badge-pulse {
+    0%   { box-shadow: 0 0 0 0 currentColor; opacity: 1; }
+    70%  { box-shadow: 0 0 0 6px transparent; opacity: 0.6; }
+    100% { box-shadow: 0 0 0 0 transparent; opacity: 1; }
+}
+
+.dl-badge-purple {
+    color: var(--primary-light);
+    border: 1px solid rgba(139, 92, 246, 0.55);
+    box-shadow: 0 0 18px rgba(139, 92, 246, 0.25);
+}
+
+.dl-badge-pink {
+    color: var(--accent-light);
+    border: 1px solid rgba(236, 72, 153, 0.55);
+    box-shadow: 0 0 18px rgba(236, 72, 153, 0.25);
+}
+
 .download-card {
     background: rgba(26, 26, 46, 0.5);
     border-radius: var(--radius-lg);
@@ -1103,6 +1161,61 @@ header.shrinked {
     font-weight: 500;
     color: var(--text-secondary);
     font-family: 'Outfit', sans-serif;
+}
+
+/* ==========================================================================
+   Player Gestures
+   ========================================================================== */
+
+.gestures-section {
+    padding: 80px 0;
+    background: linear-gradient(180deg, var(--bg-primary) 0%, rgba(26, 26, 46, 0.4) 100%);
+}
+
+.gesture-figure {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* The map is a wide diagram: on narrow screens it scrolls sideways rather
+   than shrinking its labels into illegibility. */
+.gesture-map-wrapper {
+    overflow-x: auto;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    background: var(--bg-primary);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-light) transparent;
+    -webkit-overflow-scrolling: touch;
+}
+
+.gesture-map {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-width: 800px;
+}
+
+.gesture-figure figcaption {
+    text-align: center;
+    padding-top: 18px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+/* Only worth saying while the map is actually wider than its wrapper. */
+.gesture-scroll-hint {
+    display: none;
+    color: var(--primary-light);
+}
+
+@media (max-width: 860px) {
+    .gesture-scroll-hint {
+        display: inline;
+    }
 }
 
 /* DNS over HTTPS section */

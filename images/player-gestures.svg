@@ -1,0 +1,286 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1260 850" width="1260" height="850" role="img" aria-labelledby="pgTitle pgDesc">
+  <title id="pgTitle">Nani-me player gestures</title>
+  <desc id="pgDesc">The Nani-me video player screen with labelled arrows pointing to each touch gesture: slide up or down on the left half for brightness and on the right half for volume, press and hold anywhere for 2x speed, double-tap the left half to rewind 10 seconds or the right half to skip 10 seconds, single tap to show or hide the controls, and the lock button to freeze every gesture.</desc>
+
+  <defs>
+    <linearGradient id="screen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#17172D"/>
+      <stop offset="0.55" stop-color="#101020"/>
+      <stop offset="1" stop-color="#0A0A14"/>
+    </linearGradient>
+
+    <radialGradient id="washL" cx="0.16" cy="0.5" r="0.62">
+      <stop offset="0" stop-color="#F59E0B" stop-opacity="0.13"/>
+      <stop offset="1" stop-color="#F59E0B" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="washR" cx="0.84" cy="0.5" r="0.62">
+      <stop offset="0" stop-color="#8B5CF6" stop-opacity="0.15"/>
+      <stop offset="1" stop-color="#8B5CF6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="washC" cx="0.5" cy="0.5" r="0.34">
+      <stop offset="0" stop-color="#EC4899" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#EC4899" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="amber" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FCD34D"/>
+      <stop offset="1" stop-color="#F59E0B"/>
+    </linearGradient>
+    <linearGradient id="violet" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#C4B5FD"/>
+      <stop offset="1" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7C3AED"/>
+      <stop offset="1" stop-color="#A78BFA"/>
+    </linearGradient>
+
+    <linearGradient id="seam" gradientUnits="userSpaceOnUse" x1="630" y1="316" x2="630" y2="592">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="0.18" stop-color="#FFFFFF" stop-opacity="0.18"/>
+      <stop offset="0.42" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="0.58" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="0.82" stop-color="#FFFFFF" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+
+    <linearGradient id="bezel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4A4A6E"/>
+      <stop offset="0.5" stop-color="#2A2A45"/>
+      <stop offset="1" stop-color="#3A3A58"/>
+    </linearGradient>
+
+    <!-- Shakes the annotation strokes just enough to read as hand-drawn. -->
+    <filter id="rough" x="-15%" y="-15%" width="130%" height="130%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.014" numOctaves="2" seed="11" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowSoft" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="2.5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <clipPath id="screenClip">
+      <rect x="230" y="248" width="800" height="410" rx="24"/>
+    </clipPath>
+  </defs>
+
+  <style>
+    .f { font-family: Outfit, Inter, "Segoe UI", system-ui, -apple-system, sans-serif; }
+    .tag  { font-size: 18px; font-weight: 700; letter-spacing: -0.1px; }
+    .sub  { font-size: 13.5px; fill: #A1A1B5; }
+    .note { font-size: 12.5px; fill: #6B6B80; }
+
+    .arrow { fill: none; stroke-width: 2.1; stroke-linecap: round; stroke-linejoin: round; }
+
+    .drift  { animation: drift 4s ease-in-out infinite; }
+    .drift2 { animation: drift 4s ease-in-out infinite; animation-delay: -2s; }
+    @keyframes drift {
+      0%, 100% { transform: translateY(-26px); }
+      50%      { transform: translateY(26px); }
+    }
+    .ring  { animation: ripple 3s ease-in-out infinite; }
+    .ring2 { animation-delay: -1s; }
+    .ring3 { animation-delay: -2s; }
+    @keyframes ripple {
+      0%, 100% { opacity: 0.12; }
+      50%      { opacity: 0.75; }
+    }
+    .blink { animation: blink 3s ease-in-out infinite; }
+    @keyframes blink {
+      0%, 100% { opacity: 0.55; }
+      50%      { opacity: 1; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .drift, .drift2, .ring, .blink { animation: none; }
+    }
+  </style>
+
+  <rect width="1260" height="850" fill="#0F0F1A"/>
+
+  <!-- ══ Player screen ══════════════════════════════════════════════ -->
+  <rect x="230" y="248" width="800" height="410" rx="24" fill="url(#screen)"/>
+
+  <g clip-path="url(#screenClip)">
+    <rect x="230" y="248" width="800" height="410" fill="url(#washL)"/>
+    <rect x="230" y="248" width="800" height="410" fill="url(#washR)"/>
+    <rect x="230" y="248" width="800" height="410" fill="url(#washC)"/>
+  </g>
+
+  <rect x="230" y="248" width="800" height="410" rx="24" fill="none" stroke="url(#bezel)" stroke-width="2"/>
+
+  <!-- half divider -->
+  <line x1="630" y1="316" x2="630" y2="592" stroke="url(#seam)" stroke-width="1.4" stroke-dasharray="4 9"/>
+
+  <!-- ── Top bar ─────────────────────────────────────────────────── -->
+  <path d="M265 277 L256 286 L265 295" fill="none" stroke="#FFFFFF" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+  <text class="f" x="278" y="283" font-size="15" font-weight="600" fill="#FFFFFF">Magical Girl Lyrical Nanoha</text>
+  <text class="f" x="278" y="301" font-size="11" fill="#FFFFFF" fill-opacity="0.55">Episode 3</text>
+
+  <g stroke="#FFFFFF" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="899" y="285" width="13" height="10.5" rx="2.5"/>
+    <path d="M901.8 285 V281.3 a4 4 0 0 1 8 -0.4"/>
+    <path d="M940 278 V288 M935.6 283.6 L940 288 L944.4 283.6 M933 292 H947"/>
+    <path d="M1003 283 H1008 V278 M1017 283 H1012 V278 M1003 289 H1008 V294 M1017 289 H1012 V294"/>
+  </g>
+  <rect x="961" y="275" width="34" height="22" rx="11" fill="#FFFFFF" fill-opacity="0.14"/>
+  <text class="f" x="978" y="290" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">1x</text>
+
+  <!-- ── On-screen indicators the gestures produce ───────────────── -->
+  <g filter="url(#glowSoft)">
+    <rect x="298" y="324" width="104" height="32" rx="16" fill="#0A0A14" fill-opacity="0.72" stroke="#60A5FA" stroke-opacity="0.5" stroke-width="1.2"/>
+    <rect x="858" y="324" width="104" height="32" rx="16" fill="#0A0A14" fill-opacity="0.72" stroke="#60A5FA" stroke-opacity="0.5" stroke-width="1.2"/>
+  </g>
+  <polygon points="334,333 334,347 326,340" fill="#60A5FA"/>
+  <polygon points="343,333 343,347 335,340" fill="#60A5FA"/>
+  <text class="f" x="350" y="345.5" font-size="13" font-weight="700" fill="#FFFFFF">10s</text>
+  <text class="f" x="886" y="345.5" font-size="13" font-weight="700" fill="#FFFFFF">10s</text>
+  <polygon points="918,333 918,347 926,340" fill="#60A5FA"/>
+  <polygon points="927,333 927,347 935,340" fill="#60A5FA"/>
+
+  <g class="blink">
+    <g filter="url(#glowSoft)">
+      <rect x="584" y="324" width="92" height="32" rx="16" fill="#0A0A14" fill-opacity="0.72" stroke="#EC4899" stroke-opacity="0.55" stroke-width="1.2"/>
+    </g>
+    <polygon points="609,333 609,347 617,340" fill="#EC4899"/>
+    <polygon points="618,333 618,347 626,340" fill="#EC4899"/>
+    <text class="f" x="632" y="346" font-size="14" font-weight="700" fill="#FFFFFF">2×</text>
+  </g>
+
+  <!-- ── Transport controls ──────────────────────────────────────── -->
+  <g fill="#FFFFFF" fill-opacity="0.9">
+    <rect x="444" y="446" width="2.8" height="18" rx="1.4"/>
+    <polygon points="463,446 463,464 449,455"/>
+    <rect x="813.2" y="446" width="2.8" height="18" rx="1.4"/>
+    <polygon points="797,446 797,464 811,455"/>
+  </g>
+  <g fill="none" stroke="#FFFFFF" stroke-opacity="0.9" stroke-width="1.7" stroke-linecap="round">
+    <path d="M530 444 A11 11 0 1 0 541 455"/>
+    <path d="M730 444 A11 11 0 1 1 719 455"/>
+  </g>
+  <polygon points="530,439.5 530,448.5 523,444" fill="#FFFFFF" fill-opacity="0.9"/>
+  <polygon points="730,439.5 730,448.5 737,444" fill="#FFFFFF" fill-opacity="0.9"/>
+  <text class="f" x="530" y="459" font-size="8.5" font-weight="700" fill="#FFFFFF" fill-opacity="0.9" text-anchor="middle">10</text>
+  <text class="f" x="730" y="459" font-size="8.5" font-weight="700" fill="#FFFFFF" fill-opacity="0.9" text-anchor="middle">10</text>
+
+  <!-- hold-to-2× ripple, centred on play/pause -->
+  <g fill="none" stroke="#EC4899" stroke-width="1.5">
+    <circle class="ring" cx="630" cy="455" r="38"/>
+    <circle class="ring ring2" cx="630" cy="455" r="52"/>
+    <circle class="ring ring3" cx="630" cy="455" r="66"/>
+  </g>
+  <circle cx="630" cy="455" r="26" fill="#FFFFFF" fill-opacity="0.16" stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="1.1"/>
+  <rect x="622" y="444" width="5.5" height="22" rx="2" fill="#FFFFFF"/>
+  <rect x="632.5" y="444" width="5.5" height="22" rx="2" fill="#FFFFFF"/>
+
+  <!-- ── Slide zones ─────────────────────────────────────────────── -->
+  <g filter="url(#glow)">
+    <line x1="350" y1="396" x2="350" y2="518" stroke="#F59E0B" stroke-width="2.6" stroke-linecap="round"/>
+    <polygon points="350,381 341,398 359,398" fill="url(#amber)"/>
+    <polygon points="350,533 341,516 359,516" fill="url(#amber)"/>
+  </g>
+  <g class="drift">
+    <circle cx="350" cy="457" r="18" fill="#0C0C18" stroke="#F59E0B" stroke-width="1.8"/>
+    <circle cx="350" cy="457" r="4.5" fill="#FCD34D"/>
+    <g stroke="#FCD34D" stroke-width="1.4" stroke-linecap="round">
+      <line x1="350" y1="446.5" x2="350" y2="449.5"/>
+      <line x1="350" y1="464.5" x2="350" y2="467.5"/>
+      <line x1="339.5" y1="457" x2="342.5" y2="457"/>
+      <line x1="357.5" y1="457" x2="360.5" y2="457"/>
+      <line x1="342.6" y1="449.6" x2="344.7" y2="451.7"/>
+      <line x1="355.3" y1="462.3" x2="357.4" y2="464.4"/>
+      <line x1="357.4" y1="449.6" x2="355.3" y2="451.7"/>
+      <line x1="344.7" y1="462.3" x2="342.6" y2="464.4"/>
+    </g>
+  </g>
+
+  <g filter="url(#glow)">
+    <line x1="910" y1="396" x2="910" y2="518" stroke="#8B5CF6" stroke-width="2.6" stroke-linecap="round"/>
+    <polygon points="910,381 901,398 919,398" fill="url(#violet)"/>
+    <polygon points="910,533 901,516 919,516" fill="url(#violet)"/>
+  </g>
+  <g class="drift2">
+    <circle cx="910" cy="457" r="18" fill="#0C0C18" stroke="#8B5CF6" stroke-width="1.8"/>
+    <path d="M904 453.5 H901 V461 H904 L910 465.5 V449 Z" fill="#C4B5FD"/>
+    <g fill="none" stroke="#C4B5FD" stroke-width="1.4" stroke-linecap="round">
+      <path d="M913 452.5 a6 6 0 0 1 0 9.5"/>
+      <path d="M916.5 449 a10.5 10.5 0 0 1 0 16.5"/>
+    </g>
+  </g>
+
+  <!-- ── Bottom bar ──────────────────────────────────────────────── -->
+  <text class="f" x="258" y="607" font-size="11.5" fill="#FFFFFF" fill-opacity="0.72">8:13 &#160;/&#160; 23:40</text>
+  <rect x="930" y="592" width="72" height="26" rx="13" fill="#FFFFFF" fill-opacity="0.16"/>
+  <polygon points="946,598 946,610 951,604" fill="#FFFFFF"/>
+  <polygon points="951,598 951,610 956,604" fill="#FFFFFF"/>
+  <text class="f" x="960" y="608.5" font-size="11" font-weight="700" fill="#FFFFFF">+85s</text>
+  <rect x="258" y="628" width="744" height="4" rx="2" fill="#FFFFFF" fill-opacity="0.22"/>
+  <rect x="258" y="628" width="268" height="4" rx="2" fill="url(#bar)"/>
+  <circle cx="526" cy="630" r="6" fill="#C4B5FD"/>
+
+  <!-- ══ Annotations ════════════════════════════════════════════════ -->
+
+  <!-- Double-tap · left -->
+  <text class="f tag" x="60" y="96" fill="#60A5FA">Double-tap</text>
+  <text class="f sub" x="60" y="118">left half · rewind 10s (taps stack)</text>
+  <g class="arrow" stroke="#60A5FA" filter="url(#rough)">
+    <path d="M118 142 C150 240, 168 330, 290 344"/>
+    <path d="M277.9 336.9 L290 344 L276.6 348.2"/>
+  </g>
+
+  <!-- Press &amp; hold -->
+  <text class="f tag" x="630" y="96" fill="#EC4899" text-anchor="middle">Press &amp; hold</text>
+  <text class="f sub" x="630" y="118" text-anchor="middle">anywhere · 2× while you hold</text>
+  <g class="arrow" stroke="#EC4899" filter="url(#rough)">
+    <path d="M628 140 C570 200, 528 300, 566 394"/>
+    <path d="M566.5 379.0 L566 394 L555.2 383.6"/>
+  </g>
+
+  <!-- Double-tap · right -->
+  <text class="f tag" x="1200" y="96" fill="#60A5FA" text-anchor="end">Double-tap</text>
+  <text class="f sub" x="1200" y="118" text-anchor="end">right half · skip 10s (taps stack)</text>
+  <g class="arrow" stroke="#60A5FA" filter="url(#rough)">
+    <path d="M1142 142 C1110 240, 1092 330, 970 344"/>
+    <path d="M983.4 348.2 L970 344 L982.1 336.9"/>
+  </g>
+
+  <!-- Lock -->
+  <text class="f" x="870" y="218" font-size="13.5" fill="#A1A1B5" text-anchor="end"><tspan font-weight="700" fill="#FFFFFF">Lock</tspan> · freezes every gesture</text>
+  <g class="arrow" stroke="#8A8AA3" filter="url(#rough)">
+    <path d="M878 224 C898 242, 906 252, 906 270"/>
+    <path d="M912.1 256.3 L906 270 L899.9 256.3"/>
+  </g>
+
+  <!-- Brightness -->
+  <text class="f tag" x="200" y="448" fill="#F59E0B" text-anchor="end">Brightness</text>
+  <text class="f sub" x="200" y="470" text-anchor="end">slide up / down</text>
+  <g class="arrow" stroke="#F59E0B" filter="url(#rough)">
+    <path d="M214 472 C256 494, 292 492, 328 470"/>
+    <path d="M313.1 471.9 L328 470 L319.5 482.4"/>
+  </g>
+
+  <!-- Volume -->
+  <text class="f tag" x="1060" y="448" fill="#A78BFA">Volume</text>
+  <text class="f sub" x="1060" y="470">slide up / down</text>
+  <g class="arrow" stroke="#8B5CF6" filter="url(#rough)">
+    <path d="M1046 472 C1004 494, 968 492, 932 470"/>
+    <path d="M940.5 482.4 L932 470 L946.9 471.9"/>
+  </g>
+
+  <!-- Single tap -->
+  <text class="f tag" x="200" y="742" fill="#E7E7F0" text-anchor="end">Single tap</text>
+  <text class="f sub" x="200" y="764" text-anchor="end">show / hide the controls</text>
+  <g class="arrow" stroke="#8A8AA3" filter="url(#rough)">
+    <path d="M218 748 C272 742, 312 702, 340 652"/>
+    <path d="M328.0 661.0 L340 652 L338.6 666.9"/>
+  </g>
+
+  <!-- Footnotes -->
+  <text class="f note" x="1200" y="742" text-anchor="end">Each readout appears on the side opposite your finger, so your hand never covers it.</text>
+  <text class="f note" x="1200" y="764" text-anchor="end">Brightness never dims fully to black · in fullscreen the top edge is left to the notification shade.</text>
+</svg>

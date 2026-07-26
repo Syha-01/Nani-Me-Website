@@ -36,6 +36,7 @@
                     <li><a href="#hero" class="nav-link active">Home</a></li>
                     <li><a href="#features" class="nav-link">Features</a></li>
                     <li><a href="#showcase" class="nav-link">Editions</a></li>
+                    <li><a href="#gestures" class="nav-link">Gestures</a></li>
                     <li><a href="#compare" class="nav-link">Compare</a></li>
                     <li><a href="#install" class="nav-link">Install</a></li>
                     <li><a href="#download" class="nav-link">Download</a></li>
@@ -352,6 +353,26 @@
             </div>
         </section>
 
+        <!-- Player Gestures -->
+        <section id="gestures" class="gestures-section">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="sub-title">Touch Controls</span>
+                    <h2>Every Gesture, One Screen</h2>
+                    <p class="section-desc">The mobile player is gesture driven. Slide, hold, or tap anywhere on the picture — there is no menu to hunt through.</p>
+                </div>
+
+                <figure class="gesture-figure">
+                    <div class="gesture-map-wrapper">
+                        <img src="images/player-gestures.svg"
+                             alt="The Nani-me player screen annotated with its gestures: slide up or down on the left half for brightness and on the right half for volume, press and hold anywhere for 2× speed, double-tap left or right to seek 10 seconds, single tap to show or hide the controls, and the lock button to freeze every gesture."
+                             class="gesture-map" width="1260" height="850" loading="lazy">
+                    </div>
+                    <figcaption><span class="gesture-scroll-hint">Swipe the map sideways to see all six gestures. </span>Every gesture works in both fullscreen and windowed playback, and on downloaded episodes too. TV playback is driven by the D-pad instead — see the Editions section above.</figcaption>
+                </figure>
+            </div>
+        </section>
+
         <!-- Edition Comparison -->
         <section id="compare" class="compare-section">
             <div class="container">
@@ -490,6 +511,8 @@
 
                 <div class="grid grid-2 download-grid">
                     <!-- Mobile Card -->
+                    <div class="dl-card-shell">
+                    <span class="dl-badge dl-badge-purple">Latest</span>
                     <div class="download-card border-purple">
                         <div class="card-glow"></div>
                         <div class="dl-card-content">
@@ -515,8 +538,11 @@
                             <p class="dl-fallback">Doesn't work on your device? Older 32-bit phones and Intel-based devices can use the <a href="https://github.com/Syha-01/Nani-Me/releases/download/mobile-v2.3.0/nanime-mobile-v2.3.0-universal.apk" download>universal APK (v2.3.0, ~92 MB)</a> instead.</p>
                         </div>
                     </div>
+                    </div>
 
                     <!-- TV Card -->
+                    <div class="dl-card-shell">
+                    <span class="dl-badge dl-badge-pink">Latest</span>
                     <div class="download-card border-pink">
                         <div class="card-glow"></div>
                         <div class="dl-card-content">
@@ -540,6 +566,7 @@
 
                             <a href="https://github.com/Syha-01/Nani-Me/releases/download/tv-v2.1.0/nanime-tv-v2.1.0.apk" download id="dl-tv-apk" class="btn btn-block btn-accent btn-glow">Download APK (TV Edition)</a>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -645,6 +672,7 @@
                         <li><a href="#hero">Home</a></li>
                         <li><a href="#features">Features</a></li>
                         <li><a href="#showcase">Editions</a></li>
+                        <li><a href="#gestures">Gestures</a></li>
                         <li><a href="#compare">Compare</a></li>
                         <li><a href="#install">Install</a></li>
                         <li><a href="#download">Download</a></li>
