@@ -1753,3 +1753,13 @@ footer {
     text-transform: uppercase;
     background: rgba(0, 0, 0, 0.22);
 }
+
+.card-glow-red:hover {
+    box-shadow: 0 12px 30px rgba(255, 77, 87, 0.15);
+}
+
+.card-glow-red .card-icon-container {
+    background: rgba(255, 77, 87, 0.1);
+    color: var(--red-light);
+    border: 1px solid rgba(255, 77, 87, 0.2);
+}
