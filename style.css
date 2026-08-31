@@ -30,6 +30,10 @@
     --warning: #F59E0B;
     --danger: #EF4444;
 
+    /* Tsuzuku ships on red so the two apps are never mistaken for each other. */
+    --red: #FF4D57;
+    --red-light: #FF7A82;
+
     /* Spacing & Radii */
     --radius-sm: 6px;
     --radius-md: 12px;
@@ -1670,4 +1674,82 @@ footer {
     .highlight-card:hover {
         transform: none !important;
     }
+}
+
+
+/* ── Tsuzuku (sister app) ────────────────────────────────────────────── */
+
+.dl-badge-red {
+    color: var(--red-light);
+    border: 1px solid rgba(255, 77, 87, 0.55);
+    box-shadow: 0 0 18px rgba(255, 77, 87, 0.25);
+}
+
+.border-red {
+    border: 1px solid rgba(255, 77, 87, 0.3);
+}
+
+.border-red:hover {
+    border-color: var(--red);
+    box-shadow: 0 16px 40px rgba(255, 77, 87, 0.2);
+}
+
+.border-red .card-glow { background: var(--red); }
+.border-red:hover .card-glow { opacity: 0.3; transform: scale(1.5); }
+
+.color-red { color: var(--red); }
+
+.btn-red {
+    background: linear-gradient(135deg, var(--red), var(--red-light));
+    color: #14000A;
+}
+
+.btn-red:hover {
+    box-shadow: 0 10px 30px rgba(255, 77, 87, 0.35);
+}
+
+.glow-red { background: var(--red); }
+
+/* Sits inline in the heading, so it reads as part of the name. */
+.beta-tag {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+    padding: 4px 11px;
+    border-radius: 999px;
+    font-size: 0.42em;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--red-light);
+    border: 1px solid rgba(255, 77, 87, 0.55);
+    background: rgba(255, 77, 87, 0.1);
+}
+
+.sister-note {
+    max-width: 760px;
+    margin: 0 auto var(--space-xl, 40px);
+    padding: 16px 20px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 77, 87, 0.28);
+    background: rgba(255, 77, 87, 0.07);
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.65;
+}
+
+.sister-note strong { color: var(--red-light); }
+
+.compare-table .col-red { color: var(--red-light); }
+
+/* Beta marker inside the hero button, so the label stays honest at a glance. */
+.btn-tag {
+    margin-left: 8px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 0.66em;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: rgba(0, 0, 0, 0.22);
 }
