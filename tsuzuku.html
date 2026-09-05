@@ -66,35 +66,270 @@
                     Nani-me remains the complete app.
                 </p>
 
-                <div class="grid download-grid">
-                                        <div class="dl-card-shell">
-                    <span class="dl-badge dl-badge-red">Beta</span>
-                    <div class="download-card border-red">
-                        <div class="card-glow"></div>
-                        <div class="dl-card-content">
-                            <div class="dl-platform">
-                                <svg class="dl-icon color-red" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                                    <path d="M18.4395 5.5586c-.675 1.1664-1.352 2.3318-2.0274 3.498-.0366-.0155-.0742-.0286-.1113-.043-1.8249-.6957-3.484-.8-4.42-.787-1.8551.0185-3.3544.4643-4.2597.8203-.084-.1494-1.7526-3.021-2.0215-3.4864a1.1451 1.1451 0 0 0-.1406-.1914c-.3312-.364-.9054-.4859-1.379-.203-.475.282-.7136.9361-.3886 1.5019 1.9466 3.3696-.0966-.2158 1.9473 3.3593.0172.031-.4946.2642-1.3926 1.0177C2.8987 12.176.452 14.772 0 18.9902h24c-.119-1.1108-.3686-2.099-.7461-3.0683-.7438-1.9118-1.8435-3.2928-2.7402-4.1836a12.1048 12.1048 0 0 0-2.1309-1.6875c.6594-1.122 1.312-2.2559 1.9649-3.3848.2077-.3615.1886-.7956-.0079-1.1191a1.1001 1.1001 0 0 0-.8515-.5332c-.5225-.0536-.9392.3128-1.0488.5449zm-.0391 8.461c.3944.5926.324 1.3306-.1563 1.6503-.4799.3197-1.188.0985-1.582-.4941-.3944-.5927-.324-1.3307.1563-1.6504.4727-.315 1.1812-.1086 1.582.4941zM7.207 13.5273c.4803.3197.5506 1.0577.1563 1.6504-.394.5926-1.1038.8138-1.584.4941-.48-.3197-.5503-1.0577-.1563-1.6504.4008-.6021 1.1087-.8106 1.584-.4941z"/>
-                                </svg>
-                                <div>
-                                    <h3>Tsuzuku</h3>
-                                    <span>Android App (Phones &amp; Tablets)</span>
-                                </div>
+                <p class="tsuzuku-hero-actions">
+                    <a href="#tsuzuku-download" class="btn btn-lg btn-red btn-glow">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Download Tsuzuku
+                    </a>
+                </p>
+
+            </div>
+        </section>
+
+        <!-- Screenshot carousel: above the download card on purpose, so what the
+             app looks like comes before the decision to install it. -->
+        <section id="tsuzuku-screens" class="screens-section">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="sub-title">Gallery</span>
+                    <h2>Every Screen, Explained</h2>
+                    <p class="section-desc">Seventeen shots straight off a phone, with what each one is for.</p>
+                </div>
+
+                <div class="shot-carousel" data-shot-carousel tabindex="0"
+                     role="region" aria-roledescription="carousel" aria-label="Tsuzuku screenshots">
+                    <div class="shot-viewport">
+                        <div class="shot-track" data-shot-track aria-live="polite">
+                        <figure class="shot-slide is-active" role="group"
+                                aria-roledescription="slide" aria-label="1 of 17">
+                            <div class="shot-frame">
+                                <img src="images/Tsuzuku-screenshots/01-home.jpeg" alt="Home screen: a Bleach spotlight banner, a Continue Watching row and a numbered Top Anime grid"
+                                     width="575" height="1280" loading="eager" decoding="async">
                             </div>
-
-                            <ul class="dl-specs">
-                                <li><span>Version</span> <strong>v1.1.0 (Beta)</strong></li>
-                                <li><span>Released</span> <strong>September 4, 2026</strong></li>
-                                <li><span>Size</span> <strong>~32 MB</strong></li>
-                                <li><span>Requirement</span> <strong>Android 7.0+ (arm64 only)</strong></li>
-                                <li><span>Subtitles</span> <strong>Selectable tracks</strong></li>
-                                <li><span>Updates</span> <strong>Over-the-air</strong></li>
-                            </ul>
-
-                            <a href="https://github.com/Syha-01/Tsuzuku/releases/download/v1.1.0/tsuzuku-v1.1.0-arm64.apk" download id="dl-tsuzuku-apk" class="btn btn-block btn-red btn-glow">Download APK (Tsuzuku Beta)</a>
-                            <p class="dl-fallback">Built for 64-bit devices only — there is no universal APK for this one yet. Tsuzuku installs alongside Nani-me; the two share nothing and do not conflict.</p>
+                            <figcaption class="shot-copy">
+                                <span class="shot-step">1 / 17</span>
+                                <h3>Home</h3>
+                                <p>The spotlight rotates through whatever is being featured that day. Under it, Continue Watching picks up the episode you actually played last &mdash; not the furthest you ever reached &mdash; and Top Anime keeps the ranking the site gives it.</p>
+                            </figcaption>
+                        </figure>
+                        <figure class="shot-slide" role="group"
+                                aria-roledescription="slide" aria-label="2 of 17" aria-hidden="true">
+                            <div class="shot-frame">
+                                <img src="images/Tsuzuku-screenshots/02-series-detail.jpeg" alt="Series page for Bleach: Thousand-Year Blood War with rating, resume button, next-episode countdown and episode grid"
+                                     width="575" height="1280" loading="lazy" decoding="async">
+                            </div>
+                            <figcaption class="shot-copy">
+                                <span class="shot-step">2 / 17</span>
+                                <h3>Series detail</h3>
+                                <p>Rating, episode count and MAL id up top, then one button that puts you back exactly where you stopped. The countdown is an estimate of when the next episode lands, and Related lists only the titles you can actually open.</p>
+                            </figcaption>
+                        </figure>
+                        <figure class="shot-slide shot-slide--wide" role="group"
+                                aria-roledescription="slide" aria-label="3 of 17" aria-hidden="true">
+                            <div class="shot-frame">
+                                <img src="images/Tsuzuku-screenshots/03-player.jpeg" alt="The player in landscape, controls showing, with quality, subtitle and text-size buttons and a plus eighty-five seconds button"
+                                     width="1280" height="575" loading="lazy" decoding="async">
+                            </div>
+                            <figcaption class="shot-copy">
+                                <span class="shot-step">3 / 17</span>
+                                <h3>The player</h3>
+                                <p>Landscape, whichever way the rest of the app is set. Quality, audio track and subtitles sit in the controls rather than behind a settings gear, next to a <strong>+85s</strong> button for skipping an opening. Everything else is a gesture &mdash; see below.</p>
+                            </figcaption>
+                        </figure>
+                        <figure class="shot-slide" role="group"
+                                aria-roledescription="slide" aria-label="4 of 17" aria-hidden="true">
+                            <div class="shot-frame">
+                                <img src="images/Tsuzuku-screenshots/04-download-picker.jpeg" alt="The same series page in download mode, with an episode picker and a quality row along the bottom"
+                                     width="575" height="1280" loading="lazy" decoding="async">
+                            </div>
+                            <figcaption class="shot-copy">
+                                <span class="shot-step">4 / 17</span>
+                                <h3>Downloading episodes</h3>
+                                <p>The same page with the switch flipped to Download. Pick episodes one at a time or take the lot, and the quality row offers only the sizes that series actually comes in.</p>
+                            </figcaption>
+                        </figure>
+                        <figure class="shot-slide" role="group"
+                                aria-roledescription="slide" aria-label="5 of 17" aria-hidden="true">
+                            <div class="shot-frame">
+                                <img src="images/Tsuzuku-screenshots/05-add-to-list.jpeg" alt="A sheet offering Watching, Watch Later, Completed and Dropped for the open series"
+                                     width="575" height="1280" loading="lazy" decoding="async">
+                            </div>
+                            <figcaption class="shot-copy">
+                                <span class="shot-step">5 / 17</span>
+                                <h3>Tracking a series</h3>
+                                <p>Four states, set from the series page. The Saved tab is built from this and nothing else, which is why it still lists everything with no internet.</p>
+                            </figcaption>
+                        </figure>
+                        <figure class="shot-slide" role="group"
+                                aria-roledescription="slide" aria-label="6 of 17" aria-hidden="true">
+                            <div class="shot-frame">
+                                <img src="images/Tsuzuku-screenshots/06-saved.jpeg" alt="Saved tab listing twelve tracked series filtered to Watching, each with a progress fraction"
+                                     width="575" height="1280" loading="lazy" decoding="async">
+                            </div>
+                            <figcaption class="shot-copy">
+                                <span class="shot-step">6 / 17</span>
+                                <h3>Saved</h3>
+                                <p>Everything you have marked, split by status with a count on each tab. The fraction is how far you have got against how many episodes there are now, so a series still airing moves on its own. The button top right swaps the rows for a wall of posters.</p>
+                            </figcaption>
+                        </figure>
+                        <figure class="shot-slide" role="group"
+                                aria-roledescription="slide" aria-label="7 of 17" aria-hidden="true">
+                            <div class="shot-frame">
+                                <img src="images/Tsuzuku-screenshots/07-schedule.jpeg" alt="Schedule tab showing a week of days and the episodes airing on the selected day"
+                                     width="575" height="1280" loading="lazy" decoding="async">
+                            </div>
+                            <figcaption class="shot-copy">
+                                <span class="shot-step">7 / 17</span>
+                                <h3>Schedule</h3>
+                                <p>Estimated air times converted to your timezone, one day at a time. Anything whose slot has already passed is dimmed and ticked, so the next thing due is the first one you can read.</p>
+                            </figcaption>
+                        </figure>
+                        <figure class="shot-slide" role="group"
+                                aria-roledescription="slide" aria-label="8 of 17" aria-hidden="true">
+                            <div class="shot-frame">
+                                <img src="images/Tsuzuku-screenshots/08-search-browse.jpeg" alt="Search field above browse categories and a full grid of genre chips"
+                                     width="575" height="1280" loading="lazy" decoding="async">
+                            </div>
+                            <figcaption class="shot-copy">
+                                <span class="shot-step">8 / 17</span>
+                                <h3>Search and browse</h3>
+                                <p>One search field, and under it the whole catalogue as tap targets &mdash; eleven listings and forty-seven genres. Most of the time you can get where you are going without typing anything.</p>
+                            </figcaption>
+                        </figure>
+                        <figure class="shot-slide" role="group"
+                                aria-roledescription="slide" aria-label="9 of 17" aria-hidden="true">
+                            <div class="shot-frame">
+                                <img src="images/Tsuzuku-screenshots/09-downloads.jpeg" alt="Downloads tab with counters for series, episodes, space used and space free"
+                                     width="575" height="1280" loading="lazy" decoding="async">
+                            </div>
+                            <figcaption class="shot-copy">
+                                <span class="shot-step">9 / 17</span>
+                                <h3>Downloads</h3>
+                                <p>Saved episodes live here and play with no internet &mdash; subtitles included, since they come down with the video. The counters across the top are series, episodes, space used and space left.</p>
+                            </figcaption>
+                        </figure>
+                        <figure class="shot-slide" role="group"
+                                aria-roledescription="slide" aria-label="10 of 17" aria-hidden="true">
+                            <div class="shot-frame">
+                                <img src="images/Tsuzuku-screenshots/10-settings-playback.jpeg" alt="Playback settings: subtitles on by default, autoplay next episode, preferred quality and preferred audio"
+                                     width="575" height="1280" loading="lazy" decoding="async">
+                            </div>
+                            <figcaption class="shot-copy">
+                                <span class="shot-step">10 / 17</span>
+                                <h3>Settings &mdash; Playback</h3>
+                                <p>Subtitles and autoplay default here. Quality and audio are remembered between episodes rather than asked for again every time you start one.</p>
+                            </figcaption>
+                        </figure>
+                        <figure class="shot-slide" role="group"
+                                aria-roledescription="slide" aria-label="11 of 17" aria-hidden="true">
+                            <div class="shot-frame">
+                                <img src="images/Tsuzuku-screenshots/11-settings-display.jpeg" alt="Display settings: screen orientation and which tab Saved opens on"
+                                     width="575" height="1280" loading="lazy" decoding="async">
+                            </div>
+                            <figcaption class="shot-copy">
+                                <span class="shot-step">11 / 17</span>
+                                <h3>Settings &mdash; Display</h3>
+                                <p>Orientation for the app; the player is always landscape whatever this says. Saved can open on any of its tabs rather than always on All.</p>
+                            </figcaption>
+                        </figure>
+                        <figure class="shot-slide" role="group"
+                                aria-roledescription="slide" aria-label="12 of 17" aria-hidden="true">
+                            <div class="shot-frame">
+                                <img src="images/Tsuzuku-screenshots/12-settings-subtitles.jpeg" alt="Subtitle settings with a sample preview line, plus size, colour and background controls"
+                                     width="575" height="1280" loading="lazy" decoding="async">
+                            </div>
+                            <figcaption class="shot-copy">
+                                <span class="shot-step">12 / 17</span>
+                                <h3>Settings &mdash; Subtitles</h3>
+                                <p>Size, colour and the box behind the text, with a sample line so you are not guessing. Subtitles are drawn by the app rather than burned into the video, so this applies to everything that has a track.</p>
+                            </figcaption>
+                        </figure>
+                        <figure class="shot-slide" role="group"
+                                aria-roledescription="slide" aria-label="13 of 17" aria-hidden="true">
+                            <div class="shot-frame">
+                                <img src="images/Tsuzuku-screenshots/13-settings-downloads.jpeg" alt="Download settings: default quality, switch back to streaming, play saved copies, and storage used"
+                                     width="575" height="1280" loading="lazy" decoding="async">
+                            </div>
+                            <figcaption class="shot-copy">
+                                <span class="shot-step">13 / 17</span>
+                                <h3>Settings &mdash; Downloads</h3>
+                                <p>A default size for downloads, whether a saved copy is played instead of streaming it again, and what the whole library is costing you in space.</p>
+                            </figcaption>
+                        </figure>
+                        <figure class="shot-slide" role="group"
+                                aria-roledescription="slide" aria-label="14 of 17" aria-hidden="true">
+                            <div class="shot-frame">
+                                <img src="images/Tsuzuku-screenshots/14-settings-catalogue.jpeg" alt="Catalogue settings showing the scraper version and a button to clear cached results"
+                                     width="575" height="1280" loading="lazy" decoding="async">
+                            </div>
+                            <figcaption class="shot-copy">
+                                <span class="shot-step">14 / 17</span>
+                                <h3>Settings &mdash; Catalogue</h3>
+                                <p>The scraper is baked into the app rather than served from anywhere, so its version is worth being able to read. Below it, a way to drop everything it has cached.</p>
+                            </figcaption>
+                        </figure>
+                        <figure class="shot-slide" role="group"
+                                aria-roledescription="slide" aria-label="15 of 17" aria-hidden="true">
+                            <div class="shot-frame">
+                                <img src="images/Tsuzuku-screenshots/15-settings-connection.jpeg" alt="Connection settings with a Test connection action"
+                                     width="1220" height="2712" loading="lazy" decoding="async">
+                            </div>
+                            <figcaption class="shot-copy">
+                                <span class="shot-step">15 / 17</span>
+                                <h3>Settings &mdash; Connection</h3>
+                                <p>The video never comes from the site you browse. Test connection walks the whole chain &mdash; site, search, stream lookup, then the video server itself &mdash; and names the first step that fails instead of leaving you to guess.</p>
+                            </figcaption>
+                        </figure>
+                        <figure class="shot-slide" role="group"
+                                aria-roledescription="slide" aria-label="16 of 17" aria-hidden="true">
+                            <div class="shot-frame">
+                                <img src="images/Tsuzuku-screenshots/16-settings-app.jpeg" alt="App settings: check for update on the preview channel, and clear watch history"
+                                     width="575" height="1280" loading="lazy" decoding="async">
+                            </div>
+                            <figcaption class="shot-copy">
+                                <span class="shot-step">16 / 17</span>
+                                <h3>Settings &mdash; App</h3>
+                                <p>Updates arrive over the air, so a fix lands on the next launch without a reinstall. Clearing watch history drops every resume position the app is holding.</p>
+                            </figcaption>
+                        </figure>
+                        <figure class="shot-slide" role="group"
+                                aria-roledescription="slide" aria-label="17 of 17" aria-hidden="true">
+                            <div class="shot-frame">
+                                <img src="images/Tsuzuku-screenshots/17-settings-whats-new.jpeg" alt="What's new section listing recent release notes inside the app"
+                                     width="575" height="1280" loading="lazy" decoding="async">
+                            </div>
+                            <figcaption class="shot-copy">
+                                <span class="shot-step">17 / 17</span>
+                                <h3>Settings &mdash; What&rsquo;s new</h3>
+                                <p>Every release worth mentioning gets a note. The newest one shows itself when an update lands, and the whole history stays here for whenever you want it.</p>
+                            </figcaption>
+                        </figure>
                         </div>
                     </div>
+
+                    <button type="button" class="shot-nav shot-prev" data-shot-prev aria-label="Previous screenshot">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <button type="button" class="shot-nav shot-next" data-shot-next aria-label="Next screenshot">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+
+                    <div class="shot-dots" data-shot-dots role="group" aria-label="Choose a screenshot">
+                        <button type="button" class="shot-dot is-active" data-shot-dot="0" aria-label="Home"></button>
+                        <button type="button" class="shot-dot" data-shot-dot="1" aria-label="Series detail"></button>
+                        <button type="button" class="shot-dot" data-shot-dot="2" aria-label="The player"></button>
+                        <button type="button" class="shot-dot" data-shot-dot="3" aria-label="Downloading episodes"></button>
+                        <button type="button" class="shot-dot" data-shot-dot="4" aria-label="Tracking a series"></button>
+                        <button type="button" class="shot-dot" data-shot-dot="5" aria-label="Saved"></button>
+                        <button type="button" class="shot-dot" data-shot-dot="6" aria-label="Schedule"></button>
+                        <button type="button" class="shot-dot" data-shot-dot="7" aria-label="Search and browse"></button>
+                        <button type="button" class="shot-dot" data-shot-dot="8" aria-label="Downloads"></button>
+                        <button type="button" class="shot-dot" data-shot-dot="9" aria-label="Settings - Playback"></button>
+                        <button type="button" class="shot-dot" data-shot-dot="10" aria-label="Settings - Display"></button>
+                        <button type="button" class="shot-dot" data-shot-dot="11" aria-label="Settings - Subtitles"></button>
+                        <button type="button" class="shot-dot" data-shot-dot="12" aria-label="Settings - Downloads"></button>
+                        <button type="button" class="shot-dot" data-shot-dot="13" aria-label="Settings - Catalogue"></button>
+                        <button type="button" class="shot-dot" data-shot-dot="14" aria-label="Settings - Connection"></button>
+                        <button type="button" class="shot-dot" data-shot-dot="15" aria-label="Settings - App"></button>
+                        <button type="button" class="shot-dot" data-shot-dot="16" aria-label="Settings - What's new"></button>
                     </div>
                 </div>
             </div>
@@ -274,6 +509,42 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="tsuzuku-download" class="download-section">
+            <div class="container">
+                <div class="grid download-grid">
+                                        <div class="dl-card-shell">
+                    <span class="dl-badge dl-badge-red">Beta</span>
+                    <div class="download-card border-red">
+                        <div class="card-glow"></div>
+                        <div class="dl-card-content">
+                            <div class="dl-platform">
+                                <svg class="dl-icon color-red" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path d="M18.4395 5.5586c-.675 1.1664-1.352 2.3318-2.0274 3.498-.0366-.0155-.0742-.0286-.1113-.043-1.8249-.6957-3.484-.8-4.42-.787-1.8551.0185-3.3544.4643-4.2597.8203-.084-.1494-1.7526-3.021-2.0215-3.4864a1.1451 1.1451 0 0 0-.1406-.1914c-.3312-.364-.9054-.4859-1.379-.203-.475.282-.7136.9361-.3886 1.5019 1.9466 3.3696-.0966-.2158 1.9473 3.3593.0172.031-.4946.2642-1.3926 1.0177C2.8987 12.176.452 14.772 0 18.9902h24c-.119-1.1108-.3686-2.099-.7461-3.0683-.7438-1.9118-1.8435-3.2928-2.7402-4.1836a12.1048 12.1048 0 0 0-2.1309-1.6875c.6594-1.122 1.312-2.2559 1.9649-3.3848.2077-.3615.1886-.7956-.0079-1.1191a1.1001 1.1001 0 0 0-.8515-.5332c-.5225-.0536-.9392.3128-1.0488.5449zm-.0391 8.461c.3944.5926.324 1.3306-.1563 1.6503-.4799.3197-1.188.0985-1.582-.4941-.3944-.5927-.324-1.3307.1563-1.6504.4727-.315 1.1812-.1086 1.582.4941zM7.207 13.5273c.4803.3197.5506 1.0577.1563 1.6504-.394.5926-1.1038.8138-1.584.4941-.48-.3197-.5503-1.0577-.1563-1.6504.4008-.6021 1.1087-.8106 1.584-.4941z"/>
+                                </svg>
+                                <div>
+                                    <h3>Tsuzuku</h3>
+                                    <span>Android App (Phones &amp; Tablets)</span>
+                                </div>
+                            </div>
+
+                            <ul class="dl-specs">
+                                <li><span>Version</span> <strong>v1.1.0 (Beta)</strong></li>
+                                <li><span>Released</span> <strong>September 4, 2026</strong></li>
+                                <li><span>Size</span> <strong>~32 MB</strong></li>
+                                <li><span>Requirement</span> <strong>Android 7.0+ (arm64 only)</strong></li>
+                                <li><span>Subtitles</span> <strong>Selectable tracks</strong></li>
+                                <li><span>Updates</span> <strong>Over-the-air</strong></li>
+                            </ul>
+
+                            <a href="https://github.com/Syha-01/Tsuzuku/releases/download/v1.1.0/tsuzuku-v1.1.0-arm64.apk" download id="dl-tsuzuku-apk" class="btn btn-block btn-red btn-glow">Download APK (Tsuzuku Beta)</a>
+                            <p class="dl-fallback">Built for 64-bit devices only — there is no universal APK for this one yet. Tsuzuku installs alongside Nani-me; the two share nothing and do not conflict.</p>
+                        </div>
+                    </div>
+                    </div>
                 </div>
             </div>
         </section>

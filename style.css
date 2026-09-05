@@ -1763,3 +1763,200 @@ footer {
     color: var(--red-light);
     border: 1px solid rgba(255, 77, 87, 0.2);
 }
+
+/* ==========================================================================
+   Tsuzuku Screenshot Carousel
+   ========================================================================== */
+
+.shot-carousel {
+    position: relative;
+    max-width: 940px;
+    margin: 0 auto;
+}
+
+/* The track is laid out as a grid stack rather than a flex row: every slide
+   sits in cell 1/1, so the viewport takes the height of the tallest one and
+   nothing jumps as you move between a short caption and a long one. */
+/* Height is set per slide from JS, and animates between them. Without JS it
+   stays auto, which the grid stack below resolves to the tallest slide — the
+   old behaviour, and a safe place to land. */
+.shot-viewport {
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    transition: height var(--transition-normal);
+}
+
+.shot-track {
+    display: grid;
+}
+
+.shot-slide {
+    grid-area: 1 / 1;
+    /* Grid items stretch by default, which would make every slide as tall as
+       the tallest and give the height measurement nothing to tell apart. */
+    align-self: start;
+    display: grid;
+    /* A portrait phone shot is over twice as tall as it is wide, so the column
+       width is what sets the height of the whole card. 230 keeps the app's own
+       text legible without the caption stranded halfway down an empty panel. */
+    grid-template-columns: minmax(0, 230px) minmax(0, 1fr);
+    gap: 44px;
+    align-items: center;
+    margin: 0;
+    padding: 28px 32px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+    transition: opacity var(--transition-normal), transform var(--transition-normal), visibility var(--transition-normal);
+}
+
+.shot-slide.is-active {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+}
+
+.shot-frame {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--border-light);
+    background: var(--bg-secondary);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+
+.shot-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.shot-step {
+    display: inline-block;
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--red);
+    margin-bottom: 10px;
+}
+
+.shot-copy h3 {
+    font-size: 26px;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+}
+
+.shot-copy p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-size: 15px;
+    max-width: 52ch;
+}
+
+.shot-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--border-light);
+    background: rgba(15, 15, 26, 0.85);
+    color: var(--text-primary);
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+    transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.shot-nav svg { width: 20px; height: 20px; }
+.shot-nav:hover { background: var(--red); border-color: var(--red); }
+.shot-nav:focus-visible { outline: 2px solid var(--red-light); outline-offset: 3px; }
+.shot-prev { left: -22px; }
+.shot-next { right: -22px; }
+
+.shot-dots {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 24px;
+}
+
+.shot-dot {
+    width: 9px;
+    height: 9px;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-full);
+    background: var(--border-light);
+    cursor: pointer;
+    transition: background var(--transition-fast), width var(--transition-fast);
+}
+
+.shot-dot:hover { background: var(--text-tertiary); }
+.shot-dot:focus-visible { outline: 2px solid var(--red-light); outline-offset: 3px; }
+
+.shot-dot.is-active {
+    width: 26px;
+    background: var(--red);
+}
+
+/* The player shot is landscape where every other one is portrait. Beside its
+   caption it would be a letterbox stranded in a card whose height the tall
+   shots set, so it stacks instead and takes the width it needs to be read. */
+.shot-slide--wide {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    text-align: center;
+    gap: 28px;
+}
+
+.shot-slide--wide .shot-frame { width: min(100%, 640px); }
+.shot-slide--wide .shot-copy p { max-width: 62ch; margin: 0 auto; }
+
+/* Stacked on a phone, and the shot itself is capped: a full-height portrait
+   screenshot above the text pushes the description off the screen entirely. */
+@media (max-width: 768px) {
+    .shot-slide,
+    .shot-slide--wide {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 20px;
+        justify-items: center;
+        text-align: center;
+    }
+
+    .shot-frame { max-width: 210px; }
+    .shot-slide--wide .shot-frame { max-width: 100%; }
+    .shot-copy h3 { font-size: 21px; }
+
+    /* Inside the padding rather than outside it — there is no room beside the
+       card at this width. */
+    .shot-prev { left: 4px; }
+    .shot-next { right: 4px; }
+    .shot-nav { width: 38px; height: 38px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .shot-slide { transition: none; transform: none; }
+    .shot-viewport { transition: none; }
+}
+
+/* The hero is a title and a note now that the download card has moved to the
+   end of the page, so it no longer needs a full section's padding under it —
+   that plus the note's own margin left a blank band above the gallery. */
+#tsuzuku-hero { padding-bottom: 24px; }
+#tsuzuku-hero .sister-note { margin-bottom: 0; }
+
+/* The card itself is at the foot of the page, so the hero carries a jump to it
+   rather than a second copy of the download. */
+.tsuzuku-hero-actions {
+    display: flex;
+    justify-content: center;
+    margin: 32px 0 0;
+}

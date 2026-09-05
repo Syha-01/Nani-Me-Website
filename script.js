@@ -104,6 +104,71 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     /* ==========================================================================
+       Tsuzuku Screenshot Carousel
+       One slide at a time, with arrows, dots, arrow keys and a swipe. Absent
+       on every other page, so it does nothing when the markup is not there.
+       ========================================================================== */
+    document.querySelectorAll('[data-shot-carousel]').forEach(carousel => {
+        const slides = Array.from(carousel.querySelectorAll('.shot-slide'));
+        const dots = Array.from(carousel.querySelectorAll('[data-shot-dot]'));
+        const viewport = carousel.querySelector('.shot-viewport');
+        if (!slides.length) return;
+
+        let current = 0;
+
+        // Every slide sits in the same grid cell, so the card would otherwise
+        // take the height of the tallest — leaving the one landscape shot
+        // floating in a box built for a portrait one.
+        const fit = () => { viewport.style.height = slides[current].offsetHeight + 'px'; };
+
+        const show = (next) => {
+            // Wraps both ways, so the arrows are never dead at either end.
+            current = (next + slides.length) % slides.length;
+            slides.forEach((slide, i) => {
+                const on = i === current;
+                slide.classList.toggle('is-active', on);
+                // Hidden slides are stacked under the visible one, so they are
+                // taken out of the reading order rather than just made invisible.
+                slide.toggleAttribute('aria-hidden', !on);
+            });
+            dots.forEach((dot, i) => dot.classList.toggle('is-active', i === current));
+            fit();
+        };
+
+        carousel.querySelector('[data-shot-prev]').addEventListener('click', () => show(current - 1));
+        carousel.querySelector('[data-shot-next]').addEventListener('click', () => show(current + 1));
+        dots.forEach((dot, i) => dot.addEventListener('click', () => show(i)));
+
+        // Only once the carousel has focus — arrow keys still scroll the page
+        // for anyone who has not reached it.
+        carousel.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') { show(current - 1); e.preventDefault(); }
+            else if (e.key === 'ArrowRight') { show(current + 1); e.preventDefault(); }
+        });
+
+        // Horizontal swipe. The vertical check keeps a scroll down the page
+        // from being read as a lazy sideways drag.
+        let startX = 0, startY = 0;
+        carousel.addEventListener('touchstart', (e) => {
+            startX = e.changedTouches[0].clientX;
+            startY = e.changedTouches[0].clientY;
+        }, { passive: true });
+
+        carousel.addEventListener('touchend', (e) => {
+            const dx = e.changedTouches[0].clientX - startX;
+            const dy = e.changedTouches[0].clientY - startY;
+            if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) show(current + (dx < 0 ? 1 : -1));
+        }, { passive: true });
+
+        show(0);
+        window.addEventListener('resize', fit, { passive: true });
+        // The shots are lazy-loaded, so the first measurement can land before
+        // the image has a height to report.
+        carousel.querySelectorAll('img').forEach(img => img.addEventListener('load', fit));
+    });
+
+
+    /* ==========================================================================
        Scrollspy (Highlight Active Navbar Link)
        ========================================================================== */
     const sections = document.querySelectorAll('section[id]');
