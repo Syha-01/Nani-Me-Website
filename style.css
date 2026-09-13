@@ -405,6 +405,40 @@ header.shrinked {
     }
 }
 
+/* The nav list is display:none under 768px and there is no hamburger, so these
+   sit outside it — inside, they would be gone on a phone, which is where most
+   of the traffic is. Grouped with the nav so the logo still holds the left on
+   its own and space-between does not drag the links to the middle. */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-social {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    color: var(--text-secondary);
+    border: 1px solid transparent;
+    transition: var(--transition-normal);
+}
+
+.social-link:hover {
+    color: #FFFFFF;
+    border-color: var(--border-color);
+    background: rgba(139, 92, 246, 0.12);
+}
+
 /* ==========================================================================
    Hero Section
    ========================================================================== */
