@@ -73,6 +73,8 @@
                     playback controls Nani-me has nothing to attach to. Offline downloads landed in v1.1.0 and
                     on-device subtitle translation in v1.2.0; what it still
                     goes without is an Android TV edition and two years of polish.
+                    v2.0 adds MyAnimeList, two more places to find a stream, and a
+                    great deal more about what you are watching.
                     <strong>It is in beta:</strong> newer, smaller and less proven.
                     Nani-me remains the complete app.
                 </p>
@@ -88,6 +90,74 @@
                     </a>
                 </p>
 
+            </div>
+        </section>
+
+        <section id="tsuzuku-whats-new" class="highlights-section">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="sub-title">Version 2.0</span>
+                    <h2>What Is New</h2>
+                    <p class="section-desc">The largest release Tsuzuku has had. It installs over the copy you already have and keeps everything in it.</p>
+                </div>
+
+                <div class="grid grid-3">
+                    <div class="highlight-card card-glow-red">
+                        <div class="card-icon-container">
+                            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M20 6 9 17l-5-5"></path>
+                            </svg>
+                        </div>
+                        <h3>Your list, on MyAnimeList</h3>
+                        <p>What you watch here is written to your list there &mdash; what you are watching, how far through you are, and the score you give it at the end. A list you already have can be brought in the other way too.</p>
+                        <p class="card-note"><strong>To connect it:</strong> Settings &rarr; MyAnimeList &rarr; Connect to MyAnimeList. That opens MyAnimeList in your browser &mdash; sign in, press Allow, and it drops you back into the app. If the browser it opens is not the one you are already signed in on, use Copy sign-in link instead and paste it into the one that is.</p>
+                    </div>
+                    <div class="highlight-card card-glow-red">
+                        <div class="card-icon-container">
+                            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M4 4v6h6"></path><path d="M20 20v-6h-6"></path><path d="M4 10a8 8 0 0 1 14-3M20 14a8 8 0 0 1-14 3"></path>
+                            </svg>
+                        </div>
+                        <h3>Three places to find an episode</h3>
+                        <p>When the usual site has no stream, Tsuzuku tries two more on its own before telling you it cannot. Downloads fall back the same way, so an episode that would not save often simply does now.</p>
+                    </div>
+                    <div class="highlight-card card-glow-red">
+                        <div class="card-icon-container">
+                            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M7 9h10M7 13h6"></path>
+                            </svg>
+                        </div>
+                        <h3>Far more about a series</h3>
+                        <p>Every season in order with the one you are on marked, what it is related to, the cast and the studio behind it &mdash; and episodes listed under their real names instead of a number.</p>
+                    </div>
+                    <div class="highlight-card card-glow-red">
+                        <div class="card-icon-container">
+                            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                        </div>
+                        <h3>The discussion, under the episode</h3>
+                        <p>What everyone else made of the episode you just watched, pulled from its MyAnimeList thread and sitting at the bottom of the player.</p>
+                    </div>
+                    <div class="highlight-card card-glow-red">
+                        <div class="card-icon-container">
+                            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                            </svg>
+                        </div>
+                        <h3>Finishing a series</h3>
+                        <p>Watch the last episode and Tsuzuku asks how it was, then marks the series done &mdash; on your list here, and on MyAnimeList if it is connected.</p>
+                    </div>
+                    <div class="highlight-card card-glow-red">
+                        <div class="card-icon-container">
+                            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="12" cy="12" r="10"></circle><path d="M8 12h8M12 8v8"></path>
+                            </svg>
+                        </div>
+                        <h3>And the small things</h3>
+                        <p>The Seasons row opens on the season you are actually in. The download queue no longer swallows taps on its own buttons. A saved episode that will not play can be replaced rather than being stuck.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -494,6 +564,21 @@
                                 <td><span class="check no" aria-label="No">&mdash;</span> Phones and tablets only</td>
                             </tr>
                             <tr>
+                                <th scope="row">MyAnimeList sync</th>
+                                <td><span class="check no" aria-label="No">&mdash;</span></td>
+                                <td><span class="check yes" aria-label="Yes">&#10003;</span> Status, progress and score, written as you watch</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">If the source has no stream</th>
+                                <td><span class="check no" aria-label="No">&mdash;</span> Nothing to fall back to</td>
+                                <td><span class="check yes" aria-label="Yes">&#10003;</span> Two further sites tried automatically</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Episode names, seasons and cast</th>
+                                <td><span class="check no" aria-label="No">&mdash;</span></td>
+                                <td><span class="check yes" aria-label="Yes">&#10003;</span></td>
+                            </tr>
+                            <tr>
                                 <th scope="row">Ratings, Related and Recommended</th>
                                 <td><span class="check no" aria-label="No">&mdash;</span></td>
                                 <td><span class="check yes" aria-label="Yes">&#10003;</span></td>
@@ -548,16 +633,16 @@
                             </div>
 
                             <ul class="dl-specs">
-                                <li><span>Version</span> <strong>v1.2.0 (Beta)</strong></li>
-                                <li><span>Released</span> <strong>September 9, 2026</strong></li>
-                                <li><span>Size</span> <strong>~48 MB</strong></li>
+                                <li><span>Version</span> <strong>v2.0.0 (Beta)</strong></li>
+                                <li><span>Released</span> <strong>September 15, 2026</strong></li>
+                                <li><span>Size</span> <strong>~52 MB</strong></li>
                                 <li><span>Requirement</span> <strong>Android 7.0+ (arm64 only)</strong></li>
                                 <li><span>Subtitles</span> <strong>Selectable, translatable</strong></li>
                                 <li><span>Updates</span> <strong>Over-the-air</strong></li>
                             </ul>
 
-                            <a href="https://github.com/Syha-01/Tsuzuku/releases/download/v1.2.0/tsuzuku-v1.2.0-arm64.apk" download id="dl-tsuzuku-apk" class="btn btn-block btn-red btn-glow">Download APK (Tsuzuku Beta)</a>
-                            <p class="dl-fallback">Built for 64-bit devices only — there is no universal APK for this one yet. Tsuzuku installs alongside Nani-me; the two share nothing and do not conflict.</p>
+                            <a href="https://github.com/Syha-01/Tsuzuku/releases/download/v2.0.0/tsuzuku-v2.0.0-arm64.apk" download id="dl-tsuzuku-apk" class="btn btn-block btn-red btn-glow">Download APK (Tsuzuku Beta)</a>
+                            <p class="dl-fallback">Built for 64-bit devices only — there is no universal APK for this one yet. Already on an older Tsuzuku? Install this straight over it — your list, your progress, your downloads and your settings all stay put. Tsuzuku installs alongside Nani-me; the two share nothing and do not conflict.</p>
                         </div>
                     </div>
                     </div>

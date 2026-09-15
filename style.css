@@ -639,6 +639,14 @@ header.shrinked {
     line-height: 1.6;
 }
 
+/* The steps under a card, set back from what the card is actually about. */
+.highlight-card p.card-note {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-color);
+    font-size: 14px;
+}
+
 /* ==========================================================================
    Showcase / Tab Section
    ========================================================================== */
