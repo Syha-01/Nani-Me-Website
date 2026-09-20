@@ -517,18 +517,10 @@ h1, h2, h3 { font-weight: 300; text-wrap: balance; letter-spacing: -0.022em; }
     place-items: center;
 }
 
-.ui-mal {
-    width: calc(var(--k) * 28);
-    height: calc(var(--k) * 12);
-    border-radius: calc(var(--k) * 2);
-    background: #2E51A2;
-    color: #fff;
-    font-size: calc(var(--k) * 7.5);
-    font-weight: 700;
-    letter-spacing: calc(var(--k) * 0.3);
-    display: grid;
-    place-items: center;
-}
+/* assets/mal.png and assets/anilist.png, at the widths SignInGate gives them.
+   Height is left to follow the file so neither mark is squashed. */
+.ui-mal { width: calc(var(--k) * 28); height: auto; display: block; }
+.ui-al  { width: calc(var(--k) * 18); height: auto; display: block; }
 
 .ui-label {
     flex: 1;
@@ -791,6 +783,61 @@ section { scroll-margin-top: 84px; }
 .tile h3 { font-size: 14.5px; font-weight: 500; }
 .tile p { color: var(--dim); font-size: 13.5px; line-height: 1.68; }
 
+/* ── the checklist ────────────────────────────────────────────────── */
+
+/* Columns rather than a grid: a grid puts each group in a fixed cell, so at
+   two columns a fifteen-item group and an eight-item one share a row and the
+   short one leaves a hole. Flowing them lets the groups pack and balance at
+   whatever column count fits. */
+.checklist {
+    padding: clamp(26px, 3.6vw, 46px);
+    column-gap: clamp(26px, 3vw, 44px);
+}
+
+@media (min-width: 620px) { .checklist { columns: 2; } }
+@media (min-width: 980px) { .checklist { columns: 3; } }
+
+.check-group {
+    break-inside: avoid;
+    display: grid;
+    gap: 14px;
+    align-content: start;
+    margin-bottom: clamp(26px, 3vw, 34px);
+}
+
+.check-group:last-child { margin-bottom: 0; }
+
+.check-group h3 {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--seal-lit);
+}
+
+.check-group ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+
+.check-group li {
+    display: grid;
+    grid-template-columns: 15px 1fr;
+    gap: 11px;
+    align-items: start;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--dim);
+}
+
+/* Drawn rather than a character: a tick glyph varies by font and would sit on
+   a different baseline in each one. */
+.check-group li::before {
+    content: "";
+    width: 15px;
+    height: 15px;
+    margin-top: 0.25em;
+    background: no-repeat center / 11px 11px
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M1.4 6.3 4.4 9.2 10.6 2.8' fill='none' stroke='%23ffffff' stroke-opacity='0.55' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
 /* ── close ────────────────────────────────────────────────────────── */
 
 .close-slab {
@@ -953,6 +1000,93 @@ footer { padding-block: 40px 52px; }
         </div>
     </section>
 
+    <section class="sec page" id="everything">
+        <div class="sec-head">
+            <p class="eyebrow">At a glance</p>
+            <h2>Everything it does, in one list.</h2>
+            <p>No tiers, no upgrade, nothing held back for a paid version — all of this is in the app you download.</p>
+        </div>
+
+        <div class="slab checklist">
+            <div class="check-group">
+                <h3>Watching</h3>
+                <ul>
+                    <li>Stream up to 1080p</li>
+                    <li>Change quality mid-episode</li>
+                    <li>Quality remembered for next time</li>
+                    <li>Sub and dub as separate lists</li>
+                    <li>Swap between them mid-episode</li>
+                    <li>Subtitle timing corrected for you</li>
+                    <li>Translate subtitles on the phone</li>
+                    <li>Double tap to skip, taps stack up</li>
+                    <li>Hold for double speed</li>
+                    <li>Slide for brightness and volume</li>
+                    <li>Skip the intro in one press</li>
+                    <li>Theatre mode</li>
+                    <li>Lock the orientation</li>
+                    <li>Set subtitle size, font and background</li>
+                    <li>Falls back when a server won't play</li>
+                </ul>
+            </div>
+
+            <div class="check-group">
+                <h3>Offline</h3>
+                <ul>
+                    <li>Download any episode</li>
+                    <li>One file per episode</li>
+                    <li>Resumes after an interruption</li>
+                    <li>Keeps going when you leave the app</li>
+                    <li>Choose the quality to save at</li>
+                    <li>Share a saved episode like any video</li>
+                    <li>Offline watching still counts</li>
+                    <li>See what each download costs you</li>
+                </ul>
+
+            </div>
+
+            <div class="check-group">
+                <h3>Finding things</h3>
+                <ul>
+                    <li>Continue watching, to the minute</li>
+                    <li>What's airing this week</li>
+                    <li>Countdown to the next episode</li>
+                    <li>Search by name</li>
+                    <li>Browse by genre</li>
+                    <li>Synopsis, cast, year and rating</li>
+                    <li>Every season in order</li>
+                    <li>Episode discussion threads</li>
+                </ul>
+            </div>
+
+            <div class="check-group">
+                <h3>Your list</h3>
+                <ul>
+                    <li>MyAnimeList sync</li>
+                    <li>AniList sync</li>
+                    <li>Episodes ticked off as you watch</li>
+                    <li>Status, score and rewatches</li>
+                    <li>Start and finish dates</li>
+                    <li>Import your whole list</li>
+                    <li>Matching runs in the background</li>
+                    <li>Fix anything it can't place by hand</li>
+                </ul>
+
+            </div>
+
+            <div class="check-group">
+                <h3>The app itself</h3>
+                <ul>
+                    <li>Free</li>
+                    <li>No account required</li>
+                    <li>No ads</li>
+                    <li>Updates arrive on their own</li>
+                    <li>Choose your own colours</li>
+                    <li>True black for OLED screens</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
     <section class="sec page">
         <div class="pillars">
             <div class="slab pillar">
@@ -1104,16 +1238,14 @@ footer { padding-block: 40px 52px; }
 
                         <div class="ui-choices">
                             <div class="ui-row">
-                                <span class="ui-logo"><span class="ui-mal">MAL</span></span>
+                                <span class="ui-logo"><img class="ui-mal" src="images/tsuzuku/mal.png" width="140" height="58" loading="lazy" decoding="async" alt=""></span>
                                 <span class="ui-label">Continue with MyAnimeList</span>
                                 <span class="ui-chev">
                                     <svg width="7" height="12" viewBox="0 0 8 14" fill="none"><path d="m1.5 1 5.5 6-5.5 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                                 </span>
                             </div>
                             <div class="ui-row">
-                                <span class="ui-logo">
-                                    <svg width="12" height="9" viewBox="0 0 18 14" fill="#02A9FF"><path d="M0 0h3.5v10.6h6.1V14H0V0Z"/><path d="M12.4 0 8.2 14h3.6l.8-2.9h3.1l.8 2.9H18L13.8 0h-1.4Zm.7 8.3.8-3.2.8 3.2h-1.6Z"/></svg>
-                                </span>
+                                <span class="ui-logo"><img class="ui-al" src="images/tsuzuku/anilist.png" width="108" height="82" loading="lazy" decoding="async" alt=""></span>
                                 <span class="ui-label">Continue with AniList</span>
                                 <span class="ui-chev">
                                     <svg width="7" height="12" viewBox="0 0 8 14" fill="none"><path d="m1.5 1 5.5 6-5.5 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1212,6 +1344,7 @@ footer { padding-block: 40px 52px; }
             </div>
         </div>
     </section>
+
 
     <section class="sec page" id="get">
         <div class="slab close-slab">
