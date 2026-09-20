@@ -434,11 +434,6 @@ h1, h2, h3 { font-weight: 300; text-wrap: balance; letter-spacing: -0.022em; }
 
 .shot-tall { max-width: 244px; margin-inline: auto; }
 
-/* The player is landscape, so its block gives the picture the wider half. */
-@media (min-width: 880px) {
-    .block.wide-media { grid-template-columns: 1.12fr 0.88fr; }
-}
-
 /* ── the first screen, rebuilt ────────────────────────────────────── */
 
 /* A miniature of components/SignInGate.tsx. Every measurement below is the
@@ -644,6 +639,10 @@ section { scroll-margin-top: 84px; }
 @media (min-width: 880px) {
     .block { grid-template-columns: 0.82fr 1.18fr; }
     .block.flip .block-media { order: 2; }
+
+    /* A landscape picture beside a tall column of text leaves a column of
+       nothing, so it goes across the top and the list runs beneath it. */
+    .block.stacked { grid-template-columns: 1fr; }
 }
 
 .block-body { display: grid; gap: 22px; }
@@ -653,6 +652,32 @@ section { scroll-margin-top: 84px; }
 .block-body h2 { font-size: clamp(22px, 2.7vw, 29px); line-height: 1.28; }
 
 .feats { display: grid; gap: 2px; }
+
+/* Two columns, filled top-to-bottom rather than left-to-right, so it still
+   reads as one list. Every item takes a rule here, not just the ones after a
+   sibling — otherwise whichever item starts the second column floats with
+   nothing above it. */
+@media (min-width: 720px) {
+    .feats-2 {
+        display: block;
+        columns: 2;
+        column-gap: clamp(30px, 4vw, 56px);
+    }
+
+    .feats-2 .feat { break-inside: avoid; }
+    .feats-2 .feat + .feat::before { content: none; }
+
+    .feats-2 .feat::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.12) 72%, transparent);
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.032);
+    }
+}
 
 .feat {
     display: grid;
@@ -946,7 +971,7 @@ footer { padding-block: 40px 52px; }
     </section>
 
     <section class="sec page" id="player">
-        <div class="slab block wide-media">
+        <div class="slab block stacked">
             <div class="block-media">
                 <div class="well shot-img">
                     <img src="images/tsuzuku/player.jpg" width="1356" height="610" loading="lazy" decoding="async"
@@ -956,7 +981,7 @@ footer { padding-block: 40px 52px; }
             <div class="block-body">
                 <p class="eyebrow">Watching</p>
                 <h2>Built by someone tired of tapping the wrong thing in the dark.</h2>
-                <div class="feats">
+                <div class="feats feats-2">
                     <div class="feat">
                         <h3>Pick the quality yourself</h3>
                         <p>Every quality an episode actually comes in, changeable halfway through without losing your place, and remembered for the next episode. Tsuzuku checks what's really on offer instead of showing the same list every time — one series has 1080p, 720p and 360p, the next only has 720p.</p>
