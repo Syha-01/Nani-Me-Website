@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tsuzuku — an anime app that picks up where you left off</title>
+    <meta name="description" content="Tsuzuku is a free Android anime app: stream it, download episodes for when you have no internet, and let MyAnimeList or AniList keep up with what you have watched.">
+    <meta name="theme-color" content="#242424">
+    <meta name="color-scheme" content="dark">
+    <!-- Open Graph / social sharing -->
+    <meta property="og:title" content="Tsuzuku — an anime app that picks up where you left off">
+    <meta property="og:description" content="Stream it, download episodes for when you have no internet, and let MyAnimeList or AniList keep up with what you have watched. Free, Android, no account needed.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="images/tsuzuku/home.jpg">
+    <!-- Favicon (app icon) -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/app-icon.png">
+</head>
+<body>
+<style>img { max-width: 100%; }</style>
+<title>Tsuzuku</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600&display=swap">
+
+<style>
+/* One material, sampled off the app icon: a matte neutral grey lit from the
+   upper left. Nothing here has a border. Every panel is the same colour as the
+   page and is separated from it only by the way light falls on it — raised
+   when it holds a thought, sunk when it holds a picture. */
+:root {
+    --ground:   #242424;
+    --high:     #303030;   /* the lit face of a raised form   */
+    --low:      #1B1B1B;   /* its shaded face                 */
+    --sunk:     #1C1C1C;   /* the floor of a well             */
+
+    --text:     #E6E6E6;   /* the brush white in the icon     */
+    --dim:      #9B9B9B;
+    --dimmer:   #757578;
+    --faint:    #55555A;
+
+    --seal:     #A3131E;   /* the red dot, and the only colour on the page */
+    --seal-lit: #C8323C;
+
+    /* A swell in the sheet, not a card on it. Only two of the four edges are
+       drawn at all: the flank facing the light and the flank turning away from
+       it. Both gradients start at fully transparent, so where the swell meets
+       the page it *is* the page — the top and left edges have nothing marking
+       them and simply dissolve. One cast shadow, down and right, because that
+       is the only direction a light from the upper left can throw one. */
+    --dome: linear-gradient(145deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.06) 16%,
+        rgba(255, 255, 255, 0.012) 50%,
+        rgba(0, 0, 0, 0.085) 84%,
+        rgba(0, 0, 0, 0.15) 100%);
+    /* The same surface pressed the other way. */
+    --dish: linear-gradient(145deg,
+        rgba(0, 0, 0, 0.2) 0%,
+        rgba(0, 0, 0, 0.1) 24%,
+        rgba(0, 0, 0, 0.02) 56%,
+        rgba(255, 255, 255, 0.02) 92%);
+
+    /* Hover lights a button rather than growing its shadow — a shadow that
+       swells reads as the thing jumping at you, which is the wrong gesture for
+       something you are about to press. */
+    --glow: 0 0 20px rgba(255, 255, 255, 0.07);
+
+    --lift:    18px 22px 46px rgba(0, 0, 0, 0.38);
+    --lift-hi: 26px 32px 62px rgba(0, 0, 0, 0.48);
+    --lift-sm:  7px  9px 20px rgba(0, 0, 0, 0.36);
+    --press:
+        inset 5px 6px 15px rgba(0, 0, 0, 0.46),
+        inset -4px -5px 12px rgba(255, 255, 255, 0.02);
+    --well:
+        inset 13px 15px 34px rgba(0, 0, 0, 0.5),
+        inset -10px -12px 28px rgba(255, 255, 255, 0.018);
+
+    /* One family throughout. Hierarchy comes from weight and tracking rather
+       than from a second face, which is what keeps it quiet. */
+    --display: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --mono: 'Manrope', system-ui, sans-serif;
+    --code: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    --gutter: clamp(18px, 5vw, 56px);
+    --page: 1120px;
+    --r-lg: 28px;
+    --r-md: 20px;
+    --r-sm: 14px;
+}
+
+:root { scroll-behavior: smooth; }
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background-color: var(--ground);
+    /* A single soft key light, so the ground itself has a direction. */
+    background-image: radial-gradient(78% 46% at 10% -8%, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0) 56%);
+    background-repeat: no-repeat;
+    color: var(--text);
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.68;
+    letter-spacing: 0.001em;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+a { color: inherit; }
+
+:focus-visible {
+    outline: 2px solid var(--seal-lit);
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { font-weight: 300; text-wrap: balance; letter-spacing: -0.022em; }
+
+.page {
+    width: 100%;
+    max-width: var(--page);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+}
+
+.eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--dimmer);
+}
+
+/* ── the material ─────────────────────────────────────────────────── */
+
+.slab {
+    border-radius: var(--r-lg);
+    background: var(--dome);
+    box-shadow: var(--lift);
+}
+
+/* A dish pressed into the sheet. No fill either: the depression is read from
+   the shading alone, so its rim dissolves the same way a card's does. */
+.well {
+    border-radius: var(--r-md);
+    background: var(--dish);
+    box-shadow: var(--well);
+}
+
+/* ── header ───────────────────────────────────────────────────────── */
+
+.bar {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 40;
+    padding-block: 14px 10px;
+    /* A short fade, so whatever scrolls up behind the floating bar dims out
+       rather than colliding with it. */
+    background: linear-gradient(to bottom, var(--ground) 46%, rgba(36, 36, 36, 0.7) 76%, rgba(36, 36, 36, 0));
+}
+
+.bar-in {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 9px 12px 9px 18px;
+    border-radius: 999px;
+    background: linear-gradient(145deg, rgba(53, 53, 53, 0.93), rgba(29, 29, 29, 0.93));
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: var(--lift-sm);
+}
+
+.mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+}
+
+/* The ensō, abstracted: a ring cut into the surface with one end open. */
+.ring {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    flex: none;
+    background: var(--ground);
+    box-shadow: var(--press);
+    position: relative;
+}
+
+.ring::after {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    border-radius: 50%;
+    border: 2px solid var(--text);
+    border-right-color: transparent;
+    transform: rotate(-38deg);
+    opacity: 0.92;
+}
+
+.mark-name {
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--text);
+}
+
+.bar-nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13.5px;
+}
+
+.bar-nav a {
+    padding: 8px 15px;
+    border-radius: 999px;
+    color: var(--dim);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.bar-nav a:hover {
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.035);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* The last one is the one they came for. */
+.bar-nav a.lead {
+    color: var(--text);
+    background: var(--dome), linear-gradient(150deg, #2A2A2A, #212121);
+    box-shadow: var(--lift-sm);
+    transition: box-shadow 0.2s ease, transform 0.2s ease, color 0.25s ease;
+}
+
+.bar-nav a.lead:hover { box-shadow: var(--lift-sm), var(--glow); }
+.bar-nav a.lead:active { box-shadow: var(--press); transform: translate(1px, 1px); }
+
+/* Scoped past `.bar-nav a`, which is more specific than a lone class and was
+   keeping its 15px side padding — that left a 6px content box for a 17px icon,
+   which then overflowed from the left edge instead of centring. */
+.bar-nav a.icon-link {
+    display: inline-grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border-radius: 50%;
+    color: var(--dim);
+}
+
+.icon-link svg { display: block; }
+
+.nav-sep {
+    width: 1px;
+    height: 20px;
+    margin-inline: 7px;
+    background: rgba(0, 0, 0, 0.45);
+    box-shadow: 1px 0 0 rgba(255, 255, 255, 0.045);
+}
+
+.bar-nav .wide { display: none; }
+
+@media (min-width: 760px) { .bar-nav .wide { display: inline; } }
+
+/* ── buttons, which press ─────────────────────────────────────────── */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 26px;
+    border: 0;
+    border-radius: 999px;
+    font-family: var(--display);
+    font-size: 14.5px;
+    font-weight: 500;
+    letter-spacing: 0.005em;
+    text-decoration: none;
+    cursor: pointer;
+    background: var(--dome), linear-gradient(150deg, #2A2A2A, #212121);
+    color: var(--text);
+    box-shadow: var(--lift-sm);
+    transition: box-shadow 0.2s ease, transform 0.2s ease, color 0.25s ease;
+}
+
+.btn:hover { box-shadow: var(--lift-sm), var(--glow); }
+.btn:active { box-shadow: var(--press); transform: translate(1px, 1px); }
+
+.btn-seal { color: #FFF; }
+
+
+
+/* The download button carries the release with it, so nobody has to open the
+   page to find out whether it is the current one. */
+.btn-dl { padding: 11px 26px; }
+
+.btn-stack {
+    display: grid;
+    gap: 1px;
+    text-align: left;
+}
+
+.btn-date {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: rgba(255, 255, 255, 0.52);
+}
+
+
+.btn svg { flex: none; opacity: 0.75; }
+
+/* ── hero ─────────────────────────────────────────────────────────── */
+
+.hero { padding-block: clamp(40px, 7vw, 88px) clamp(56px, 8vw, 104px); }
+
+.hero-slab {
+    display: grid;
+    gap: clamp(34px, 5vw, 60px);
+    padding: clamp(30px, 5vw, 62px);
+    align-items: center;
+}
+
+@media (min-width: 900px) {
+    .hero-slab { grid-template-columns: 1.15fr 0.85fr; }
+}
+
+.wordmark {
+    font-size: clamp(44px, 6.6vw, 72px);
+    font-weight: 200;
+    line-height: 1;
+    letter-spacing: -0.038em;
+    color: var(--text);
+    /* Cut into the slab rather than printed on it. */
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.55), -1px -1px 1px rgba(255, 255, 255, 0.06);
+    margin-bottom: 26px;
+}
+
+.hero-line {
+    font-size: clamp(23px, 3.1vw, 31px);
+    font-weight: 300;
+    line-height: 1.34;
+    letter-spacing: -0.022em;
+    text-wrap: balance;
+    max-width: 19ch;
+    margin-bottom: 20px;
+}
+
+.hero-line strong { font-weight: 500; color: #fff; }
+
+.hero-lede {
+    color: var(--dim);
+    font-size: clamp(14.5px, 1.5vw, 16px);
+    line-height: 1.75;
+    max-width: 44ch;
+    margin-bottom: 30px;
+}
+
+.hero-cta { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 26px; }
+
+.hero-fine {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--faint);
+}
+
+/* ── screenshot wells ─────────────────────────────────────────────── */
+
+.shot {
+    position: relative;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 16px;
+    overflow: hidden;
+}
+
+.shot-phone { aspect-ratio: 9 / 18; width: 100%; max-width: 218px; margin-inline: auto; }
+.shot-wide { aspect-ratio: 4 / 3; width: 100%; }
+
+/* A soft glyph pressed into the floor of the well, so an empty placeholder
+   still reads as something rather than as a hole. */
+.glyph {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--sunk);
+    box-shadow:
+        inset -3px -3px 7px rgba(255, 255, 255, 0.03),
+        inset 3px 3px 7px rgba(0, 0, 0, 0.55);
+}
+
+.glyph svg { opacity: 0.45; }
+
+.shot-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--faint);
+    text-align: center;
+    padding-inline: 14px;
+}
+
+/* A real capture. The 5px of padding is what keeps the well a well: an
+   opaque image flush to the edges would paint over the inset shading and the
+   dish would read as a flat rectangle. */
+.shot-img { padding: 5px; }
+
+.shot-img img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+}
+
+.shot-tall { max-width: 244px; margin-inline: auto; }
+
+/* The player is landscape, so its block gives the picture the wider half. */
+@media (min-width: 880px) {
+    .block.wide-media { grid-template-columns: 1.12fr 0.88fr; }
+}
+
+/* ── the first screen, rebuilt ────────────────────────────────────── */
+
+/* A miniature of components/SignInGate.tsx. Every measurement below is the
+   dp the app actually uses, multiplied by --k: the container is 262px wide
+   standing in for a 400dp screen, so one dp is 0.25cqw. Change the width and
+   the whole screen rescales in proportion. Colours are the DEFAULT palette
+   out of theme/palettes.ts. */
+.shot-ui {
+    container-type: inline-size;
+    width: 100%;
+    max-width: 262px;
+    aspect-ratio: 9 / 18;
+    margin-inline: auto;
+    padding: 5px;
+}
+
+.ui {
+    --k: 0.25cqw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 15px;
+    overflow: hidden;
+    background: #0B0B12;
+    color: #F5F5FA;
+    font-family: var(--display);
+    letter-spacing: 0;
+    padding:
+        calc(var(--k) * 46)
+        calc(var(--k) * 24)
+        calc(var(--k) * 30);
+}
+
+.ui-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(var(--k) * 12);
+}
+
+/* assets/icon.png, at the size and corner radius SignInGate gives it. */
+.ui-icon {
+    width: calc(var(--k) * 76);
+    height: calc(var(--k) * 76);
+    border-radius: calc(var(--k) * 18);
+    display: block;
+}
+
+.ui-title {
+    font-size: calc(var(--k) * 34);
+    font-weight: 700;
+    line-height: 1.16;
+    letter-spacing: calc(var(--k) * 0.5);
+}
+
+.ui-lead {
+    max-width: calc(var(--k) * 320);
+    color: #A0A0B4;
+    font-size: calc(var(--k) * 14);
+    line-height: calc(var(--k) * 21);
+    text-align: center;
+}
+
+.ui-choices { display: grid; gap: calc(var(--k) * 12); }
+
+.ui-row {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--k) * 16);
+    padding: calc(var(--k) * 16) calc(var(--k) * 20);
+    border-radius: calc(var(--k) * 14);
+    background: #15151F;
+    border: 1px solid #242435;
+}
+
+.ui-logo {
+    width: calc(var(--k) * 28);
+    flex: none;
+    display: grid;
+    place-items: center;
+}
+
+.ui-mal {
+    width: calc(var(--k) * 28);
+    height: calc(var(--k) * 12);
+    border-radius: calc(var(--k) * 2);
+    background: #2E51A2;
+    color: #fff;
+    font-size: calc(var(--k) * 7.5);
+    font-weight: 700;
+    letter-spacing: calc(var(--k) * 0.3);
+    display: grid;
+    place-items: center;
+}
+
+.ui-label {
+    flex: 1;
+    font-size: calc(var(--k) * 16);
+    font-weight: 600;
+    line-height: 1.25;
+}
+
+.ui-chev { flex: none; color: #6C6C82; display: grid; }
+
+.ui-safe {
+    display: flex;
+    align-items: flex-start;
+    gap: calc(var(--k) * 12);
+    padding: calc(var(--k) * 8) calc(var(--k) * 8) 0;
+}
+
+.ui-safe svg { flex: none; color: #3DDC84; margin-top: calc(var(--k) * 1); }
+
+.ui-safe span {
+    flex: 1;
+    color: #A0A0B4;
+    font-size: calc(var(--k) * 12);
+    line-height: calc(var(--k) * 18);
+}
+
+.ui-note {
+    text-align: center;
+    color: #6C6C82;
+    font-size: calc(var(--k) * 12);
+}
+
+.shot-cap {
+    margin: 14px 0 0;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--faint);
+    text-align: center;
+}
+
+/* ── sections ─────────────────────────────────────────────────────── */
+
+section { scroll-margin-top: 84px; }
+
+.sec { padding-block: clamp(38px, 5.5vw, 68px); }
+
+.sec-head {
+    display: grid;
+    gap: 16px;
+    max-width: 620px;
+    margin-bottom: clamp(32px, 4.5vw, 48px);
+}
+
+.sec-head h2 {
+    font-size: clamp(24px, 3.2vw, 33px);
+    line-height: 1.25;
+}
+
+.sec-head p {
+    color: var(--dim);
+    font-size: 15.5px;
+    line-height: 1.75;
+    max-width: 54ch;
+}
+
+/* ── the three pillars ────────────────────────────────────────────── */
+
+.pillars {
+    display: grid;
+    gap: clamp(16px, 2.2vw, 22px);
+}
+
+@media (min-width: 780px) { .pillars { grid-template-columns: repeat(3, 1fr); } }
+
+.pillar {
+    padding: clamp(24px, 3vw, 32px);
+    display: grid;
+    gap: 12px;
+    align-content: start;
+        transition: box-shadow 0.45s ease;
+}
+
+.pillar:hover { box-shadow: var(--lift-hi); }
+
+.pillar h3 {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--seal-lit);
+}
+
+.pillar p { color: var(--dim); font-size: 14.5px; line-height: 1.72; }
+.pillar p b { color: var(--text); font-weight: 500; }
+
+/* ── a feature block: a picture sunk beside what it does ──────────── */
+
+.block {
+    display: grid;
+    gap: clamp(28px, 4vw, 52px);
+    padding: clamp(24px, 3.6vw, 46px);
+    align-items: center;
+}
+
+@media (min-width: 880px) {
+    .block { grid-template-columns: 0.82fr 1.18fr; }
+    .block.flip .block-media { order: 2; }
+}
+
+.block-body { display: grid; gap: 22px; }
+
+.block-body > .eyebrow { margin-bottom: -10px; }
+
+.block-body h2 { font-size: clamp(22px, 2.7vw, 29px); line-height: 1.28; }
+
+.feats { display: grid; gap: 2px; }
+
+.feat {
+    display: grid;
+    gap: 4px;
+    padding-block: 15px;
+    position: relative;
+}
+
+.feat + .feat::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.12) 72%, transparent);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.032);
+}
+
+.feat h3 { font-size: 15px; font-weight: 500; letter-spacing: -0.004em; color: var(--text); }
+.feat p { color: var(--dim); font-size: 14px; line-height: 1.7; max-width: 60ch; }
+
+.feat code {
+    font-family: var(--code);
+    font-size: 0.82em;
+    color: var(--text);
+    padding: 1px 6px;
+    border-radius: 5px;
+    background: var(--sunk);
+    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* ── trackers ─────────────────────────────────────────────────────── */
+
+.trackers { display: grid; gap: clamp(16px, 2.2vw, 22px); }
+.trackers-spaced { margin-top: clamp(16px, 2.2vw, 22px); }
+
+.sec-lede {
+    color: var(--dim);
+    font-size: 15.5px;
+    line-height: 1.75;
+    max-width: 54ch;
+}
+
+@media (min-width: 720px) { .trackers { grid-template-columns: 1fr 1fr; } }
+
+.tracker {
+    padding: clamp(24px, 3vw, 34px);
+    display: grid;
+    gap: 18px;
+    align-content: start;
+    transition: box-shadow 0.45s ease;
+}
+
+.tracker:hover { box-shadow: var(--lift-hi); }
+
+.tracker-top { display: flex; align-items: center; gap: 12px; }
+
+.pip {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex: none;
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3), 0 0 10px currentColor;
+}
+
+.pip-mal { background: #2E51A2; color: rgba(46, 81, 162, 0.5); }
+.pip-al  { background: #02A9FF; color: rgba(2, 169, 255, 0.45); }
+
+.tracker h3 { font-size: 17px; font-weight: 500; }
+
+.tracker ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 13px; }
+
+.tracker li {
+    position: relative;
+    padding-left: 20px;
+    color: var(--dim);
+    font-size: 14.5px;
+    line-height: 1.66;
+}
+
+.tracker li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.68em;
+    width: 8px;
+    height: 2px;
+    border-radius: 1px;
+    background: var(--faint);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* ── the small-print grid ─────────────────────────────────────────── */
+
+.grid-sm { display: grid; gap: clamp(14px, 1.8vw, 18px); }
+
+@media (min-width: 640px) { .grid-sm { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 980px) { .grid-sm { grid-template-columns: repeat(3, 1fr); } }
+
+.tile {
+    padding: 24px 24px 26px;
+    border-radius: var(--r-md);
+    display: grid;
+    gap: 9px;
+    align-content: start;
+    transition: box-shadow 0.45s ease;
+}
+
+.tile:hover { box-shadow: var(--lift-hi); }
+.tile h3 { font-size: 14.5px; font-weight: 500; }
+.tile p { color: var(--dim); font-size: 13.5px; line-height: 1.68; }
+
+/* ── close ────────────────────────────────────────────────────────── */
+
+.close-slab {
+    padding: clamp(34px, 5.5vw, 70px);
+    display: grid;
+    gap: 26px;
+    justify-items: start;
+}
+
+.close-slab h2 { font-size: clamp(26px, 4vw, 42px); line-height: 1.16; max-width: 15ch; }
+.close-slab h2 b { font-weight: 500; color: #fff; }
+.close-slab p { color: var(--dim); font-size: 15.5px; line-height: 1.74; max-width: 48ch; }
+
+.note {
+    width: 100%;
+    padding: 20px 22px;
+    border-radius: var(--r-sm);
+    display: grid;
+    gap: 8px;
+}
+
+.note dt {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--faint);
+}
+
+.note dd {
+    margin: 0;
+    color: var(--dim);
+    font-size: 13.5px;
+    line-height: 1.75;
+}
+
+.note dd b { color: var(--text); font-weight: 500; }
+
+footer { padding-block: 40px 52px; }
+
+.foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--faint);
+}
+
+.foot a { color: var(--dimmer); text-decoration: none; transition: color 0.25s ease; }
+.foot a:hover { color: var(--text); }
+.foot nav { display: flex; gap: 22px; flex-wrap: wrap; }
+
+@media (max-width: 560px) {
+    :root {
+        --r-lg: 24px;
+        --lift: 11px 14px 28px rgba(0, 0, 0, 0.38);
+    }
+}
+
+/* 8-bit colour cannot step finely enough for ramps this shallow — a 54px
+   shadow crossing four or five levels of grey quantises into visible rings.
+   A fine grain over the whole page dithers those boundaries away. One octave
+   rather than four: extra octaves add low-frequency clumps, which read as
+   film grain instead of disappearing into the ramp. It sits above everything,
+   because the banding is in the cards' own shading as much as in the ground. */
+.grain {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.019;
+    background-image: url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20width='140'%20height='140'><filter%20id='g'><feTurbulence%20type='fractalNoise'%20baseFrequency='0.95'%20numOctaves='1'%20stitchTiles='stitch'/><feColorMatrix%20type='saturate'%20values='0'/></filter><rect%20width='140'%20height='140'%20filter='url%28%23g%29'/></svg>");
+    background-size: 140px 140px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    :root { scroll-behavior: auto; }
+
+    *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        transition-duration: 0.001ms !important;
+    }
+}
+</style>
+
+
+<div class="grain" aria-hidden="true"></div>
+
+<header class="bar">
+    <div class="page bar-in">
+        <a class="mark" href="#top">
+            <span class="ring" aria-hidden="true"></span>
+            <span class="mark-name">Tsuzuku</span>
+        </a>
+        <nav class="bar-nav">
+            <a href="#player" class="wide">The player</a>
+            <a href="#offline" class="wide">Offline</a>
+            <a href="#lists" class="wide">Your list</a>
+            <span class="nav-sep" aria-hidden="true"></span>
+            <a class="icon-link" href="https://discord.gg/pT3MxSY9yd" target="_blank" rel="noopener" aria-label="Tsuzuku on Discord" title="Discord">
+                <svg width="17" height="17" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                    <path d="M13.2 3.2A12 12 0 0 0 10.4 2.3l-.2.4a9.3 9.3 0 0 1 2.5 1.1 10.4 10.4 0 0 0-9.4 0 9.3 9.3 0 0 1 2.5-1.1l-.2-.4a12 12 0 0 0-2.8.9C1 6 .5 8.7.8 11.3a12 12 0 0 0 3.6 1.8l.7-1.2a7.7 7.7 0 0 1-1.2-.6l.3-.2a8.6 8.6 0 0 0 7.6 0l.3.2a7.7 7.7 0 0 1-1.2.6l.7 1.2a12 12 0 0 0 3.6-1.8c.4-3-.5-5.7-2-8.1ZM5.7 9.7c-.7 0-1.3-.7-1.3-1.5s.6-1.5 1.3-1.5 1.3.7 1.3 1.5-.6 1.5-1.3 1.5Zm4.6 0c-.7 0-1.3-.7-1.3-1.5s.6-1.5 1.3-1.5 1.3.7 1.3 1.5-.6 1.5-1.3 1.5Z"/>
+                </svg>
+            </a>
+            <a class="icon-link" href="https://github.com/Syha-01/Tsuzuku" target="_blank" rel="noopener" aria-label="Tsuzuku on GitHub" title="GitHub">
+                <svg width="17" height="17" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
+                </svg>
+            </a>
+            <a href="#get" class="lead">Download</a>
+        </nav>
+    </div>
+</header>
+
+<main id="top">
+
+    <section class="hero page">
+        <div class="slab hero-slab">
+            <div>
+                <h1 class="wordmark">Tsuzuku</h1>
+                <p class="hero-line">An anime app that <strong>picks up where you left off</strong>.</p>
+                <p class="hero-lede">
+                    Watch it, download episodes for when you have no internet, and let
+                    MyAnimeList or AniList keep up with what you've seen.
+                </p>
+                <div class="hero-cta">
+                    <a class="btn btn-seal" href="#get">
+                        Get the app
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                            <path d="M8 2.5v11m0 0 4.2-4.2M8 13.5 3.8 9.3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <a class="btn" href="https://discord.gg/pT3MxSY9yd" target="_blank" rel="noopener">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                            <path d="M13.2 3.2A12 12 0 0 0 10.4 2.3l-.2.4a9.3 9.3 0 0 1 2.5 1.1 10.4 10.4 0 0 0-9.4 0 9.3 9.3 0 0 1 2.5-1.1l-.2-.4a12 12 0 0 0-2.8.9C1 6 .5 8.7.8 11.3a12 12 0 0 0 3.6 1.8l.7-1.2a7.7 7.7 0 0 1-1.2-.6l.3-.2a8.6 8.6 0 0 0 7.6 0l.3.2a7.7 7.7 0 0 1-1.2.6l.7 1.2a12 12 0 0 0 3.6-1.8c.4-3-.5-5.7-2-8.1ZM5.7 9.7c-.7 0-1.3-.7-1.3-1.5s.6-1.5 1.3-1.5 1.3.7 1.3 1.5-.6 1.5-1.3 1.5Zm4.6 0c-.7 0-1.3-.7-1.3-1.5s.6-1.5 1.3-1.5 1.3.7 1.3 1.5-.6 1.5-1.3 1.5Z"/>
+                        </svg>
+                        Join the Discord
+                    </a>
+                    <a class="btn" href="https://github.com/Syha-01/Tsuzuku" target="_blank" rel="noopener">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
+                        </svg>
+                        View on GitHub
+                    </a>
+                </div>
+                <p class="hero-fine">Android · free · no account needed</p>
+            </div>
+
+            <div class="well shot-img shot-tall">
+                <img src="images/tsuzuku/home.jpg" width="610" height="1356" loading="eager" decoding="async"
+                     alt="Tsuzuku's home screen: a full-width spotlight for That Time I Got Reincarnated as a Slime Season 4 with a Watch button, a Continue Watching row showing each series at the episode you stopped on, and a Top Anime row below.">
+            </div>
+        </div>
+    </section>
+
+    <section class="sec page">
+        <div class="pillars">
+            <div class="slab pillar">
+                <h3>Nothing in between</h3>
+                <p>Tsuzuku goes straight to the site it streams from, from your phone. There is <b>nothing of ours in the middle</b> that can go down and take the app with it.</p>
+            </div>
+            <div class="slab pillar">
+                <h3>No account needed</h3>
+                <p>Open it and watch. Connect <b>MyAnimeList or AniList</b> only if you want your list to follow you — and nothing already on your phone is replaced when you do.</p>
+            </div>
+            <div class="slab pillar">
+                <h3>It fixes itself</h3>
+                <p>When something breaks on the site Tsuzuku streams from, the fix <b>arrives on its own</b> the next time you open the app. Nothing to reinstall, nobody to wait on.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec page" id="player">
+        <div class="slab block wide-media">
+            <div class="block-media">
+                <div class="well shot-img">
+                    <img src="images/tsuzuku/player.jpg" width="1356" height="610" loading="lazy" decoding="async"
+                         alt="The player in landscape, part-way through an episode, with the subtitles panel open on the right: English is selected, and under Translate to are Español, 日本語 and Italiano, each showing a 31 MB download.">
+                </div>
+            </div>
+            <div class="block-body">
+                <p class="eyebrow">Watching</p>
+                <h2>Built by someone tired of tapping the wrong thing in the dark.</h2>
+                <div class="feats">
+                    <div class="feat">
+                        <h3>Pick the quality yourself</h3>
+                        <p>Every quality an episode actually comes in, changeable halfway through without losing your place, and remembered for the next episode. Tsuzuku checks what's really on offer instead of showing the same list every time — one series has 1080p, 720p and 360p, the next only has 720p.</p>
+                    </div>
+                    <div class="feat">
+                        <h3>Taps that add up</h3>
+                        <p>Double tap either side to skip, and tapping again keeps adding to the same jump instead of starting a new one. Hold anywhere for double speed. Slide up and down on the left for brightness, on the right for volume. <code>+85s</code> gets you past the cold open and the opening in one press.</p>
+                    </div>
+                    <div class="feat">
+                        <h3>Brightness it gives back</h3>
+                        <p>Tsuzuku dims its own screen instead of changing your phone's, so it never has to ask permission, and your phone is back to normal the moment you leave.</p>
+                    </div>
+                    <div class="feat">
+                        <h3>Sub and dub, side by side</h3>
+                        <p>Two separate episode lists rather than a number beside the title, and you can swap over halfway through an episode.</p>
+                    </div>
+                    <div class="feat">
+                        <h3>Subtitles that stay in time</h3>
+                        <p>Sometimes a dub's subtitles were written for a different copy of the episode and slide out of time partway in. Tsuzuku works out how far off they are and puts them back where they belong.</p>
+                    </div>
+                    <div class="feat">
+                        <h3>Translate subtitles on your phone</h3>
+                        <p>Get a language once and subtitles are translated on the phone itself — nothing is sent anywhere. Settings tells you how big each language is before you download it.</p>
+                    </div>
+                    <div class="feat">
+                        <h3>If one server won't play, it tries the next</h3>
+                        <p>Episodes are usually on more than one server. Tsuzuku works its way down the list rather than giving up on the first one that refuses.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec page" id="offline">
+        <div class="slab block flip">
+            <div class="block-media">
+                <div class="well shot-img shot-tall">
+                    <img src="images/tsuzuku/downloads.jpg" width="610" height="1356" loading="lazy" decoding="async"
+                         alt="The Downloads screen: one series, one episode, 237 MB used and 82 GB free, an episode downloading with pause and cancel beside it, and a saved Bleach: Thousand-Year Blood War below.">
+                </div>
+            </div>
+            <div class="block-body">
+                <p class="eyebrow">Offline</p>
+                <h2>On the train, on a plane, anywhere with no internet.</h2>
+                <div class="feats">
+                    <div class="feat">
+                        <h3>One episode, one file</h3>
+                        <p>An episode online is really hundreds of little pieces. Tsuzuku joins them into a single video as it downloads, so what ends up on your phone is one file the size of the episode — and you can send it on like any other video.</p>
+                    </div>
+                    <div class="feat">
+                        <h3>It keeps going when you leave</h3>
+                        <p>Switching away from the app doesn't quietly stop a download. If one does get interrupted it carries on from where it stopped rather than starting again.</p>
+                    </div>
+                    <div class="feat">
+                        <h3>Save at the size you want</h3>
+                        <p>Choose the quality to save at and every download takes the best one available up to that, whatever that particular episode happens to offer.</p>
+                    </div>
+                    <div class="feat">
+                        <h3>What you watch offline still counts</h3>
+                        <p>A downloaded episode plays on the same screen a streamed one does, so an episode you watch on a plane is in Continue Watching — and on your list — as soon as you're back online.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec page" id="lists">
+        <div class="slab block">
+            <div class="block-media">
+                <div class="well shot-img shot-tall">
+                    <img src="images/tsuzuku/series.jpg" width="610" height="1356" loading="lazy" decoding="async"
+                         alt="A series page: the poster, rating, year and episode count, sub and dub counts, a Resume button reading twenty minutes left, Subbed and Dubbed toggles, Stream and Download, the synopsis and genres, every season in a row, a countdown to the next episode, and the episode grid.">
+                </div>
+            </div>
+            <div class="block-body">
+                <p class="eyebrow">Your list</p>
+                <h2>It keeps your list up to date without you opening it.</h2>
+                <p class="sec-lede">
+                    Connect MyAnimeList or AniList and finishing an episode here finishes it there.
+                    How far you've got, whether you're watching or on hold, your score, your
+                    rewatches and the dates you started and finished — all of it goes up as you
+                    watch.
+                </p>
+            </div>
+        </div>
+
+        <div class="trackers trackers-spaced">
+            <div class="slab tracker">
+                <div class="tracker-top"><span class="pip pip-mal" aria-hidden="true"></span><h3>MyAnimeList</h3></div>
+                <ul>
+                    <li>Every episode you finish is ticked off</li>
+                    <li>Your score, your status and your rewatches stay matched</li>
+                    <li>The discussion thread for each episode, right on the series page</li>
+                    <li>It won't call a series that's still airing finished, just because you've caught up</li>
+                </ul>
+            </div>
+            <div class="slab tracker">
+                <div class="tracker-top"><span class="pip pip-al" aria-hidden="true"></span><h3>AniList</h3></div>
+                <ul>
+                    <li>The same, the moment you finish an episode</li>
+                    <li>Your whole list comes across in one go</li>
+                    <li>The description, cast and discussion come from the site you signed in to</li>
+                    <li>A rewatch you're in the middle of stays a rewatch</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec page">
+        <div class="slab block">
+            <div class="block-media">
+                <div class="well shot-ui">
+                    <div class="ui">
+                        <div class="ui-top">
+                            <img class="ui-icon" src="images/tsuzuku/app-icon.png" width="192" height="192"
+                                 loading="lazy" decoding="async" alt="">
+                            <p class="ui-title">Tsuzuku</p>
+                            <p class="ui-lead">Sign in to bring your list with you, and to keep what you watch here in step with it.</p>
+                        </div>
+
+                        <div class="ui-choices">
+                            <div class="ui-row">
+                                <span class="ui-logo"><span class="ui-mal">MAL</span></span>
+                                <span class="ui-label">Continue with MyAnimeList</span>
+                                <span class="ui-chev">
+                                    <svg width="7" height="12" viewBox="0 0 8 14" fill="none"><path d="m1.5 1 5.5 6-5.5 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                </span>
+                            </div>
+                            <div class="ui-row">
+                                <span class="ui-logo">
+                                    <svg width="12" height="9" viewBox="0 0 18 14" fill="#02A9FF"><path d="M0 0h3.5v10.6h6.1V14H0V0Z"/><path d="M12.4 0 8.2 14h3.6l.8-2.9h3.1l.8 2.9H18L13.8 0h-1.4Zm.7 8.3.8-3.2.8 3.2h-1.6Z"/></svg>
+                                </span>
+                                <span class="ui-label">Continue with AniList</span>
+                                <span class="ui-chev">
+                                    <svg width="7" height="12" viewBox="0 0 8 14" fill="none"><path d="m1.5 1 5.5 6-5.5 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                </span>
+                            </div>
+                            <div class="ui-row">
+                                <span class="ui-logo">
+                                    <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="#A0A0B4" stroke-width="1.7"><circle cx="10" cy="6.2" r="3.4"/><path d="M3.4 17.2c0-3.4 3-5.6 6.6-5.6s6.6 2.2 6.6 5.6" stroke-linecap="round"/></svg>
+                                </span>
+                                <span class="ui-label">Continue without an account</span>
+                                <span class="ui-chev">
+                                    <svg width="7" height="12" viewBox="0 0 8 14" fill="none"><path d="m1.5 1 5.5 6-5.5 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                </span>
+                            </div>
+
+                            <div class="ui-safe">
+                                <svg width="10" height="10" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7">
+                                    <path d="M10 2.2 3.6 4.6v5c0 4 2.7 7 6.4 8.2 3.7-1.2 6.4-4.2 6.4-8.2v-5L10 2.2Z" stroke-linejoin="round"/>
+                                    <path d="m7.3 9.8 2 2 3.6-3.8" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span>Nothing on this phone is deleted. What you have already watched stays where it is, and your list is merged with it rather than written over.</span>
+                            </div>
+                        </div>
+
+                        <p class="ui-note">An account can be connected later in Settings.</p>
+                    </div>
+                </div>
+                <p class="shot-cap">The first screen, recreated</p>
+            </div>
+            <div class="block-body">
+                <p class="eyebrow">Bringing a list across</p>
+                <h2>Three hundred series, and you don't sit there watching it happen.</h2>
+                <div class="feats">
+                    <div class="feat">
+                        <h3>You don't wait for it</h3>
+                        <p>Tsuzuku takes your list and lets you get on with things, then looks each series up in the background — what you're watching first, then on hold, then plan to watch, and what you finished years ago last. They turn up as they're found, and closing the app only pauses it.</p>
+                    </div>
+                    <div class="feat">
+                        <h3>Nothing of yours is replaced</h3>
+                        <p>Signing in joins your list to what's already on the phone. Everything you've watched here stays exactly where it was.</p>
+                    </div>
+                    <div class="feat">
+                        <h3>The ones it can't find</h3>
+                        <p>Anything it can't match gets a screen of its own, so you can point it at the right series in a couple of taps instead of wondering where it went.</p>
+                    </div>
+                    <div class="feat">
+                        <h3>One list at a time</h3>
+                        <p>Signing in to the second signs you out of the first, on purpose — when two lists disagree there's no right answer.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec page">
+        <div class="sec-head">
+            <p class="eyebrow">And the rest of it</p>
+            <h2>The parts you'd only notice if they were missing.</h2>
+        </div>
+        <div class="grid-sm">
+            <div class="slab tile">
+                <h3>Continue watching</h3>
+                <p>Opens on what you're partway through, at the episode and the minute you stopped.</p>
+            </div>
+            <div class="slab tile">
+                <h3>Know what's next</h3>
+                <p>What's airing this week, and when the next episode of anything you follow is due.</p>
+            </div>
+            <div class="slab tile">
+                <h3>Search and genres</h3>
+                <p>Find it by name or browse by genre, with the description, cast and year on a proper series page.</p>
+            </div>
+            <div class="slab tile">
+                <h3>Episode lists open where you are</h3>
+                <p>The episode numbers start where you're watching, not back at 1–24 when you're on 1,177.</p>
+            </div>
+            <div class="slab tile">
+                <h3>Episode discussion</h3>
+                <p>The thread for the episode you just finished, from whichever list you signed in to.</p>
+            </div>
+            <div class="slab tile">
+                <h3>Theatre mode</h3>
+                <p>Fill the whole screen or keep the page around the player, and lock it to portrait, landscape, or let it turn.</p>
+            </div>
+            <div class="slab tile">
+                <h3>Make it your colours</h3>
+                <p>Start from a preset or choose the colours yourself. Change the background and everything else follows it, and there's a pure black one for OLED screens.</p>
+            </div>
+            <div class="slab tile">
+                <h3>Subtitles the size you want</h3>
+                <p>Text size, background and font, set once and used on every episode after that.</p>
+            </div>
+            <div class="slab tile">
+                <h3>It tells you what changed</h3>
+                <p>When an update arrives, a short note says what's new in it — once, and then never again.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec page" id="get">
+        <div class="slab close-slab">
+            <p class="eyebrow">Get it</p>
+            <h2>Put it on your phone, then <b>tell us what's broken</b>.</h2>
+            <p>
+                Tsuzuku is made with a small group of people who actually watch on it. New versions
+                go up in the Discord first, it's where the bugs get found, and it's where what to
+                build next gets argued about. Come and take a side.
+            </p>
+            <div class="hero-cta">
+                <a class="btn btn-seal btn-dl" href="https://github.com/Syha-01/Tsuzuku/releases/download/v2.0.0-2/tsuzuku-v2.0.0-2-arm64.apk" target="_blank" rel="noopener">
+                    <span class="btn-stack">
+                        <span>Download the app</span>
+                        <span class="btn-date">Latest · 2.0.0 (2) · 20 September 2026</span>
+                    </span>
+                </a>
+                <a class="btn" href="https://discord.gg/pT3MxSY9yd" target="_blank" rel="noopener">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                        <path d="M13.2 3.2A12 12 0 0 0 10.4 2.3l-.2.4a9.3 9.3 0 0 1 2.5 1.1 10.4 10.4 0 0 0-9.4 0 9.3 9.3 0 0 1 2.5-1.1l-.2-.4a12 12 0 0 0-2.8.9C1 6 .5 8.7.8 11.3a12 12 0 0 0 3.6 1.8l.7-1.2a7.7 7.7 0 0 1-1.2-.6l.3-.2a8.6 8.6 0 0 0 7.6 0l.3.2a7.7 7.7 0 0 1-1.2.6l.7 1.2a12 12 0 0 0 3.6-1.8c.4-3-.5-5.7-2-8.1ZM5.7 9.7c-.7 0-1.3-.7-1.3-1.5s.6-1.5 1.3-1.5 1.3.7 1.3 1.5-.6 1.5-1.3 1.5Zm4.6 0c-.7 0-1.3-.7-1.3-1.5s.6-1.5 1.3-1.5 1.3.7 1.3 1.5-.6 1.5-1.3 1.5Z"/>
+                    </svg>
+                    Join the Discord
+                </a>
+                <a class="btn" href="https://github.com/Syha-01/Tsuzuku" target="_blank" rel="noopener">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
+                    </svg>
+                    View on GitHub
+                </a>
+            </div>
+            <dl class="well note">
+                <dt>Before you install</dt>
+                <dd>
+                    Works on <b>Android phones from the last decade or so</b>. It installs from the
+                    file rather than an app store, so Android will ask you once whether you trust
+                    it. Test versions install as a separate app with their own downloads and list,
+                    so trying one never costs you the version you already have.
+                </dd>
+            </dl>
+        </div>
+    </section>
+</main>
+
+<footer class="page">
+    <div class="foot">
+        <span>Tsuzuku · Android</span>
+        <nav>
+            <a href="https://github.com/Syha-01/Tsuzuku" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://github.com/Syha-01/Tsuzuku/releases/download/v2.0.0-2/tsuzuku-v2.0.0-2-arm64.apk" target="_blank" rel="noopener">Releases</a>
+            <a href="https://discord.gg/pT3MxSY9yd" target="_blank" rel="noopener">Discord</a>
+            <a href="#top">Top</a>
+        </nav>
+    </div>
+</footer>
+
+</body>
+</html>
