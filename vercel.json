@@ -1,0 +1,6 @@
+{
+  "redirects": [
+    { "source": "/tsuzuku.html", "destination": "/tsuzuku/", "permanent": false },
+    { "source": "/tsuzuku-new.html", "destination": "/tsuzuku/", "permanent": false }
+  ]
+}

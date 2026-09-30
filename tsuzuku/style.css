@@ -1,0 +1,573 @@
+/* Everything here is sampled off the logo: the black it is drawn on, the brush
+   white of the hat, and the one oxblood the band and the dot share. The red is
+   a material — it fills things — not a highlight colour laid over text, which
+   is what keeps it reading as ink rather than neon. */
+
+:root {
+    --sumi: #08080A;          /* the ground */
+    --sumi-2: #0D0D11;
+    --washi: #E7E7E9;         /* the lit crown of the hat */
+    --ash: #97969B;
+    --ash-dim: #7C7A82;
+    --seal: #6F161F;          /* the hat band, and the dot */
+    --seal-lit: #A8202E;      /* only ever a hover or a focus */
+
+    --display: 'Shippori Mincho B1', Georgia, serif;
+    --body: 'Zen Kaku Gothic New', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+    --page: 1180px;
+    --gutter: clamp(20px, 5vw, 64px);
+
+    /* A brush flick, standing in for a bullet. */
+    --flick: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M.9 6.3c2.2 1 3.5 2.1 4.3 3.7C6.5 7 8.3 4.2 11.1 1.5 8.4 3.2 6.6 5.1 5.3 7.5 4.3 6.5 2.9 6.2.9 6.3Z' fill='%23A8202E'/%3E%3C/svg%3E");
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+    margin: 0;
+    background: var(--sumi);
+    color: var(--washi);
+    font: 400 17px/1.72 var(--body);
+    letter-spacing: 0.002em;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, p, figure, ul { margin: 0; }
+img { max-width: 100%; }
+a { color: inherit; }
+
+::selection { background: var(--seal); color: var(--washi); }
+
+:focus-visible {
+    outline: 2px solid var(--washi);
+    outline-offset: 3px;
+}
+
+.skip {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 100;
+    padding: 12px 18px;
+    background: var(--seal);
+    color: var(--washi);
+    text-decoration: none;
+}
+.skip:focus { left: 12px; top: 12px; }
+
+/* The page is one flat black, which reads as a switched-off screen. A little
+   noise over the whole thing gives it a surface. */
+.grain {
+    position: fixed;
+    inset: -60%;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.035;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── the dot ───────────────────────────────────────────────────────────
+   The one in the logo, kept. It crosses the right margin as you read, so
+   where it has got to is how far down you are. */
+.sun {
+    position: fixed;
+    top: 15vh;
+    right: clamp(16px, 3vw, 44px);
+    z-index: 1;
+    width: clamp(30px, 3.6vw, 48px);
+    pointer-events: none;
+    will-change: transform;
+}
+.sun img { display: block; width: 100%; }
+
+@media (max-width: 800px) { .sun { display: none; } }
+
+/* ── bar ──────────────────────────────────────────────────────────────── */
+.bar {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 40;
+    /* Clears a notch where the page runs under one, and costs nothing where
+       it doesn't. */
+    padding-block: calc(18px + env(safe-area-inset-top, 0px)) 18px;
+    transition: padding .4s ease, background-color .4s ease, box-shadow .4s ease;
+}
+.bar.is-stuck {
+    padding-block: calc(11px + env(safe-area-inset-top, 0px)) 11px;
+    background: rgba(8, 8, 10, .82);
+    backdrop-filter: blur(16px) saturate(130%);
+    -webkit-backdrop-filter: blur(16px) saturate(130%);
+    box-shadow: 0 1px 0 rgba(231, 231, 233, .07);
+}
+
+.bar-in {
+    max-width: var(--page);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+    display: flex;
+    align-items: center;
+    gap: clamp(16px, 3vw, 40px);
+}
+
+.brand { display: flex; align-items: center; gap: 11px; text-decoration: none; }
+.brand-hat { width: 36px; }
+.brand-word { width: 88px; }
+
+.nav { margin-left: auto; display: flex; gap: clamp(16px, 2.2vw, 30px); }
+.nav a {
+    position: relative;
+    padding-block: 5px;
+    font-size: 14.5px;
+    color: var(--ash);
+    text-decoration: none;
+    transition: color .3s ease;
+}
+.nav a::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0;
+    height: 1px;
+    background: var(--seal-lit);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .4s cubic-bezier(.22, .8, .2, 1);
+}
+.nav a:hover { color: var(--washi); }
+.nav a:hover::after, .nav a:focus-visible::after { transform: scaleX(1); }
+
+@media (max-width: 880px) {
+    .nav { display: none; }
+    .bar .btn-sm { margin-left: auto; }
+}
+
+/* ── buttons ──────────────────────────────────────────────────────────── */
+.btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    isolation: isolate;
+    overflow: hidden;
+    padding: 14px 26px;
+    border: 1px solid rgba(231, 231, 233, .17);
+    border-radius: 2px;
+    font: 500 15px/1 var(--body);
+    color: var(--washi);
+    text-decoration: none;
+    transition: border-color .4s ease, color .3s ease;
+}
+/* Hover fills the button rather than lighting it — a wash of ink, left to
+   right, the way the strokes in the logo were laid down. */
+.btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--seal);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .5s cubic-bezier(.22, .8, .2, 1);
+}
+.btn:hover, .btn:focus-visible { border-color: var(--seal-lit); }
+.btn:hover::before, .btn:focus-visible::before { transform: scaleX(1); }
+
+.btn-seal { background: var(--seal); border-color: var(--seal); }
+.btn-seal::before { background: var(--seal-lit); }
+
+.btn-sm { padding: 10px 18px; font-size: 14px; }
+
+.btn-bare {
+    padding-inline: 4px;
+    border-color: transparent;
+    color: var(--ash);
+}
+.btn-bare::before { display: none; }
+.btn-bare::after {
+    content: '';
+    position: absolute;
+    inset: auto 4px 8px;
+    height: 1px;
+    background: var(--seal-lit);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .4s cubic-bezier(.22, .8, .2, 1);
+}
+.btn-bare:hover, .btn-bare:focus-visible { color: var(--washi); border-color: transparent; }
+.btn-bare:hover::after, .btn-bare:focus-visible::after { transform: scaleX(1); }
+
+/* ── hero ─────────────────────────────────────────────────────────────── */
+.hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 100svh;
+    padding-block: clamp(124px, 15vh, 168px) clamp(128px, 17vh, 168px);
+    overflow: hidden;
+}
+
+.hero-art { position: absolute; inset: 0; pointer-events: none; }
+
+.hero-hat {
+    position: absolute;
+    top: 50%;
+    right: -7vw;
+    width: min(57vw, 760px);
+    translate: 0 -54%;
+    -webkit-mask-image: url(images/wipe.png);
+    mask-image: url(images/wipe.png);
+    -webkit-mask-size: 400% 100%;
+    mask-size: 400% 100%;
+    -webkit-mask-position: var(--wipe, 100%) 50%;
+    mask-position: var(--wipe, 100%) 50%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+}
+
+/* The painting runs under the type at narrow widths; this is what keeps the
+   words on top of it readable, and it looks like the ink drying out. */
+.hero-art::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(97deg, var(--sumi) 22%, rgba(8, 8, 10, .74) 44%, rgba(8, 8, 10, 0) 70%);
+}
+
+.hero-in {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: var(--page);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+}
+
+.hero-mark { line-height: 0; }
+.hero-mark img { width: clamp(200px, 27vw, 310px); }
+
+.hero-line {
+    margin-top: clamp(22px, 2.6vw, 34px);
+    font: 600 clamp(30px, 4.4vw, 56px)/1.13 var(--display);
+    letter-spacing: -0.018em;
+}
+/* Each line is masked by its own box so it can be lifted into place. The
+   break is set by hand and must hold, or the mask cuts a wrapped line. */
+.hero-line .ln { display: block; overflow: hidden; }
+.hero-line .ln > span { display: block; white-space: nowrap; }
+
+.hero-lede {
+    margin-top: clamp(18px, 2vw, 26px);
+    max-width: 46ch;
+    color: var(--ash);
+    font-size: clamp(16px, 1.7vw, 19px);
+}
+
+.hero-do {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: clamp(28px, 3.4vw, 40px);
+}
+
+.hero-meta {
+    margin-top: 18px;
+    font-size: 13.5px;
+    letter-spacing: .04em;
+    color: var(--ash-dim);
+}
+
+/* Tsuzuku is what an episode puts on screen before the credits. So does this. */
+.endcard {
+    position: absolute;
+    right: clamp(20px, 5vw, 64px);
+    bottom: clamp(30px, 6vh, 62px);
+    z-index: 2;
+    text-align: right;
+}
+.endcard-word {
+    display: block;
+    font: 500 clamp(24px, 2.8vw, 34px)/1 var(--display);
+    letter-spacing: .01em;
+    color: var(--washi);
+}
+.endcard-en {
+    display: block;
+    margin-top: 12px;
+    font-size: 12.5px;
+    letter-spacing: .08em;
+    color: var(--ash-dim);
+}
+
+/* The hat over the words, the way the logo stacks them. It needs height to
+   stand up in, so a phone held sideways keeps the side-by-side hero. */
+@media (max-width: 820px) and (min-height: 600px) {
+    .hero {
+        align-items: flex-end;
+        padding-block: 108px clamp(126px, 17vh, 168px);
+    }
+    .hero-hat { top: 4%; right: -8%; width: min(116%, 660px); translate: 0 0; }
+    /* Straight down rather than across, and the painting keeps its own black
+       instead of being greyed out by a scrim laid over it. */
+    .hero-art::after {
+        background: linear-gradient(to bottom, rgba(8, 8, 10, 0) 26%, rgba(8, 8, 10, .82) 46%, var(--sumi) 58%);
+    }
+}
+
+@media (max-width: 480px) {
+    .endcard { right: var(--gutter); }
+    .endcard-word { font-size: 23px; }
+}
+
+/* ── bands ────────────────────────────────────────────────────────────── */
+.band { position: relative; padding-block: clamp(66px, 7.4vw, 108px); }
+
+.shell {
+    max-width: var(--page);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+}
+
+.band-body { min-width: 0; }
+
+.head h2 {
+    font: 600 clamp(29px, 4vw, 48px)/1.12 var(--display);
+    letter-spacing: -0.016em;
+    text-wrap: balance;
+}
+
+/* Every rule on the page is a stroke lifted off the brim of the hat. */
+.rule {
+    display: block;
+    width: min(360px, 78%);
+    height: auto;
+    margin-block: 16px 20px;
+    opacity: .82;
+}
+
+.head-lede {
+    max-width: 54ch;
+    color: var(--ash);
+    font-size: clamp(17px, 1.9vw, 21px);
+    line-height: 1.62;
+}
+
+/* ── notes ────────────────────────────────────────────────────────────── */
+.cols {
+    display: grid;
+    gap: clamp(30px, 3.4vw, 46px) clamp(30px, 4vw, 66px);
+    margin-top: clamp(36px, 4.4vw, 62px);
+}
+.cols-1 { grid-template-columns: minmax(0, 1fr); gap: clamp(26px, 3vw, 38px); }
+@media (min-width: 720px) { .cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 620px) { .cols-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 940px) { .cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+.note h3 {
+    margin-bottom: 9px;
+    font: 500 19.5px/1.35 var(--display);
+    letter-spacing: -0.006em;
+}
+.note p {
+    max-width: 58ch;
+    color: var(--ash);
+    font-size: 16px;
+    line-height: 1.74;
+}
+
+.key {
+    font-family: var(--display);
+    font-weight: 600;
+    color: var(--washi);
+    border-bottom: 1px solid var(--seal-lit);
+}
+
+/* ── pictures ─────────────────────────────────────────────────────────── */
+.shot { position: relative; }
+.shot img {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: #000;
+    box-shadow: 0 34px 80px -28px #000, 0 0 0 1px rgba(231, 231, 233, .09);
+}
+.shot-phone img { border-radius: 22px; }
+.shot-wide img { border-radius: 8px; }
+.shot-wide { margin-top: clamp(36px, 4.4vw, 62px); }
+
+.split {
+    display: grid;
+    gap: clamp(32px, 4vw, 62px);
+    align-items: center;
+    margin-top: clamp(36px, 4.4vw, 62px);
+}
+.split .shot-phone { max-width: 290px; margin-inline: auto; }
+@media (min-width: 880px) {
+    .split { grid-template-columns: minmax(0, 290px) minmax(0, 1fr); }
+    .split-flip { grid-template-columns: minmax(0, 1fr) minmax(0, 290px); }
+    .split-flip .shot { order: 2; }
+    .split-flip .shot img { max-height: 500px; object-fit: cover; object-position: top; }
+}
+
+.body-text > p { max-width: 58ch; color: var(--ash); font-size: 16.5px; }
+
+.trio {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: clamp(20px, 3vw, 40px);
+    margin-top: clamp(36px, 4.4vw, 62px);
+}
+.trio .shot img { max-height: 430px; object-fit: cover; object-position: top; }
+.trio figcaption {
+    margin-top: 15px;
+    font-size: 14px;
+    color: var(--ash-dim);
+}
+
+/* ── trackers ─────────────────────────────────────────────────────────── */
+.trackers { display: grid; gap: clamp(28px, 3vw, 46px); margin-top: 34px; }
+@media (min-width: 640px) { .trackers { grid-template-columns: 1fr 1fr; } }
+.tracker-logo { height: 24px; width: auto; margin-bottom: 18px; opacity: .92; }
+.tracker-logo-al { height: 30px; }
+
+/* ── tick lists ───────────────────────────────────────────────────────── */
+.ticks { list-style: none; padding: 0; display: grid; gap: 9px; }
+.ticks li {
+    position: relative;
+    padding-left: 22px;
+    font-size: 15px;
+    line-height: 1.56;
+    color: var(--ash);
+}
+.ticks li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: .38em;
+    width: 12px;
+    height: 12px;
+    background: var(--flick) center / contain no-repeat;
+}
+
+/* ── the list of everything ───────────────────────────────────────────── */
+/* Five groups of wildly different lengths. A grid leaves a hole under the
+   short ones; columns let them stack up against each other. */
+.glance {
+    columns: 3 214px;
+    column-gap: clamp(30px, 3.4vw, 50px);
+    margin-top: clamp(36px, 4.4vw, 62px);
+}
+.glance-set {
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    padding-bottom: 32px;
+}
+.glance-set h3 {
+    margin-bottom: 18px;
+    font: 500 16px/1 var(--display);
+    letter-spacing: .01em;
+}
+.glance-set h3::after {
+    content: '';
+    display: block;
+    width: 26px;
+    height: 2px;
+    margin-top: 11px;
+    background: var(--seal-lit);
+}
+
+/* ── the sub-section inside Your list ─────────────────────────────────── */
+.sub { margin-top: clamp(58px, 7vw, 100px); }
+.sub-head { font: 600 clamp(22px, 2.6vw, 31px)/1.2 var(--display); letter-spacing: -0.012em; }
+.sub-lede { margin-top: 11px; max-width: 54ch; color: var(--ash); }
+
+/* ── get it ───────────────────────────────────────────────────────────── */
+.band-get {
+    background: linear-gradient(to bottom,
+        rgba(111, 22, 31, 0) 0%,
+        rgba(111, 22, 31, .10) 46%,
+        rgba(111, 22, 31, 0) 100%);
+}
+.get-blurb {
+    max-width: 56ch;
+    margin-top: clamp(30px, 3.4vw, 44px);
+    color: var(--ash);
+    font-size: 16.5px;
+}
+
+.grabs {
+    display: grid;
+    gap: 14px;
+    max-width: 720px;
+    margin-top: clamp(30px, 3.4vw, 42px);
+}
+@media (min-width: 640px) { .grabs { grid-template-columns: 1fr 1fr; } }
+
+.grab {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: block;
+    padding: 22px 26px;
+    border: 1px solid rgba(231, 231, 233, .15);
+    border-radius: 2px;
+    text-decoration: none;
+    transition: border-color .4s ease;
+}
+.grab::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--seal);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .5s cubic-bezier(.22, .8, .2, 1);
+}
+.grab:hover, .grab:focus-visible { border-color: var(--seal-lit); }
+.grab:hover::before, .grab:focus-visible::before { transform: scaleX(1); }
+
+.grab-name { display: block; font: 500 19px/1.25 var(--display); }
+.grab-meta { display: block; margin-top: 8px; font-size: 13.5px; color: var(--ash-dim); }
+
+.grab-main { background: var(--seal); border-color: var(--seal); }
+.grab-main::before { background: var(--seal-lit); }
+.grab-main .grab-meta { color: rgba(231, 231, 233, .74); }
+
+.hero-do-get { margin-top: 22px; }
+
+.fineprint {
+    max-width: 66ch;
+    margin-top: clamp(44px, 5vw, 70px);
+    padding-top: 28px;
+    border-top: 1px solid rgba(231, 231, 233, .09);
+}
+.fineprint h3 { margin-bottom: 10px; font: 500 17px/1.3 var(--display); }
+.fineprint p { color: var(--ash-dim); font-size: 15px; line-height: 1.75; }
+
+/* ── foot ─────────────────────────────────────────────────────────────── */
+.foot { padding-block: 46px 58px; border-top: 1px solid rgba(231, 231, 233, .07); }
+.foot-in {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    max-width: var(--page);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+}
+.foot-hat { width: 46px; opacity: .5; }
+.foot-name { font-size: 14px; color: var(--ash-dim); }
+.foot-nav { display: flex; flex-wrap: wrap; gap: 22px; margin-left: auto; }
+.foot-nav a { font-size: 14px; color: var(--ash); text-decoration: none; transition: color .3s ease; }
+.foot-nav a:hover { color: var(--washi); }
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
+}

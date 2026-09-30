@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Tsuzuku is a free Android anime app: stream it, download episodes for when you have no internet, and let MyAnimeList or AniList keep up with what you have watched.">
+<meta name="theme-color" content="#08080A">
+<meta property="og:title" content="Tsuzuku">
+<meta property="og:description" content="Stream it, download episodes for when you have no internet, and let MyAnimeList or AniList keep up with what you have watched. Free, Android, no account needed.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://nani-me-website.vercel.app/tsuzuku/images/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="/tsuzuku/images/favicon.png">
+<link rel="apple-touch-icon" href="/tsuzuku/images/apple-touch-icon.png">
+<title>Tsuzuku</title>
+<script>
+// Anchors the old pages had, for bookmarks that followed the redirect here.
+{ const moved = { '#everything': '#glance', '#tsuzuku-download': '#get', '#dl-tsuzuku-apk': '#get' };
+  if (moved[location.hash]) history.replaceState(null, '', moved[location.hash]); }
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;600;800&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&display=swap">
+<link rel="stylesheet" href="/tsuzuku/style.css">
+<link rel="preload" as="image" href="/tsuzuku/images/hat.png">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- The grain keeps the black from reading as a flat screen colour. It sits
+     above everything and takes no pointer events. -->
+<div class="grain" aria-hidden="true"></div>
+
+<!-- The red dot out of the logo, parked in the right margin. How far down it
+     has travelled is how far down the page you are. -->
+<div class="sun" aria-hidden="true"><img src="/tsuzuku/images/disc.png" alt=""></div>
+
+<header class="bar" id="top">
+  <div class="bar-in">
+    <a class="brand" href="#top" aria-label="Tsuzuku, home">
+      <img class="brand-hat" src="/tsuzuku/images/hat.png" alt="">
+      <img class="brand-word" src="/tsuzuku/images/wordmark.png" alt="Tsuzuku">
+    </a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#player">The player</a>
+      <a href="#offline">Offline</a>
+      <a href="#lists">Your list</a>
+      <a href="#glance">Everything</a>
+    </nav>
+    <a class="btn btn-seal btn-sm" href="#get">Get the app</a>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ── hero ──────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-art" aria-hidden="true">
+    <img class="hero-hat" src="/tsuzuku/images/hat.png" alt="">
+  </div>
+
+  <div class="hero-in">
+    <h1 class="hero-mark"><img src="/tsuzuku/images/wordmark.png" alt="Tsuzuku"></h1>
+    <p class="hero-line">
+      <span class="ln"><span>An anime app that</span></span>
+      <span class="ln"><span>picks up where</span></span>
+      <span class="ln"><span>you left off.</span></span>
+    </p>
+    <p class="hero-lede">Watch it, download episodes for when you have no internet, and
+      let MyAnimeList or AniList keep up with what you&rsquo;ve seen.</p>
+    <div class="hero-do">
+      <a class="btn btn-seal" href="#get">Get the app</a>
+      <a class="btn" href="https://discord.gg/pT3MxSY9yd">Join the Discord</a>
+      <a class="btn btn-bare" href="https://github.com/Syha-01/Tsuzuku">View on GitHub</a>
+    </div>
+    <p class="hero-meta">Android &middot; free &middot; no account needed</p>
+  </div>
+
+  <p class="endcard">
+    <span class="endcard-word">tsuzuku</span>
+    <span class="endcard-en">to be continued</span>
+  </p>
+</section>
+
+<!-- ── nothing in between ────────────────────────────────────────────── -->
+<section class="band" id="how">
+  <div class="shell">
+    <div class="band-body">
+      <header class="head">
+        <h2>Nothing in between</h2>
+        <img class="rule" src="/tsuzuku/images/rule.png" alt="">
+        <p class="head-lede">Tsuzuku goes straight to the site it streams from, from your
+          phone. There is nothing of ours in the middle that can go down and take the app
+          with it.</p>
+      </header>
+      <div class="cols cols-3">
+        <div class="note">
+          <h3>No account needed</h3>
+          <p>Open it and watch. Connect MyAnimeList or AniList only if you want your list
+            to follow you, and nothing already on your phone is replaced when you do.</p>
+        </div>
+        <div class="note">
+          <h3>It fixes itself</h3>
+          <p>When something breaks on the site Tsuzuku streams from, the fix arrives on its
+            own the next time you open the app. Nothing to reinstall, nobody to wait on.</p>
+        </div>
+        <div class="note">
+          <h3>Nothing held back</h3>
+          <p>No tiers, no upgrade, nothing kept for a paid version. Everything on this page
+            is in the app you download.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── the player ────────────────────────────────────────────────────── -->
+<section class="band" id="player">
+  <div class="shell">
+    <div class="band-body">
+      <header class="head">
+        <h2>The player</h2>
+        <img class="rule" src="/tsuzuku/images/rule.png" alt="">
+        <p class="head-lede">Built by someone tired of tapping the wrong thing in the dark.</p>
+      </header>
+
+      <figure class="shot shot-wide">
+        <img src="/tsuzuku/images/player.jpg" alt="The Tsuzuku player in landscape, with the seek bar, quality menu and subtitles on screen." loading="lazy" decoding="async" width="1356" height="610">
+      </figure>
+
+      <div class="cols cols-2">
+        <div class="note">
+          <h3>Pick the quality yourself</h3>
+          <p>Every quality an episode actually comes in, changeable halfway through without
+            losing your place, and remembered for the next episode. Tsuzuku checks what is
+            really on offer instead of showing the same list every time &mdash; one series
+            has 1080p, 720p and 360p, the next only has 720p.</p>
+        </div>
+        <div class="note">
+          <h3>Taps that add up</h3>
+          <p>Double tap either side to skip, and tapping again keeps adding to the same jump
+            instead of starting a new one. Hold anywhere for double speed. Slide up and down
+            on the left for brightness, on the right for volume. <b class="key">+85s</b> gets
+            you past the cold open and the opening in one press.</p>
+        </div>
+        <div class="note">
+          <h3>Brightness it gives back</h3>
+          <p>Tsuzuku dims its own screen instead of changing your phone&rsquo;s, so it never
+            has to ask permission, and your phone is back to normal the moment you leave.</p>
+        </div>
+        <div class="note">
+          <h3>Sub and dub, side by side</h3>
+          <p>Two separate episode lists rather than a number beside the title, and you can
+            swap over halfway through an episode.</p>
+        </div>
+        <div class="note">
+          <h3>Subtitles that stay in time</h3>
+          <p>Sometimes a dub&rsquo;s subtitles were written for a different copy of the
+            episode and slide out of time partway in. Tsuzuku works out how far off they are
+            and puts them back where they belong.</p>
+        </div>
+        <div class="note">
+          <h3>Translate subtitles on your phone</h3>
+          <p>Get a language once and subtitles are translated on the phone itself &mdash;
+            nothing is sent anywhere. Settings tells you how big each language is before you
+            download it.</p>
+        </div>
+        <div class="note">
+          <h3>Keep watching in a small window</h3>
+          <p>Go home mid-episode and it carries on in a corner of the screen, subtitles and
+            all, while you answer a message or look something up.</p>
+        </div>
+        <div class="note">
+          <h3>If one server won&rsquo;t play, it tries the next</h3>
+          <p>Episodes are usually on more than one server. Tsuzuku works its way down the
+            list rather than giving up on the first one that refuses.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── offline ───────────────────────────────────────────────────────── -->
+<section class="band" id="offline">
+  <div class="shell">
+    <div class="band-body">
+      <header class="head">
+        <h2>Offline</h2>
+        <img class="rule" src="/tsuzuku/images/rule.png" alt="">
+        <p class="head-lede">On the train, on a plane, anywhere with no internet.</p>
+      </header>
+
+      <div class="split">
+        <figure class="shot shot-phone">
+          <img src="/tsuzuku/images/downloads.jpg" alt="The downloads screen, listing saved episodes with their size and progress." loading="lazy" decoding="async" width="610" height="1356">
+        </figure>
+        <div class="cols cols-1">
+          <div class="note">
+            <h3>One episode, one file</h3>
+            <p>An episode online is really hundreds of little pieces. Tsuzuku joins them into
+              a single video as it downloads, so what ends up on your phone is one file the
+              size of the episode &mdash; and you can send it on like any other video.</p>
+          </div>
+          <div class="note">
+            <h3>It keeps going when you leave</h3>
+            <p>Switching away from the app or locking your phone doesn&rsquo;t quietly stop a
+              download, so a season queued before bed is there in the morning. If one does get
+              interrupted it carries on from where it stopped rather than starting again.</p>
+          </div>
+          <div class="note">
+            <h3>Save at the size you want</h3>
+            <p>Choose the quality to save at and every download takes the best one available
+              up to that, whatever that particular episode happens to offer.</p>
+          </div>
+          <div class="note">
+            <h3>What you watch offline still counts</h3>
+            <p>A downloaded episode plays on the same screen a streamed one does, so an
+              episode you watch on a plane is in Continue Watching &mdash; and on your list
+              &mdash; as soon as you are back online.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── your list ─────────────────────────────────────────────────────── -->
+<section class="band" id="lists">
+  <div class="shell">
+    <div class="band-body">
+      <header class="head">
+        <h2>Your list</h2>
+        <img class="rule" src="/tsuzuku/images/rule.png" alt="">
+        <p class="head-lede">It keeps your list up to date without you opening it.</p>
+      </header>
+
+      <div class="split split-flip">
+        <figure class="shot shot-phone">
+          <img src="/tsuzuku/images/series.jpg" alt="A series page showing the synopsis, cast and episode list." loading="lazy" decoding="async" width="610" height="1356">
+        </figure>
+        <div class="body-text">
+          <p>Connect MyAnimeList or AniList and finishing an episode here finishes it there.
+            How far you have got, whether you are watching or on hold, your score, your
+            rewatches and the dates you started and finished &mdash; all of it goes up as
+            you watch.</p>
+          <div class="trackers">
+            <div class="tracker">
+              <img class="tracker-logo" src="/tsuzuku/images/mal.png" alt="MyAnimeList" width="140" height="58" loading="lazy">
+              <ul class="ticks">
+                <li>Every episode you finish is ticked off</li>
+                <li>Your score, your status and your rewatches stay matched</li>
+                <li>The discussion thread for each episode, right on the series page</li>
+                <li>It won&rsquo;t call a series that is still airing finished, just because you have caught up</li>
+              </ul>
+            </div>
+            <div class="tracker">
+              <img class="tracker-logo tracker-logo-al" src="/tsuzuku/images/anilist.png" alt="AniList" width="108" height="82" loading="lazy">
+              <ul class="ticks">
+                <li>The same, the moment you finish an episode</li>
+                <li>Your whole list comes across in one go</li>
+                <li>The description, cast and discussion come from the site you signed in to</li>
+                <li>A rewatch you are in the middle of stays a rewatch</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub">
+        <h3 class="sub-head">Bringing a list across</h3>
+        <p class="sub-lede">Three hundred series, and you don&rsquo;t sit there watching it happen.</p>
+        <div class="cols cols-2">
+          <div class="note">
+            <h3>You don&rsquo;t wait for it</h3>
+            <p>Tsuzuku takes your list and lets you get on with things, then looks each
+              series up in the background &mdash; what you are watching first, then on hold,
+              then plan to watch, and what you finished years ago last. They turn up as they
+              are found, and closing the app only pauses it.</p>
+          </div>
+          <div class="note">
+            <h3>Nothing of yours is replaced</h3>
+            <p>Signing in joins your list to what is already on the phone. Everything you
+              have watched here stays exactly where it was.</p>
+          </div>
+          <div class="note">
+            <h3>The ones it can&rsquo;t find</h3>
+            <p>Anything it can&rsquo;t match gets a screen of its own, so you can point it at
+              the right series in a couple of taps instead of wondering where it went.</p>
+          </div>
+          <div class="note">
+            <h3>One list at a time</h3>
+            <p>Signing in to the second signs you out of the first, on purpose &mdash; when
+              two lists disagree there is no right answer.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── at a glance ───────────────────────────────────────────────────── -->
+<section class="band" id="glance">
+  <div class="shell">
+    <div class="band-body">
+      <header class="head">
+        <h2>Everything it does</h2>
+        <img class="rule" src="/tsuzuku/images/rule.png" alt="">
+        <p class="head-lede">In one list, so you can see what you are getting before you
+          spend fifty megabytes on it.</p>
+      </header>
+
+      <div class="glance">
+        <section class="glance-set">
+          <h3>Watching</h3>
+          <ul class="ticks">
+            <li>Stream up to 1080p</li>
+            <li>Change quality mid-episode</li>
+            <li>Quality remembered for next time</li>
+            <li>Sub and dub as separate lists</li>
+            <li>Swap between them mid-episode</li>
+            <li>Subtitle timing corrected for you</li>
+            <li>Translate subtitles on the phone</li>
+            <li>Double tap to skip, taps stack up</li>
+            <li>Hold for double speed</li>
+            <li>Slide for brightness and volume</li>
+            <li>Skip the intro in one press</li>
+            <li>Skip intros and outros on their own</li>
+            <li>Drag across the picture to seek</li>
+            <li>Fit, zoom, stretch, 16:9 or 4:3</li>
+            <li>Keep watching in a small window</li>
+            <li>Theatre mode</li>
+            <li>Lock the orientation</li>
+            <li>Set subtitle size, font and background</li>
+            <li>Falls back when a server won&rsquo;t play</li>
+          </ul>
+        </section>
+        <section class="glance-set">
+          <h3>Offline</h3>
+          <ul class="ticks">
+            <li>Download any episode</li>
+            <li>One file per episode</li>
+            <li>Resumes after an interruption</li>
+            <li>Keeps going when you leave the app</li>
+            <li>Finishes overnight with the screen off</li>
+            <li>Choose the quality to save at</li>
+            <li>Share a saved episode like any video</li>
+            <li>Offline watching still counts</li>
+            <li>See what each download costs you</li>
+          </ul>
+        </section>
+        <section class="glance-set">
+          <h3>Finding things</h3>
+          <ul class="ticks">
+            <li>Continue watching, to the minute</li>
+            <li>What&rsquo;s airing this week</li>
+            <li>Countdown to the next episode</li>
+            <li>Search by name</li>
+            <li>Browse by genre</li>
+            <li>Synopsis, cast, year and rating</li>
+            <li>Every season in order</li>
+            <li>Episode discussion threads</li>
+          </ul>
+        </section>
+        <section class="glance-set">
+          <h3>Your list</h3>
+          <ul class="ticks">
+            <li>MyAnimeList sync</li>
+            <li>AniList sync</li>
+            <li>Episodes ticked off as you watch</li>
+            <li>Status, score and rewatches</li>
+            <li>Start and finish dates</li>
+            <li>Import your whole list</li>
+            <li>Matching runs in the background</li>
+            <li>Fix anything it can&rsquo;t place by hand</li>
+          </ul>
+        </section>
+        <section class="glance-set">
+          <h3>The app itself</h3>
+          <ul class="ticks">
+            <li>Free</li>
+            <li>No account required</li>
+            <li>No ads</li>
+            <li>Updates arrive on their own</li>
+            <li>Choose your own colours</li>
+            <li>True black for OLED screens</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── and the rest ──────────────────────────────────────────────────── -->
+<section class="band" id="rest">
+  <div class="shell">
+    <div class="band-body">
+      <header class="head">
+        <h2>And the rest</h2>
+        <img class="rule" src="/tsuzuku/images/rule.png" alt="">
+        <p class="head-lede">The parts you&rsquo;d only notice if they were missing.</p>
+      </header>
+
+      <div class="trio">
+        <figure class="shot shot-phone">
+          <img src="/tsuzuku/images/home.jpg" alt="The home screen, opening on Continue Watching." loading="lazy" decoding="async" width="610" height="1356">
+          <figcaption>Home</figcaption>
+        </figure>
+        <figure class="shot shot-phone">
+          <img src="/tsuzuku/images/schedule.jpg" alt="The schedule, with the week along the top and today's episodes below." loading="lazy" decoding="async" width="575" height="1280">
+          <figcaption>Schedule</figcaption>
+        </figure>
+        <figure class="shot shot-phone">
+          <img src="/tsuzuku/images/saved.jpg" alt="The saved list as a wall of posters." loading="lazy" decoding="async" width="575" height="1280">
+          <figcaption>Saved</figcaption>
+        </figure>
+        <figure class="shot shot-phone">
+          <img src="/tsuzuku/images/themes.jpg" alt="The display settings, with colour presets and a pure black option." loading="lazy" decoding="async" width="575" height="1280">
+          <figcaption>Display settings</figcaption>
+        </figure>
+      </div>
+
+      <div class="cols cols-3">
+        <div class="note">
+          <h3>Continue watching</h3>
+          <p>Opens on what you are partway through, at the episode and the minute you stopped.</p>
+        </div>
+        <div class="note">
+          <h3>Know what&rsquo;s next</h3>
+          <p>What&rsquo;s airing this week, and when the next episode of anything you follow is due.</p>
+        </div>
+        <div class="note">
+          <h3>Search and genres</h3>
+          <p>Find it by name or browse by genre, with the description, cast and year on a proper series page.</p>
+        </div>
+        <div class="note">
+          <h3>Episode lists open where you are</h3>
+          <p>The episode numbers start where you are watching, not back at 1&ndash;24 when you are on 1,177.</p>
+        </div>
+        <div class="note">
+          <h3>Episode discussion</h3>
+          <p>The thread for the episode you just finished, from whichever list you signed in to.</p>
+        </div>
+        <div class="note">
+          <h3>Theatre mode</h3>
+          <p>Fill the whole screen or keep the page around the player, and lock it to portrait, landscape, or let it turn.</p>
+        </div>
+        <div class="note">
+          <h3>Make it your colours</h3>
+          <p>Start from a preset or choose the colours yourself. Change the background and everything else follows it, and there is a pure black one for OLED screens.</p>
+        </div>
+        <div class="note">
+          <h3>Subtitles the size you want</h3>
+          <p>Text size, background and font, set once and used on every episode after that.</p>
+        </div>
+        <div class="note">
+          <h3>It tells you what changed</h3>
+          <p>When an update arrives, a short note says what is new in it &mdash; once, and then never again.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── get it ────────────────────────────────────────────────────────── -->
+<section class="band band-get" id="get">
+  <div class="shell">
+    <div class="band-body">
+      <header class="head">
+        <h2>Get it</h2>
+        <img class="rule" src="/tsuzuku/images/rule.png" alt="">
+        <p class="head-lede">Put it on your phone, then tell us what&rsquo;s broken.</p>
+      </header>
+
+      <p class="get-blurb">Tsuzuku is made with a small group of people who actually watch
+        on it. New versions go up in the Discord first, it&rsquo;s where the bugs get found,
+        and it&rsquo;s where what to build next gets argued about. Come and take a side.</p>
+
+      <div class="grabs">
+        <a class="grab grab-main" href="https://github.com/Syha-01/Tsuzuku/releases/download/v3.1.0/tsuzuku-v3.1.0-arm64.apk">
+          <span class="grab-name">Download the app</span>
+          <span class="grab-meta">Latest &middot; 3.1.0 &middot; 30 September 2026 &middot; SIZE MB</span>
+        </a>
+        <a class="grab" href="https://github.com/Syha-01/Tsuzuku/releases/download/v2.0.0-2-universal/tsuzuku-v2.0.0-2-universal.apk">
+          <span class="grab-name">Universal</span>
+          <span class="grab-meta">32-bit &middot; 2.0.0 (2) &middot; 20 September 2026 &middot; 72 MB</span>
+        </a>
+      </div>
+
+      <div class="hero-do hero-do-get">
+        <a class="btn" href="https://discord.gg/pT3MxSY9yd">Join the Discord</a>
+        <a class="btn btn-bare" href="https://github.com/Syha-01/Tsuzuku">View on GitHub</a>
+      </div>
+
+      <div class="fineprint">
+        <h3>Before you install</h3>
+        <p>Works on Android phones from the last decade or so. Take the first download; if
+          Android refuses to install it, your phone is 32-bit and the universal one is the
+          same app built to run on it. It installs from the file rather than an app store,
+          so Android will ask you once whether you trust it. Test versions install as a
+          separate app with their own downloads and list, so trying one never costs you the
+          version you already have.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot-in">
+    <img class="foot-hat" src="/tsuzuku/images/hat.png" alt="" aria-hidden="true">
+    <p class="foot-name">Tsuzuku &middot; Android</p>
+    <nav class="foot-nav" aria-label="Elsewhere">
+      <a href="https://github.com/Syha-01/Tsuzuku">GitHub</a>
+      <a href="https://github.com/Syha-01/Tsuzuku/releases">Releases</a>
+      <a href="https://discord.gg/pT3MxSY9yd">Discord</a>
+      <a href="#top">Top</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" defer></script>
+<script src="/tsuzuku/script.js" defer></script>
+
+</body>
+</html>
