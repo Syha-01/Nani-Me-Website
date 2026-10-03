@@ -1,6 +1,25 @@
 {
   "redirects": [
-    { "source": "/tsuzuku.html", "destination": "/tsuzuku/", "permanent": false },
-    { "source": "/tsuzuku-new.html", "destination": "/tsuzuku/", "permanent": false }
+    {
+      "source": "/tsuzuku.html",
+      "destination": "/tsuzuku/",
+      "permanent": false
+    },
+    {
+      "source": "/tsuzuku-new.html",
+      "destination": "/tsuzuku/",
+      "permanent": false
+    }
+  ],
+  "headers": [
+    {
+      "source": "/player-ywocs9tb/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    }
   ]
 }

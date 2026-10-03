@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#000000">
+<title>Tsuzuku Player Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;800&display=swap">
+<link rel="stylesheet" href="/player-ywocs9tb/player.css">
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+</head>
+<body>
+<div id="picker" hidden>
+  <header>
+    <h1>Tsuzuku player lab</h1>
+    <p>Four player designs you can actually use. Open one, turn your phone sideways, and try everything: tap to show the controls, double-tap the sides to skip, drag the bar, open the settings.</p>
+  </header>
+  <div class="cards">
+    <a class="vcard" href="?v=c"><b>C · Labelled</b><span>As posted. Words under the bar; Audio &amp; subtitles opens full screen, the ⋮ menu holds the rest.</span><em>Open</em></a>
+    <a class="vcard" href="?v=d"><b>D · Island</b><span>As posted. Floating capsules, the picture never darkens, settings is one card of buttons.</span><em>Open</em></a>
+    <a class="vcard new" href="?v=f"><b>F · Island + C's settings</b><span>New. D's capsules with C's settings, and easier episode navigation: previous / next with the episode number, an episode strip that slides up, and Up next at the end.</span><em>Open</em></a>
+    <a class="vcard new" href="?v=g"><b>G · Labelled + navigation</b><span>New. C's look with the same navigation as F: previous and next in the bottom row, the episode strip, and Up next.</span><em>Open</em></a>
+  </div>
+  <p class="foot">Mockups only: quality, audio and server just show what picking one looks like. There's no real video either: the picture is a drawing, and the clock runs on its own.</p>
+</div>
+
+<div id="app" hidden>
+  <div id="stage">
+    <div class="pic" id="pic">
+      <div class="scene"></div>
+      <video id="video" playsinline muted></video>
+    </div>
+    <div class="cue" id="cue"></div>
+    <div class="gest" id="gest"></div>
+    <div class="ripple l" id="rl"><ion-icon name="play-back"></ion-icon><span></span></div>
+    <div class="ripple r" id="rr"><ion-icon name="play-forward"></ion-icon><span></span></div>
+    <div class="ui" id="ui"></div>
+    <div class="toast" id="toast"></div>
+  </div>
+  <div class="rotate" id="rotate">
+    <ion-icon name="phone-landscape-outline"></ion-icon>
+    <p>Turn your phone sideways</p>
+    <button data-act="full">Go fullscreen</button>
+    <a href="./">Back to the list</a>
+  </div>
+</div>
+<script src="/player-ywocs9tb/player.js"></script>
+</body>
+</html>
