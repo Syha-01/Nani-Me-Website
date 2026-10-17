@@ -125,3 +125,15 @@
         document.fonts.ready.then(() => ScrollTrigger.refresh());
     }
 })();
+
+// The gallery's arrows: a screenful at a time. Swiping and the keyboard work
+// without them.
+(() => {
+    const track = document.querySelector('.gal-track');
+    if (!track) return;
+    document.querySelectorAll('[data-gal]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+            track.scrollBy({ left: Number(btn.dataset.gal) * track.clientWidth * 0.8 });
+        });
+    });
+})();
