@@ -398,6 +398,14 @@ a { color: inherit; }
 .shot-wide img { border-radius: 8px; }
 .shot-wide { margin-top: clamp(36px, 4.4vw, 62px); }
 
+.duo {
+    display: grid;
+    gap: clamp(20px, 3vw, 40px);
+    margin-top: clamp(36px, 4.4vw, 62px);
+}
+.duo .shot-wide { margin-top: 0; }
+@media (min-width: 880px) { .duo { grid-template-columns: 1fr 1fr; } }
+
 .split {
     display: grid;
     gap: clamp(32px, 4vw, 62px);
@@ -421,7 +429,7 @@ a { color: inherit; }
     margin-top: clamp(36px, 4.4vw, 62px);
 }
 .trio .shot img { max-height: 430px; object-fit: cover; object-position: top; }
-.trio figcaption {
+.trio figcaption, .duo figcaption {
     margin-top: 15px;
     font-size: 14px;
     color: var(--ash-dim);

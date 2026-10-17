@@ -9,6 +9,26 @@
       "source": "/tsuzuku-new.html",
       "destination": "/tsuzuku/",
       "permanent": false
+    },
+    {
+      "source": "/tsuzuku/4",
+      "destination": "/tsuzuku/",
+      "permanent": false
+    },
+    {
+      "source": "/tsuzuku/4/",
+      "destination": "/tsuzuku/",
+      "permanent": false
+    },
+    {
+      "source": "/tsuzuku/4-1",
+      "destination": "/tsuzuku/",
+      "permanent": false
+    },
+    {
+      "source": "/tsuzuku/4-1/",
+      "destination": "/tsuzuku/",
+      "permanent": false
     }
   ],
   "headers": [
