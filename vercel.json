@@ -42,12 +42,12 @@
     },
     {
       "source": "/apk",
-      "destination": "https://github.com/Syha-01/Tsuzuku/releases/download/v6.2.0/tsuzuku-v6.2.0-arm64.apk",
+      "destination": "https://github.com/Syha-01/Tsuzuku/releases/download/v6.2.1/tsuzuku-v6.2.1-arm64.apk",
       "permanent": false
     },
     {
       "source": "/apk/",
-      "destination": "https://github.com/Syha-01/Tsuzuku/releases/download/v6.2.0/tsuzuku-v6.2.0-arm64.apk",
+      "destination": "https://github.com/Syha-01/Tsuzuku/releases/download/v6.2.1/tsuzuku-v6.2.1-arm64.apk",
       "permanent": false
     },
     {
