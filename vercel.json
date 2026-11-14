@@ -52,12 +52,12 @@
     },
     {
       "source": "/apk-universal",
-      "destination": "https://github.com/Syha-01/Tsuzuku/releases/download/v6.2.0/tsuzuku-v6.2.0-universal.apk",
+      "destination": "https://github.com/Syha-01/Tsuzuku/releases/download/v6.2.1/tsuzuku-v6.2.1-universal.apk",
       "permanent": false
     },
     {
       "source": "/apk-universal/",
-      "destination": "https://github.com/Syha-01/Tsuzuku/releases/download/v6.2.0/tsuzuku-v6.2.0-universal.apk",
+      "destination": "https://github.com/Syha-01/Tsuzuku/releases/download/v6.2.1/tsuzuku-v6.2.1-universal.apk",
       "permanent": false
     }
   ],
