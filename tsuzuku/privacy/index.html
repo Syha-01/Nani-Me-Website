@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="What Tsuzuku stores about you, why, and how to have it deleted.">
+<meta name="theme-color" content="#08080A">
+<link rel="icon" type="image/png" href="/tsuzuku/images/favicon.png">
+<title>Tsuzuku Privacy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+:root {
+    --sumi: #08080A;
+    --washi: #E7E7E9;
+    --ash: #97969B;
+    --seal-lit: #A8202E;
+    --line: #232328;
+}
+* { box-sizing: border-box; }
+body {
+    margin: 0; background: var(--sumi); color: var(--ash);
+    font: 400 16px/1.7 'Zen Kaku Gothic New', system-ui, sans-serif;
+}
+main { max-width: 720px; margin: 0 auto; padding: 56px 16px 80px; }
+a { color: var(--washi); text-decoration-color: var(--seal-lit); text-underline-offset: 3px; }
+a:hover, a:focus-visible { color: var(--seal-lit); }
+.back { font-size: 14px; }
+h1, h2 { font-family: 'Shippori Mincho B1', Georgia, serif; color: var(--washi); line-height: 1.25; }
+h1 { font-size: clamp(32px, 7vw, 44px); font-weight: 800; margin: 28px 0 6px; }
+h2 { font-size: 22px; font-weight: 600; margin: 40px 0 8px; padding-top: 24px; border-top: 1px solid var(--line); }
+.date { font-size: 14px; margin: 0 0 24px; }
+strong { color: var(--washi); font-weight: 500; }
+ul { padding-left: 20px; }
+li { margin: 6px 0; }
+</style>
+</head>
+<body>
+<main>
+<a class="back" href="/tsuzuku/">← Tsuzuku</a>
+<h1>Privacy</h1>
+<p class="date">Last updated 14 November 2026</p>
+
+<p>Tsuzuku is a free Android app, made by one developer. You can use it without an account. This page lists everything it stores about you, why, and how to have it deleted.</p>
+
+<h2>On your phone only</h2>
+<p>Your library, watch progress, downloads and settings live on your phone. They don't leave it unless you turn on one of the features below.</p>
+
+<h2>If you join the rankings or make an account</h2>
+<ul>
+<li><strong>Your username</strong> and, if you set them, a password (stored only as a hash, never readable) and an email address. The email is used only to help you back into your account, for example to send a password reset code.</li>
+<li><strong>What you watch for the rankings:</strong> the show, the episode and the minutes watched, which make up the leaderboards and your monthly wrap.</li>
+<li><strong>Your profile:</strong> your picture, the items you own or wear from the shop, your coins, who you follow, and your stories.</li>
+<li><strong>Chat:</strong> the messages you send in chats, watch parties and direct messages.</li>
+<li><strong>A backup of your library</strong>, if you turn backup on, so you can restore it on another phone.</li>
+<li><strong>MyAnimeList or AniList:</strong> if you sign in with one, Tsuzuku keeps your user name and id there, and uses their sign-in to update your list on your behalf. Your password for those sites never reaches Tsuzuku.</li>
+<li><strong>Ko-fi supporters:</strong> the support and a scrambled copy (a hash) of your Ko-fi email, only to recognise renewals.</li>
+</ul>
+
+<h2>Everyone who uses the app</h2>
+<ul>
+<li><strong>A random install id</strong> and the app version, sent at most once a day, so I know how many people use the app. It isn't tied to your name or your phone's identity.</li>
+<li><strong>Playback problems:</strong> when an episode fails to load, the show, episode and the server that failed, so broken sources can be fixed. No personal details are included.</li>
+<li><strong>Contact the developer:</strong> anything you send there, with your app version and phone model, and a way to reach you if you give one. Bug reports and feature requests are shown to other users and copied to the Tsuzuku Discord; "Something else" is seen only by you and me.</li>
+</ul>
+
+<h2>What Tsuzuku doesn't do</h2>
+<ul>
+<li>No ads and no ad tracking.</li>
+<li>No analytics or crash reporting services.</li>
+<li>Nothing is sold or shared with anyone for marketing.</li>
+</ul>
+
+<h2>Where it's kept</h2>
+<p>Account data is stored on <a href="https://www.convex.dev">Convex</a>, the service that runs Tsuzuku's server. Password reset emails are sent from tsuzuku.support@gmail.com through Gmail. Videos come from third-party sites, which see your connection as they would in a browser.</p>
+
+<h2>Deleting your data</h2>
+<p>To have your account and everything tied to it deleted, send a request from Settings › Contact the developer, or email <a href="mailto:tsuzuku.support@gmail.com">tsuzuku.support@gmail.com</a> with your username. Uninstalling the app removes everything stored on your phone.</p>
+
+<h2>Contact</h2>
+<p><a href="mailto:tsuzuku.support@gmail.com">tsuzuku.support@gmail.com</a></p>
+</main>
+</body>
+</html>
