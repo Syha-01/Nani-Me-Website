@@ -32,12 +32,12 @@
     },
     {
       "source": "/tv",
-      "destination": "https://github.com/Syha-01/Tsuzuku/releases/download/tv-v4.1.9/tsuzuku-tv-v4.1.9.apk",
+      "destination": "https://github.com/Syha-01/Tsuzuku/releases/download/tv-v4.1.10/tsuzuku-tv-v4.1.10.apk",
       "permanent": false
     },
     {
       "source": "/tv/",
-      "destination": "https://github.com/Syha-01/Tsuzuku/releases/download/tv-v4.1.9/tsuzuku-tv-v4.1.9.apk",
+      "destination": "https://github.com/Syha-01/Tsuzuku/releases/download/tv-v4.1.10/tsuzuku-tv-v4.1.10.apk",
       "permanent": false
     }
   ],
