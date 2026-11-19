@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Every Tsuzuku bug report and request from Discord, the app and direct messages, read and sorted: what is being fixed, what comes next, and what is not planned.">
+<meta name="theme-color" content="#08080A">
+<meta property="og:title" content="Tsuzuku Roadmap">
+<meta property="og:description" content="Every Tsuzuku bug report and request from Discord, the app and direct messages, read and sorted: what is being fixed, what comes next, and what is not planned.">
+<meta property="og:image" content="https://nani-me-website.vercel.app/tsuzuku/images/og.jpg">
+<link rel="icon" type="image/png" href="/tsuzuku/images/favicon.png">
+<title>Tsuzuku Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+</head>
+<body>
+<style>
+/* One column of status groups, read top to bottom from what's being fixed to
+   what isn't happening; the platform switch narrows every group at once. */
+:root {
+    --sumi: #08080A;
+    --sumi-2: #101014;
+    --washi: #E7E7E9;
+    --ash: #97969B;
+    --ash-dim: #6E6D74;
+    --line: #1E1E23;
+    --seal: #6F161F;
+    --seal-lit: #A8202E;
+    --display: 'Shippori Mincho B1', Georgia, serif;
+    --body: 'Zen Kaku Gothic New', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+    margin: 0; background: var(--sumi); color: var(--ash);
+    font: 400 16px/1.65 var(--body);
+    -webkit-font-smoothing: antialiased;
+}
+main {
+    max-width: 920px; margin: 0 auto;
+    padding-block: 48px 96px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+a { color: var(--washi); text-decoration-color: var(--seal-lit); text-underline-offset: 3px; }
+a:hover, a:focus-visible { color: var(--seal-lit); }
+:focus-visible { outline: 2px solid var(--washi); outline-offset: 3px; }
+::selection { background: var(--seal); color: var(--washi); }
+
+.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; font-size: 14px; }
+.top img { height: 26px; width: auto; display: block; }
+
+header.head { margin: 40px 0 28px; display: grid; gap: 14px; }
+h1 {
+    font: 800 clamp(38px, 8vw, 64px)/1.05 var(--display); color: var(--washi);
+    margin: 0; letter-spacing: -0.01em; text-wrap: balance;
+}
+h1 .kana { display: block; font-size: 0.32em; font-weight: 600; color: var(--seal-lit); letter-spacing: 0.3em; margin-bottom: 10px; }
+.lede { margin: 0; max-width: 62ch; color: var(--washi); font-size: 17px; }
+.lede + p { margin: 0; max-width: 62ch; }
+.stamp { font-size: 13px; color: var(--ash-dim); letter-spacing: 0.04em; }
+
+.read {
+    display: flex; flex-wrap: wrap; gap: 8px 28px; margin: 8px 0 0; padding: 16px 0;
+    border-block: 1px solid var(--line); list-style: none;
+}
+.read li { display: flex; align-items: baseline; gap: 8px; }
+.read b { font: 600 22px/1 var(--display); color: var(--washi); font-variant-numeric: tabular-nums; }
+.read span { font-size: 14px; }
+
+/* the switch */
+.tools {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 12px;
+    padding-block: 14px; margin-bottom: 8px; background: var(--sumi);
+    border-bottom: 1px solid var(--line);
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--sumi); }
+.seg { display: flex; gap: 4px; padding: 3px; border-radius: 999px; background: var(--sumi-2); }
+.seg button {
+    font: 500 14px/1 var(--body); color: var(--ash); background: none; border: 0;
+    padding: 9px 14px; border-radius: 999px; cursor: pointer;
+}
+.seg button:hover { color: var(--washi); }
+.seg button[aria-pressed="true"] { background: var(--seal); color: var(--washi); }
+.find { flex: 1 1 200px; min-width: 0; position: relative; }
+.find input {
+    width: 100%; font: 400 15px/1 var(--body); color: var(--washi);
+    background: var(--sumi-2); border: 1px solid transparent; border-radius: 999px;
+    padding: 10px 14px 10px 36px;
+}
+.find input::placeholder { color: var(--ash-dim); }
+.find input:focus { outline: none; border-color: var(--seal-lit); }
+.find svg { position: absolute; left: 13px; top: 50%; translate: 0 -50%; width: 15px; height: 15px; color: var(--ash-dim); }
+
+/* jump list */
+.jump { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 18px 0 8px; padding: 0; list-style: none; font-size: 14px; }
+.jump a { color: var(--ash); text-decoration: none; display: inline-flex; gap: 6px; align-items: center; }
+.jump a:hover { color: var(--washi); }
+.jump .n { color: var(--ash-dim); font-variant-numeric: tabular-nums; }
+
+/* groups */
+section.group { margin-top: 44px; scroll-margin-top: 80px; }
+.group > h2 {
+    display: flex; align-items: center; gap: 12px; margin: 0 0 4px;
+    font: 600 24px/1.2 var(--display); color: var(--washi);
+}
+.group > h2 .n { font: 500 14px/1 var(--body); color: var(--ash-dim); font-variant-numeric: tabular-nums; }
+.group > .say { margin: 0 0 10px; font-size: 14px; max-width: 62ch; }
+.mark { width: 14px; height: 14px; flex: none; border-radius: 50%; }
+.m-now   { background: var(--seal-lit); box-shadow: 0 0 0 4px rgba(168, 32, 46, .18); }
+.m-next  { border: 2px solid var(--seal-lit); }
+.m-plan  { border: 2px solid var(--ash); }
+.m-maybe { border: 2px dashed var(--ash-dim); }
+.m-done, .m-there, .m-no { border-radius: 0; background: none; color: var(--ash); }
+.m-done, .m-there, .m-no { font: 700 15px/14px var(--body); text-align: center; }
+.m-done  { color: var(--seal-lit); }
+
+ul.items { list-style: none; margin: 0; padding: 0; }
+.item {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 20px;
+    padding: 14px 0; border-top: 1px solid var(--line);
+}
+.item:last-child { border-bottom: 1px solid var(--line); }
+.item h3 { margin: 0; font: 500 16px/1.45 var(--body); color: var(--washi); }
+.item p { margin: 0; font-size: 15px; grid-column: 1; min-width: 0; }
+.item .where { margin-top: 4px; font-size: 13px; color: var(--ash-dim); }
+.item .where b { color: var(--ash); font-weight: 500; }
+.meta { grid-column: 2; grid-row: 1 / span 3; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.chips { display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
+.chip {
+    font: 500 11px/1 var(--body); letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ash); border: 1px solid var(--line); border-radius: 4px; padding: 5px 7px;
+}
+.asked { font-size: 12px; color: var(--seal-lit); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.need { font-size: 12px; color: var(--washi); white-space: nowrap; }
+.group.dim .item h3 { color: var(--ash); }
+.empty { padding: 14px 0; border-top: 1px solid var(--line); font-size: 15px; color: var(--ash-dim); }
+.none { margin-top: 44px; color: var(--ash); }
+
+footer.foot { margin-top: 72px; padding-top: 28px; border-top: 1px solid var(--line); display: grid; gap: 14px; max-width: 62ch; }
+footer.foot h2 { margin: 0; font: 600 22px/1.25 var(--display); color: var(--washi); }
+footer.foot p { margin: 0; }
+footer.foot .sig { font-size: 14px; color: var(--ash-dim); }
+
+@media (max-width: 560px) {
+    .item { grid-template-columns: minmax(0, 1fr); }
+    .meta { grid-column: 1; grid-row: auto; flex-direction: row; align-items: center; justify-content: flex-start; margin-top: 6px; }
+    .chips { justify-content: flex-start; }
+    .seg { width: 100%; }
+    .seg button { flex: 1; padding-inline: 6px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+}
+</style>
+
+<main>
+  <div class="top">
+    <a href="/tsuzuku/">← Tsuzuku</a>
+    <a href="https://discord.gg/pT3MxSY9yd">Discord</a>
+  </div>
+
+  <header class="head">
+    <h1><span class="kana">これから</span>What&rsquo;s coming</h1>
+    <p class="lede">Every bug report and request you&rsquo;ve sent has been read, from the Discord forums, the Contact the developer form in the app, and the messages you send me directly. This is all of it, sorted by what happens next.</p>
+    <p>Tsuzuku is made by one person between school and work, so there are no dates here. The order is real, though: things near the top get done first.</p>
+    <p class="stamp">Last updated 19 November 2026</p>
+    <ul class="read" aria-label="What was read">
+      <li><b>122</b><span>Discord posts</span></li>
+      <li><b>41</b><span>in-app reports</span></li>
+      <li><b>100</b><span>direct conversations</span></li>
+      <li><b id="total">0</b><span>things on this page</span></li>
+    </ul>
+  </header>
+
+  <div class="tools">
+    <div class="seg" role="group" aria-label="Which app">
+      <button type="button" id="f-all" data-f="all" aria-pressed="true">All</button>
+      <button type="button" id="f-phone" data-f="phone" aria-pressed="false">Phone</button>
+      <button type="button" id="f-tv" data-f="tv" aria-pressed="false">TV</button>
+      <button type="button" id="f-atlas" data-f="atlas" aria-pressed="false">Atlas</button>
+    </div>
+    <label class="find">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" id="q" placeholder="Find your report" aria-label="Search this page">
+    </label>
+  </div>
+
+  <ul class="jump" id="jump"></ul>
+  <div id="groups"></div>
+  <p class="none" id="none" hidden>Nothing here matches. If it&rsquo;s something you sent and it isn&rsquo;t on this page, send it again: Settings › Contact the developer.</p>
+
+  <footer class="foot">
+    <h2>Something missing?</h2>
+    <p>Send it from the app (Settings › Contact the developer), or post it in the bug or request forum on <a href="https://discord.gg/pT3MxSY9yd">Discord</a>. For a bug, the show, the episode and the server it was on are what make it fixable.</p>
+    <p>To get fixes as they come out: Settings › App › Check for update. The TV offers its own updates. Tsuzuku Atlas updates itself.</p>
+    <p class="sig">Syha01</p>
+  </footer>
+</main>
+
+<script>
+const GROUPS = [
+  { id: 'now',   name: 'Fixing now',         mark: 'm-now',   say: 'Bugs being worked on. Some need one more detail from you, and say so.' },
+  { id: 'next',  name: 'Next up',            mark: 'm-next',  say: 'Decided, and first in line once the fixes above are out.' },
+  { id: 'plan',  name: 'Planned',            mark: 'm-plan',  say: 'Happening, after the ones above. Some wait on a new APK, a design, or room on the server.' },
+  { id: 'maybe', name: 'Thinking about it',  mark: 'm-maybe', say: 'Good ideas that aren’t decided yet. Some are hard to do, some need a source or a design first.' },
+  { id: 'there', name: 'Already in the app', mark: 'm-there', say: 'Asked for, but already there. Here’s where to find them.' },
+  { id: 'done',  name: 'Done recently',      mark: 'm-done',  say: 'Fixed or added since the start of November, from your reports.' },
+  { id: 'no',    name: 'Not planned',        mark: 'm-no',    say: 'Looked at properly and turned down, with the reason.' },
+];
+const PLAT = { phone: 'Phone', tv: 'TV', atlas: 'Atlas' };
+
+// on: which apps. n: how many people asked. need: a detail still wanted from them.
+const ITEMS = [
+  // Fixing now
+  { s: 'now', on: ['phone'], n: 2, t: 'Downloads can close the app', d: 'Sometimes Tsuzuku closes by itself while an episode is downloading.' },
+  { s: 'now', on: ['phone'], t: 'Resume all, for downloads', d: 'Pause all has nothing to undo it, so every episode has to be started again by hand.' },
+  { s: 'now', on: ['phone'], t: 'Slow downloads', d: 'Some downloads crawl. Checking whether it’s the server they come from or the app.' },
+  { s: 'now', on: ['phone'], t: 'Double tap to seek doesn’t add up', d: 'A second double tap should take you to 20 seconds. Right now it waits, then jumps 10 again.' },
+  { s: 'now', on: ['phone'], n: 2, t: 'Continue Watching shows old shows', d: 'The row can get stuck on what you watched before instead of what you’re on now.' },
+  { s: 'now', on: ['phone'], t: 'Finished seasons stay in Continue Watching', d: 'After the last episode of a season it should leave the row instead of clogging it.' },
+  { s: 'now', on: ['phone'], t: 'Shop rows squashed on the boards', d: 'A row looks right in the shop, splits in two in the preview, and is squeezed to fit on the leaderboard.' },
+  { s: 'now', on: ['phone'], t: 'Cursor stays in the AniList score', d: 'Leaving the score box with Back leaves it highlighted with the cursor blinking.' },
+  { s: 'now', on: ['phone'], t: 'Subtitles late before the intro', d: 'On some shows the subtitles lag until the opening, then catch up. Dororo is the example.' },
+  { s: 'now', on: ['phone'], t: 'An episode with one server and the wrong shape', d: 'Dragon Ball Z 219 once opened in 4:3 with only one server, then played normally later.' },
+  { s: 'now', on: ['phone'], t: 'Episodes missing from a show', d: 'Chiikawa has gaps in its episode list.' },
+  { s: 'now', on: ['phone'], need: true, t: 'No sound on any episode', d: 'Sound is missing everywhere for one person, with and without Bluetooth.' },
+  { s: 'now', on: ['phone'], need: true, t: '“Can’t play” on everything', d: 'Nothing plays for one person.' },
+  { s: 'now', on: ['tv'], t: 'Episode row loses its place', d: 'When episode pictures load in, the highlight jumps while you’re moving along the row.' },
+  { s: 'now', on: ['tv'], t: 'Filmstrip shows late and changes', d: 'The seek pictures take a moment to appear, then swap as the sharper ones arrive.' },
+  { s: 'now', on: ['tv'], t: 'Home from a show page', d: 'Pressing Home in the sidebar while on a show page leaves you on the show.' },
+  { s: 'now', on: ['tv'], t: 'Slow after clearing storage', d: 'The TV can lag hard after clearing pictures in Settings › Storage.' },
+  { s: 'now', on: ['tv'], t: 'Spanish source missing on Mi Box S', d: 'AnimeAV1 doesn’t show on the Mi Box S (3rd gen).' },
+  { s: 'now', on: ['atlas'], n: 1, t: 'No subtitles on an English dub', d: 'English subtitles don’t show over an English dub on Unique Stream, and on Re:ANIME too. The Promised Neverland is the example.' },
+
+  // Next up
+  { s: 'next', on: ['phone'], n: 3, t: 'Picture-in-picture by itself', d: 'Leave the app while an episode plays and it carries on in a small window, without pressing anything. With a switch to turn it off.' },
+  { s: 'next', on: ['phone'], t: 'Choose how far a skip goes', d: '2, 5, 10, 15 or 20 seconds, or a number of your own, instead of always 10.' },
+  { s: 'next', on: ['phone'], n: 2, t: 'Episode pictures and names', d: 'The episode list shows a still and the title of each episode, like the TV does.' },
+  { s: 'next', on: ['phone'], t: 'Pause while it’s loading', d: 'Press pause before the episode has started, so you can walk away without waiting.' },
+  { s: 'next', on: ['phone'], t: 'Pick something for me', d: 'A button that picks a show from your list when you can’t decide what to watch.' },
+  { s: 'next', on: ['phone'], n: 2, t: 'Sequels missing from the seasons row', d: 'Natsume’s Book of Friends stops at season 6 in the row, while season 7 is right there under Related.' },
+  { s: 'next', on: ['phone'], n: 3, t: 'Better genres', d: 'Popular shows missing from some genres, shoujo shows filed under shounen, and sorting a genre by most popular or highest score, on Home rows too.' },
+  { s: 'next', on: ['phone', 'tv'], t: 'Your phone as the TV’s remote', d: 'Change the quality, server and episode playing on the TV from the phone it’s linked to.' },
+  { s: 'next', on: ['phone'], t: 'Chat rules', d: 'A short set of rules to read and agree to before your first message, so everyone knows where the line is.' },
+  { s: 'next', on: ['tv'], t: 'Back goes Home', d: 'After hopping through More like this, one Back takes you Home instead of retracing every show. A setting keeps the old way for anyone who wants it.' },
+  { s: 'next', on: ['tv'], t: 'Remove all', d: 'Clear a list in one go instead of one at a time.' },
+  { s: 'next', on: ['atlas'], t: 'Dubtitles named as such', d: 'Subtitles written to match the dub’s words get their own label, so you know which to pick.' },
+  { s: 'next', on: ['atlas'], t: 'Out of beta', d: 'A stable release once testers’ reports are fixed, checked on more Windows PCs.' },
+
+  // Planned
+  { s: 'plan', on: ['phone'], t: 'Back to Watching when a new episode is out', d: 'A show you’ve caught up on returns to Watching when its next episode airs.' },
+  { s: 'plan', on: ['phone'], t: 'Delete downloads once watched', d: 'An optional switch that clears an episode from the phone after you finish it.' },
+  { s: 'plan', on: ['phone'], t: 'Update from inside the app', d: 'Download and install a new version without going through the browser, the way the TV does. Comes with the next APK.' },
+  { s: 'plan', on: ['phone'], n: 2, t: 'Fairer rankings', d: 'Very high speeds won’t count for more than they should, and a phone left playing on its own will ask if you’re still watching.' },
+  { s: 'plan', on: ['phone'], t: 'More sources for older shows', d: 'Adding the sites the Atlas already plays, once every episode on them is checked to play.' },
+  { s: 'plan', on: ['phone'], t: 'Change your username yourself', d: 'From your profile, without having to message me.' },
+  { s: 'plan', on: ['phone'], t: 'Delete an account from Settings', d: 'For anyone with extra accounts they don’t use.' },
+  { s: 'plan', on: ['phone'], t: 'Characters on the series page', d: 'Who’s in the show, with their pictures.' },
+  { s: 'plan', on: ['phone'], t: 'Where to start, on Home', d: 'A row of the big shows a new viewer should try first.' },
+  { s: 'plan', on: ['phone'], t: 'Better pictures for rooms', d: 'Proper art for show rooms that only have a plain cover now, Attack on Titan among them.' },
+  { s: 'plan', on: ['phone'], t: 'Longer chat history', d: 'General shows more of what was said before, once the server can carry it.' },
+  { s: 'plan', on: ['tv'], t: 'Details when paused', d: 'Pausing shows the poster and what the episode is about. Needs a design first.' },
+  { s: 'plan', on: ['tv'], t: 'Blurred background like the phone’s', d: 'Only if it stays smooth on slower TVs. Needs a design first.' },
+  { s: 'plan', on: ['tv'], t: 'Search and Browse in one place', d: 'Designs are drawn. It’s a big change, so it waits until it can be done properly.' },
+  { s: 'plan', on: ['tv'], t: 'LG TVs', d: 'Test builds are already running on one LG TV.' },
+
+  // Thinking about it
+  { s: 'maybe', on: ['phone', 'tv'], n: 2, t: 'Discord status while you watch', d: 'Showing what you’re watching on your Discord profile.' },
+  { s: 'maybe', on: ['phone'], t: 'Voice chat in watch parties', d: 'Talking to the room while you watch.' },
+  { s: 'maybe', on: ['phone'], t: 'Cut and share clips', d: 'Trim a few seconds of an episode to send in chat or post elsewhere.' },
+  { s: 'maybe', on: ['phone'], t: 'Home screen widget', d: 'New episodes of what you’re watching, on your phone’s home screen.' },
+  { s: 'maybe', on: ['phone'], t: 'Chat notifications', d: 'A notification when someone replies to you.' },
+  { s: 'maybe', on: ['phone'], t: 'Pictures in chat', d: 'Sending screenshots and images in messages.' },
+  { s: 'maybe', on: ['phone'], t: 'Subtitles translated offline', d: 'Any episode in your language without the internet. Arabic was asked for first.' },
+  { s: 'maybe', on: ['phone'], t: 'Your stats, any time', d: 'A page of your watching stats, like the monthly wrap but whenever you want it.' },
+  { s: 'maybe', on: ['phone'], t: 'Try before you buy, in the shop', d: 'Wearing an item for a while before spending coins on it.' },
+  { s: 'maybe', on: ['phone'], n: 2, t: 'Indonesian dubs', d: 'This needs a site that has them. If you know a good one, post the link in Discord.' },
+  { s: 'maybe', on: ['phone', 'tv'], t: 'Show names instead of season numbers', d: 'Dragon Ball Z instead of Season 2. People in Discord are split on this one.' },
+  { s: 'maybe', on: ['phone'], t: 'Ask before closing', d: 'A check when Back on Home would close the app. Phone only: on the TV the sidebar already does that job.' },
+  { s: 'maybe', on: ['tv'], n: 3, t: 'New Home layouts', d: 'A bigger spotlight, show logos in place of names, landscape cards, and new player icons.' },
+  { s: 'maybe', on: ['tv'], t: 'Samsung TVs', d: 'A Tizen version of the TV app.' },
+  { s: 'maybe', on: ['phone', 'tv'], t: 'SIMKL', d: 'Syncing your list with SIMKL, next to MyAnimeList and AniList.' },
+
+  // Already in the app
+  { s: 'there', on: ['phone'], n: 2, t: 'Picture-in-picture', d: 'Leave the player or press Home while an episode plays.', w: 'Doing it by itself is in Next up.' },
+  { s: 'there', on: ['phone'], t: 'Subtitle size and position', d: 'More options than the TV has.', w: 'Settings › Subtitles' },
+  { s: 'there', on: ['phone'], t: 'A list without MyAnimeList or AniList', d: 'Set a status on a season and it’s kept on your phone. With a Tsuzuku account it’s backed up too.', w: 'The Saved tab' },
+  { s: 'there', on: ['phone'], n: 2, t: 'Turn off chat and the extras', d: 'Streaming only, with no messages, notifications or pop-ups.', w: 'Settings › Additional features' },
+  { s: 'there', on: ['phone'], t: 'Add a friend by name', d: 'They need to have joined the rankings first.', w: 'Rankings › Friends › Follow someone by name' },
+  { s: 'there', on: ['phone'], t: 'Share your monthly wrap', d: 'Made for you when each month ends.', w: 'Rankings, then Story at the top' },
+  { s: 'there', on: ['phone'], t: 'Hold to pause', d: 'Hold the video to stop it while you read a line.', w: 'Settings › Playback › Holding the video' },
+  { s: 'there', on: ['atlas'], t: 'Tsuzuku on a computer', d: 'Tsuzuku Atlas is in beta for Windows 10 and 11 and Linux, in the Beta channel on Discord.' },
+
+  // Done recently
+  { s: 'done', on: ['atlas'], t: 'The phone app on your computer', d: 'Atlas 1.2.0 beta: chat, rankings, the shop, watch parties, downloads, the monthly wrap and episode reminders.' },
+  { s: 'done', on: ['atlas'], n: 1, t: 'Sign in on the Atlas', d: 'Tsuzuku, AniList or MyAnimeList, with your lists kept in step everywhere. Atlas 1.1.0 beta.' },
+  { s: 'done', on: ['atlas'], t: 'Windows black screen and the pause button', d: 'The first Windows build opened to nothing, and the pause icon was squashed. Both fixed.' },
+  { s: 'done', on: ['phone'], t: 'Remove someone from a watch party', d: 'The host can remove anyone, and guests can vote someone out.' },
+  { s: 'done', on: ['phone', 'tv'], n: 2, t: 'Rankings missing what you watched', d: 'Episodes watched without a connection or before signing in, and on the TV, now wait to be counted instead of being lost.' },
+  { s: 'done', on: ['tv'], n: 2, t: 'TV closing on the next episode', d: 'Moving between episodes with different fonts closed the app. TV 4.1.13.' },
+  { s: 'done', on: ['phone'], t: 'Screenshots', d: 'A button in the player saves or shares the frame on screen.' },
+  { s: 'done', on: ['phone'], n: 3, t: 'Faster speeds, and a quieter hold', d: 'Up to 3x. Hold for 2x and slide up for more, with no vibration, and keep the speed after letting go.' },
+  { s: 'done', on: ['phone'], t: 'Picture-in-picture closing on autoplay', d: 'The next episode starting in the small window closed the app.' },
+  { s: 'done', on: ['phone'], n: 2, t: 'Your own reactions in chat', d: 'Pick the six emoji you react with most.' },
+  { s: 'done', on: ['phone'], t: 'Forgot your password', d: 'A code emailed to your account, from Settings or the TV’s sign-in page.' },
+  { s: 'done', on: ['phone'], t: 'Ties on the boards', d: 'Equal minutes go to whoever got there first.' },
+  { s: 'done', on: ['phone', 'tv'], t: 'When the episode ends', d: 'The time beside the timeline says what time the episode will finish, at the speed you’re watching.' },
+  { s: 'done', on: ['phone'], t: 'Default subtitle language', d: 'Start every episode on the language you read, with English when it isn’t there.' },
+  { s: 'done', on: ['phone'], t: 'Bringing the episode count down', d: 'Type a number or use − on a show’s progress.' },
+  { s: 'done', on: ['phone', 'tv'], t: 'AniList custom lists', d: 'Your own lists as tabs in Saved and My List.' },
+  { s: 'done', on: ['phone'], t: 'Crashes on Rankings and on one huge subtitle file', d: 'Both found from your reports the same day.' },
+  { s: 'done', on: ['tv'], t: 'Episode pictures', d: 'A still and the name of each episode, in the player and on the show page. TV 4.1.10.' },
+  { s: 'done', on: ['tv'], t: 'Stretch and Widen 4:3', d: 'Fit, Stretch, Zoom and Widen 4:3 for older shows with bars at the sides. TV 4.1.10.' },
+  { s: 'done', on: ['tv'], t: 'Plan to watch from AniList', d: 'My List brings in all of it, not just a few. TV 4.1.10.' },
+  { s: 'done', on: ['tv'], n: 2, t: 'Subtitles cut off', d: 'Slanted lines lost their last letter at the edge. TV 4.1.10.' },
+  { s: 'done', on: ['tv'], t: 'Better seeking', d: 'Seeking pauses while you look, OK goes there and Back stays put. Filmstrip, Ripple or Single previews, and no lag after long use. TV 4.1.6 to 4.1.12.' },
+  { s: 'done', on: ['tv'], t: 'English names, sliding titles, steadier menus', d: 'Chinese shows get English names, long names slide along, and the sidebar no longer flashes open. TV 4.1.10 and 4.1.12.' },
+
+  // Not planned
+  { s: 'no', on: ['phone'], t: '4x speed', d: 'The sound gets too hard to follow. 3x is the top.' },
+  { s: 'no', on: ['tv'], t: 'Seek previews from Seekr', d: 'They’re sharper, but come from a different copy of the episode and can show the wrong moment. Ours come from the file you’re watching.' },
+  { s: 'no', on: ['phone'], t: 'Miruro as a server', d: 'Its streams come from AniKoto, which Tsuzuku already plays.' },
+  { s: 'no', on: ['atlas'], t: 'Windows 7 and 8', d: 'The Atlas needs Windows 10 or later.' },
+];
+
+const $ = (s) => document.querySelector(s);
+const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const MARK = { done: '✓', there: '→', no: '×' };
+let plat = 'all';
+
+function row(i) {
+  const chips = i.on.map((p) => `<span class="chip">${PLAT[p]}</span>`).join('');
+  const asked = i.n > 1 ? `<span class="asked">Asked ${i.n} times</span>` : '';
+  const need = i.need ? '<span class="need">Send the show and episode</span>' : '';
+  const where = i.w ? `<p class="where"><b>${esc(i.w)}</b></p>` : '';
+  return `<li class="item"><h3>${esc(i.t)}</h3><p>${esc(i.d)}</p>${where}<div class="meta"><div class="chips">${chips}</div>${asked}${need}</div></li>`;
+}
+
+function draw() {
+  const q = $('#q').value.trim().toLowerCase();
+  const show = ITEMS.filter((i) => (plat === 'all' || i.on.includes(plat))
+    && (!q || (i.t + ' ' + i.d + ' ' + (i.w || '')).toLowerCase().includes(q)));
+  let html = '', jump = '';
+  for (const g of GROUPS) {
+    const rows = show.filter((i) => i.s === g.id);
+    if (!rows.length) continue;
+    const m = MARK[g.id] ? `<span class="mark ${g.mark}" aria-hidden="true">${MARK[g.id]}</span>` : `<span class="mark ${g.mark}" aria-hidden="true"></span>`;
+    html += `<section class="group${g.id === 'no' || g.id === 'there' ? ' dim' : ''}" id="${g.id}"><h2>${m}${g.name}<span class="n">${rows.length}</span></h2><p class="say">${g.say}</p><ul class="items">${rows.map(row).join('')}</ul></section>`;
+    jump += `<li><a href="#${g.id}">${g.name} <span class="n">${rows.length}</span></a></li>`;
+  }
+  $('#groups').innerHTML = html;
+  $('#jump').innerHTML = jump;
+  $('#none').hidden = !!show.length;
+}
+
+function pick(p) {
+  plat = PLAT[p] ? p : 'all';
+  document.querySelectorAll('.seg button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.f === plat)));
+  draw();
+}
+
+document.querySelectorAll('.seg button').forEach((b) => b.addEventListener('click', () => {
+  pick(b.dataset.f);
+  try { history.replaceState(null, '', b.dataset.f === 'all' ? location.pathname : '#' + b.dataset.f); } catch {}
+}));
+$('#q').addEventListener('input', draw);
+window.addEventListener('hashchange', () => { const h = location.hash.slice(1); if (PLAT[h]) pick(h); });
+$('#total').textContent = ITEMS.length;
+pick(location.hash.slice(1));
+</script>
+
+</body>
+</html>
