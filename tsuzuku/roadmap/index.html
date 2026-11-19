@@ -209,7 +209,7 @@ footer.foot .sig { font-size: 14px; color: var(--ash-dim); }
     <h1>What&rsquo;s coming</h1>
     <p class="lede">Every bug report and request you&rsquo;ve sent has been read: the Discord forums, the Contact the developer form in the app, and the messages you send me in the app. This is all of it, sorted by what happens next.</p>
     <p>Tsuzuku is made by one person between school and work, so there are no dates here. The order is real, though: things near the top get done first. If you sent something from the app, your username is on it, so you can search for yourself.</p>
-    <p class="stamp">Last updated 19 November 2026</p>
+    <p class="stamp">Last updated 19 November 2026, evening</p>
     <ul class="read" aria-label="What was read">
       <li><b>122</b><span>Discord posts</span></li>
       <li><b>41</b><span>in-app reports</span></li>
@@ -282,17 +282,10 @@ const FROM = { app: 'The app', discord: 'Discord' };
 // need: a detail still wanted. w: where to find it.
 const ITEMS = [
   // Fixing now
-  { s: 'now', on: ['phone'], a: 'downloads', by: ['MELI', ''], t: 'Downloads can close the app', x: 'Sometimes Tsuzuku closes by itself while an episode is downloading.' },
-  { s: 'now', on: ['phone'], a: 'downloads', by: ['MELI'], t: 'Resume all, for downloads', x: 'Pause all has nothing to undo it, so every episode has to be started again by hand.' },
-  { s: 'now', on: ['phone'], a: 'downloads', by: ['MELI'], t: 'Slow downloads', x: 'Some downloads crawl. Checking whether it’s the server they come from or the app.' },
-  { s: 'now', on: ['phone'], a: 'player', by: ['sunnysamantara'], t: 'Double tap to seek doesn’t add up', x: 'A second double tap should take you to 20 seconds. Right now it waits, then jumps 10 again.' },
+  { s: 'now', on: ['phone'], a: 'downloads', by: ['MELI', ''], t: 'Downloads can close the app', x: 'Sometimes Tsuzuku closes by itself while an episode is downloading. Twenty minutes of downloads in the background on Android 16 didn’t close it once, so if it happens to you, say which phone and when.' },
   { s: 'now', on: ['phone'], a: 'lists', by: ['Worldnumberonewon'], n: 2, t: 'Continue Watching shows old shows', x: 'The row can get stuck on what you watched before instead of what you’re on now.' },
-  { s: 'now', on: ['phone'], a: 'lists', by: ['Ayanakoji1225'], t: 'Finished seasons stay in Continue Watching', x: 'After the last episode of a season it should leave the row instead of clogging it.' },
-  { s: 'now', on: ['phone'], a: 'social', by: ['frownhorse'], t: 'Shop rows squashed on the boards', x: 'A row looks right in the shop, splits in two in the preview, and is squeezed to fit on the leaderboard.' },
-  { s: 'now', on: ['phone'], a: 'lists', by: ['AlexGM'], t: 'Cursor stays in the AniList score', x: 'Leaving the score box with Back leaves it highlighted with the cursor blinking.' },
-  { s: 'now', on: ['phone'], a: 'player', by: ['Aizen'], t: 'Subtitles late before the intro', x: 'On some shows the subtitles lag until the opening, then catch up. Dororo is the example.' },
-  { s: 'now', on: ['phone'], a: 'sources', d: 1, t: 'An episode with one server and the wrong shape', x: 'Dragon Ball Z 219 once opened in 4:3 with only one server, then played normally later.' },
-  { s: 'now', on: ['phone'], a: 'sources', by: ['Celestamine'], t: 'Episodes missing from a show', x: 'Chiikawa has gaps in its episode list.' },
+  { s: 'now', on: ['phone'], a: 'social', by: ['frownhorse'], t: 'Shop rows squashed on the boards', x: 'A row looks right in the shop, splits in two in the preview, and is squeezed to fit on the leaderboard. The picture rows people own are being redrawn to the row’s real shape and shown whole; the rest have left the shop.' },
+  { s: 'now', on: ['phone'], a: 'player', by: ['Aizen'], t: 'Subtitles late before the intro', x: 'On some shows the subtitles lag until the opening, then catch up. Dororo’s Japanese track lines up to a tenth of a second, so this may be the English dub, which speaks at different times. Asked which.' },
   { s: 'now', on: ['phone'], a: 'player', by: ['marcy'], need: true, t: 'No sound on any episode', x: 'Sound is missing everywhere, with and without Bluetooth.' },
   { s: 'now', on: ['phone'], a: 'player', by: ['Anime820'], need: true, t: '“Can’t play” on everything', x: 'Nothing plays at all.' },
   { s: 'now', on: ['tv'], a: 'lists', d: 1, t: 'Episode row loses its place', x: 'When episode pictures load in, the highlight jumps while you’re moving along the row.' },
@@ -362,6 +355,11 @@ const ITEMS = [
   { s: 'there', on: ['atlas'], a: 'app', d: 1, t: 'Tsuzuku on a computer', x: 'Tsuzuku Atlas is in beta for Windows 10 and 11 and Linux.', w: 'The Beta channel on Discord' },
 
   // Done recently
+  { s: 'done', on: ['phone'], a: 'player', by: ['sunnysamantara'], t: 'Double tap skips add up', x: 'After a double tap, every further tap is another 10 seconds, with no wait between, like YouTube.' },
+  { s: 'done', on: ['phone'], a: 'downloads', by: ['MELI'], t: 'Resume all, for downloads', x: 'Once everything is paused, Pause all turns into Resume all.' },
+  { s: 'done', on: ['phone'], a: 'downloads', by: ['MELI'], t: 'Faster downloads', x: 'Every episode used to wait on a “fast download” try before a byte came down. That step is gone; downloads go straight to the servers.' },
+  { s: 'done', on: ['phone'], a: 'lists', by: ['Ayanakoji1225'], t: 'Finished seasons leave Continue Watching', x: 'A last episode closed during its ending counts as watched, so the season leaves the row.' },
+  { s: 'done', on: ['phone'], a: 'lists', by: ['AlexGM'], t: 'Episode count saves on Back', x: 'Closing the keyboard with Back saves the number instead of leaving it highlighted.' },
   { s: 'done', on: ['atlas'], a: 'app', d: 1, t: 'The phone app on your computer', x: 'Atlas 1.2.0 beta: chat, rankings, the shop, watch parties, downloads, the monthly wrap and episode reminders.' },
   { s: 'done', on: ['atlas'], a: 'lists', d: 1, t: 'Sign in on the Atlas', x: 'Tsuzuku, AniList or MyAnimeList, with your lists kept in step everywhere. Atlas 1.1.0 beta.' },
   { s: 'done', on: ['atlas'], a: 'app', d: 1, t: 'Windows black screen and the pause button', x: 'The first Windows build opened to nothing, and the pause icon was squashed. Both fixed.' },
@@ -387,6 +385,8 @@ const ITEMS = [
   { s: 'done', on: ['tv'], a: 'app', d: 1, t: 'English names, sliding titles, steadier menus', x: 'Chinese shows get English names, long names slide along, and the sidebar no longer flashes open. TV 4.1.10 and 4.1.12.' },
 
   // Not planned
+  { s: 'no', on: ['phone'], a: 'sources', by: ['Celestamine'], t: 'Missing Chiikawa episodes', x: 'Not the app: none of the sites Tsuzuku plays from have episodes 125–171, 208–256 or 281–380. If one turns up that has them, it’ll be added.' },
+  { s: 'no', on: ['phone'], a: 'sources', d: 1, t: 'Dragon Ball Z 219 in 4:3 with one server', x: 'AniKoto’s list didn’t load for a moment, so only Re:ANIME was left, and it has Dragon Ball Z in its original 4:3. Both are back.' },
   { s: 'no', on: ['phone'], a: 'player', by: ['Dexter'], t: '4x speed', x: 'The sound gets too hard to follow. 3x is the top.' },
   { s: 'no', on: ['tv'], a: 'player', d: 1, t: 'Seek previews from Seekr', x: 'They’re sharper, but come from a different copy of the episode and can show the wrong moment. Ours come from the file you’re watching.' },
   { s: 'no', on: ['phone'], a: 'sources', d: 1, t: 'Miruro as a server', x: 'Its streams come from AniKoto, which Tsuzuku already plays.' },
