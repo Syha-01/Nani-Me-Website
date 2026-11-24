@@ -209,7 +209,7 @@ footer.foot .sig { font-size: 14px; color: var(--ash-dim); }
     <h1>What&rsquo;s coming</h1>
     <p class="lede">Every bug report and request you&rsquo;ve sent has been read: the Discord forums, the Contact the developer form in the app, and the messages you send me in the app. This is all of it, sorted by what happens next.</p>
     <p>Tsuzuku is made by one person between school and work, so there are no dates here. The order is real, though: things near the top get done first. If you sent something from the app, your username is on it, so you can search for yourself.</p>
-    <p class="stamp">Last updated 23 November 2026</p>
+    <p class="stamp">Last updated 24 November 2026</p>
     <ul class="read" aria-label="What was read">
       <li><b>122</b><span>Discord posts</span></li>
       <li><b>41</b><span>in-app reports</span></li>
@@ -287,9 +287,6 @@ const ITEMS = [
   { s: 'now', on: ['phone'], a: 'player', by: ['Aizen'], t: 'Subtitles late before the intro', x: 'On some shows the subtitles lag until the opening, then catch up. Dororo’s Japanese track lines up to a tenth of a second, so this may be the English dub, which speaks at different times. Asked which.' },
   { s: 'now', on: ['phone'], a: 'player', by: ['marcy'], need: true, t: 'No sound on any episode', x: 'Sound is missing everywhere, with and without Bluetooth.' },
   { s: 'now', on: ['phone'], a: 'player', by: ['Anime820'], need: true, t: '“Can’t play” on everything', x: 'Nothing plays at all.' },
-  { s: 'now', on: ['tv'], a: 'lists', d: 1, t: 'Episode row loses its place', x: 'When episode pictures load in, the highlight jumps while you’re moving along the row.' },
-  { s: 'now', on: ['tv'], a: 'player', d: 1, t: 'Filmstrip shows late and changes', x: 'The seek pictures take a moment to appear, then swap as the sharper ones arrive.' },
-  { s: 'now', on: ['tv'], a: 'app', d: 1, t: 'Home from a show page', x: 'Pressing Home in the sidebar while on a show page leaves you on the show.' },
   { s: 'now', on: ['tv'], a: 'app', d: 1, t: 'Slow after clearing storage', x: 'The TV can lag hard after clearing pictures in Settings › Storage.' },
   { s: 'now', on: ['tv'], a: 'sources', d: 1, t: 'Spanish source missing on Mi Box S', x: 'AnimeAV1 doesn’t show on the Mi Box S (3rd gen).' },
   { s: 'now', on: ['atlas'], a: 'player', d: 1, t: 'No subtitles on an English dub', x: 'English subtitles don’t show over an English dub on Unique Stream, and on Re:ANIME too. The Promised Neverland is the example.' },
@@ -304,8 +301,6 @@ const ITEMS = [
   { s: 'next', on: ['phone'], a: 'lists', by: ['theStarlightSystem', 'MizukiRyze'], n: 3, t: 'Better genres', x: 'Popular shows missing from some genres, shoujo shows filed under shounen, and sorting a genre by most popular or highest score, on Home rows too.' },
   { s: 'next', on: ['phone', 'tv'], a: 'app', by: ['Ayanakoji1225'], t: 'Your phone as the TV’s remote', x: 'Change the quality, server and episode playing on the TV from the phone it’s linked to.' },
   { s: 'next', on: ['phone'], a: 'chat', t: 'Chat rules', x: 'A short set of rules to read and agree to before your first message, so everyone knows where the line is.' },
-  { s: 'next', on: ['tv'], a: 'app', d: 1, t: 'Back goes Home', x: 'After hopping through More like this, one Back takes you Home instead of retracing every show. A setting keeps the old way for anyone who wants it.' },
-  { s: 'next', on: ['tv'], a: 'lists', d: 1, t: 'Remove all', x: 'Clear a list in one go instead of one at a time.' },
   { s: 'next', on: ['atlas'], a: 'player', d: 1, t: 'Dubtitles named as such', x: 'Subtitles written to match the dub’s words get their own label, so you know which to pick.' },
   { s: 'next', on: ['atlas'], a: 'app', d: 1, t: 'Out of beta', x: 'A stable release once testers’ reports are fixed, checked on more Windows PCs.' },
 
@@ -354,6 +349,15 @@ const ITEMS = [
   { s: 'there', on: ['atlas'], a: 'app', d: 1, t: 'Tsuzuku on a computer', x: 'Tsuzuku Atlas is in beta for Windows 10 and 11 and Linux.', w: 'The Beta channel on Discord' },
 
   // Done recently
+  { s: 'done', on: ['tv'], a: 'player', d: 1, t: 'One bar in the player', x: 'The Buttons layout is one line under the timeline: episodes and audio on the left, playback in the middle, source, speed and help on the right. TV 4.1.15.' },
+  { s: 'done', on: ['tv'], a: 'app', d: 1, t: 'Back after More like this', x: 'Three shows deep, Back asks once where to go: where you started, the first show, or one page at a time. TV 4.1.15.' },
+  { s: 'done', on: ['tv'], a: 'lists', d: 1, t: 'Remove all', x: 'Hold OK in Continue Watching to clear the whole row, after asking. TV 4.1.15.' },
+  { s: 'done', on: ['tv'], a: 'lists', d: 1, t: 'Show pages arrive whole', x: 'A show opens on its poster for a moment, then all at once, pictures and all. TV 4.1.15.' },
+  { s: 'done', on: ['tv'], a: 'lists', by: ['mike89101'], t: 'Old episode counts on the TV', x: 'A TV left on for days kept a show’s first episode count, so Blue Box said NEW with episode 7 missing. TV 4.1.15.' },
+  { s: 'done', on: ['tv'], a: 'lists', d: 1, t: 'Episode row loses its place', x: 'The pictures load into the row you’re on instead of redrawing it. TV 4.1.15.' },
+  { s: 'done', on: ['tv'], a: 'player', d: 1, t: 'Filmstrip shows late and changes', x: 'The seek pictures come down before the first press, and sharpen only into the same scene. TV 4.1.15.' },
+  { s: 'done', on: ['tv'], a: 'app', d: 1, t: 'Home from a show page', x: 'The sidebar’s icon for the screen you’re on takes you back to it. TV 4.1.15.' },
+  { s: 'done', on: ['tv'], a: 'sources', d: 1, t: 'Korean shows with no episodes', x: 'A show with no dub opened on an empty dub list. It opens subbed now. TV 4.1.15.' },
   { s: 'done', on: ['phone'], a: 'social', by: ['frownhorse'], t: 'Shop rows no longer squashed', x: 'The picture rows people own were repainted to a row’s real shape and are shown whole everywhere, with the picture’s ring on the same line as everyone’s avatar. The rest left the shop.' },
   { s: 'done', on: ['phone'], a: 'player', by: ['Ayanakoji1225'], d: 1, n: 3, t: 'Double tap that misses', x: 'The second tap had to land almost exactly on the first. Taps a finger apart, or a little slower, count now.' },
   { s: 'done', on: ['tv'], a: 'player', by: ['yuubin'], d: 1, n: 2, t: 'Next episode without a ⏭ key', x: 'A Buttons layout for the player: everything on screen, picked with the arrows. TV 4.1.14.' },
