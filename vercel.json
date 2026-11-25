@@ -59,6 +59,16 @@
       "source": "/apk-universal/",
       "destination": "https://github.com/Syha-01/Tsuzuku/releases/download/v6.4.0/tsuzuku-v6.4.0-universal.apk",
       "permanent": false
+    },
+    {
+      "source": "/atlas",
+      "destination": "https://github.com/Syha-01/Tsuzuku/releases/tag/atlas-v1.3.0-beta-1",
+      "permanent": false
+    },
+    {
+      "source": "/atlas/",
+      "destination": "https://github.com/Syha-01/Tsuzuku/releases/tag/atlas-v1.3.0-beta-1",
+      "permanent": false
     }
   ],
   "headers": [
