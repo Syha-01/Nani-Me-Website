@@ -209,7 +209,7 @@ footer.foot .sig { font-size: 14px; color: var(--ash-dim); }
     <h1>What&rsquo;s coming</h1>
     <p class="lede">Every bug report and request you&rsquo;ve sent has been read: the Discord forums, the Contact the developer form in the app, and the messages you send me in the app. This is all of it, sorted by what happens next.</p>
     <p>Tsuzuku is made by one person between school and work, so there are no dates here. The order is real, though: things near the top get done first. If you sent something from the app, your username is on it, so you can search for yourself.</p>
-    <p class="stamp">Last updated 24 November 2026</p>
+    <p class="stamp">Last updated 25 November 2026</p>
     <ul class="read" aria-label="What was read">
       <li><b>122</b><span>Discord posts</span></li>
       <li><b>41</b><span>in-app reports</span></li>
@@ -351,6 +351,8 @@ const ITEMS = [
   // Done recently
   { s: 'done', on: ['tv'], a: 'player', d: 1, t: 'Subtitles over the seek bar', x: 'With the side panel open, or while seeking, subtitles sat on the timeline or the previews. The timeline now stops at the panel too. TV 4.1.16.' },
   { s: 'done', on: ['tv'], a: 'lists', d: 1, t: 'My List search box left open', x: 'The search box and filters keep the remote until you close them. TV 4.1.16.' },
+  { s: 'done', on: ['tv'], a: 'player', d: 1, t: 'Episodes playing behind other apps', x: 'An episode that finished loading after Home could play unseen behind YouTube. It now waits, paused, and the player lets go while you are away. TV 4.1.17.' },
+  { s: 'done', on: ['tv'], a: 'app', d: 1, t: 'Back after More like this', x: 'Start now holds from two shows in, and a quick double Back no longer closes the app. TV 4.1.17.' },
   { s: 'done', on: ['tv'], a: 'player', d: 1, t: 'One bar in the player', x: 'The Buttons layout is one line under the timeline: episodes and audio on the left, playback in the middle, source, speed and help on the right. TV 4.1.15.' },
   { s: 'done', on: ['tv'], a: 'app', d: 1, t: 'Back after More like this', x: 'Three shows deep, Back asks once where to go: where you started, the first show, or one page at a time. TV 4.1.15.' },
   { s: 'done', on: ['tv'], a: 'lists', d: 1, t: 'Remove all', x: 'Hold OK in Continue Watching to clear the whole row, after asking. TV 4.1.15.' },
