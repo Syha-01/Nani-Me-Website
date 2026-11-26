@@ -287,8 +287,8 @@ const ITEMS = [
   { s: 'now', on: ['phone'], a: 'player', by: ['Aizen'], t: 'Subtitles late before the intro', x: 'On some shows the subtitles lag until the opening, then catch up. Dororo’s Japanese track lines up to a tenth of a second, so this may be the English dub, which speaks at different times. Asked which.' },
   { s: 'now', on: ['phone'], a: 'player', by: ['marcy'], need: true, t: 'No sound on any episode', x: 'Sound is missing everywhere, with and without Bluetooth.' },
   { s: 'now', on: ['phone'], a: 'player', by: ['Anime820'], need: true, t: '“Can’t play” on everything', x: 'Nothing plays at all.' },
-  { s: 'now', on: ['tv'], a: 'app', d: 1, t: 'Slow after clearing storage', x: 'The TV can lag hard after clearing pictures in Settings › Storage.' },
-  { s: 'now', on: ['tv'], a: 'sources', d: 1, t: 'Spanish source missing on Mi Box S', x: 'AnimeAV1 doesn’t show on the Mi Box S (3rd gen).' },
+  { s: 'done', on: ['tv'], a: 'app', d: 1, t: 'Slow after clearing storage', x: 'Video no longer lands in the picture cache, and clearing pictures no longer holds up the remote. TV 4.1.19.' },
+  { s: 'done', on: ['tv'], a: 'sources', d: 1, t: 'Spanish source missing on Mi Box S', x: 'AnimeAV1 is AV1 video, which some boxes can’t play; Settings now says so and TioAnime plays instead. TV 4.1.19.' },
   { s: 'now', on: ['atlas'], a: 'player', d: 1, t: 'No subtitles on an English dub', x: 'English subtitles don’t show over an English dub on Unique Stream, and on Re:ANIME too. The Promised Neverland is the example.' },
 
   // Next up
@@ -299,7 +299,7 @@ const ITEMS = [
   { s: 'next', on: ['phone'], a: 'lists', by: ['Ayanakoji1225'], t: 'Pick something for me', x: 'A button that picks a show from your list when you can’t decide what to watch.' },
   { s: 'next', on: ['phone'], a: 'sources', by: ['VEYON'], n: 2, t: 'Sequels missing from the seasons row', x: 'Natsume’s Book of Friends stops at season 6 in the row, while season 7 is right there under Related.' },
   { s: 'next', on: ['phone'], a: 'lists', by: ['theStarlightSystem', 'MizukiRyze'], n: 3, t: 'Better genres', x: 'Popular shows missing from some genres, shoujo shows filed under shounen, and sorting a genre by most popular or highest score, on Home rows too.' },
-  { s: 'next', on: ['phone', 'tv'], a: 'app', by: ['Ayanakoji1225'], t: 'Your phone as the TV’s remote', x: 'Change the quality, server and episode playing on the TV from the phone it’s linked to.' },
+  { s: 'done', on: ['phone', 'tv'], a: 'app', by: ['Ayanakoji1225'], t: 'Your phone as the TV’s remote', x: 'Pause and scan the code in the corner; the phone changes the episode, server, quality, subtitles and audio. TV 4.1.19.' },
   { s: 'next', on: ['phone'], a: 'chat', t: 'Chat rules', x: 'A short set of rules to read and agree to before your first message, so everyone knows where the line is.' },
   { s: 'next', on: ['atlas'], a: 'player', d: 1, t: 'Dubtitles named as such', x: 'Subtitles written to match the dub’s words get their own label, so you know which to pick.' },
   { s: 'next', on: ['atlas'], a: 'app', d: 1, t: 'Out of beta', x: 'A stable release once testers’ reports are fixed, checked on more Windows PCs.' },
@@ -316,6 +316,8 @@ const ITEMS = [
   { s: 'plan', on: ['phone'], a: 'lists', by: ['Zoro'], t: 'Where to start, on Home', x: 'A row of the big shows a new viewer should try first.' },
   { s: 'plan', on: ['phone'], a: 'chat', by: ['BLAZER'], t: 'Better pictures for rooms', x: 'Proper art for show rooms that only have a plain cover now, Attack on Titan among them.' },
   { s: 'plan', on: ['phone'], a: 'chat', by: ['BLAZER'], t: 'Longer chat history', x: 'General shows more of what was said before, once the server can carry it.' },
+  { s: 'done', on: ['tv'], a: 'lists', d: 1, t: 'Sort genres', x: 'Most popular, Top rated, Newest or A–Z in Browse. TV 4.1.19.' },
+  { s: 'done', on: ['phone', 'tv'], a: 'player', d: 1, t: 'Subtitle outline options', x: 'Outline colour, opacity, shadow and thickness, and fourteen text colours. TV 4.1.19 and a phone update.' },
   { s: 'plan', on: ['tv'], a: 'player', d: 1, t: 'Details when paused', x: 'Pausing shows the poster and what the episode is about. Needs a design first.' },
   { s: 'plan', on: ['tv'], a: 'app', d: 1, t: 'Blurred background like the phone’s', x: 'Only if it stays smooth on slower TVs. Needs a design first.' },
   { s: 'plan', on: ['tv'], a: 'lists', d: 1, t: 'Search and Browse in one place', x: 'Designs are drawn. It’s a big change, so it waits until it can be done properly.' },
