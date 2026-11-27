@@ -62,12 +62,12 @@
     },
     {
       "source": "/atlas",
-      "destination": "https://github.com/Syha-01/Tsuzuku/releases/tag/atlas-v1.4.0-beta-1",
+      "destination": "https://github.com/Syha-01/Tsuzuku/releases/tag/atlas-v1.5.0-beta-1",
       "permanent": false
     },
     {
       "source": "/atlas/",
-      "destination": "https://github.com/Syha-01/Tsuzuku/releases/tag/atlas-v1.4.0-beta-1",
+      "destination": "https://github.com/Syha-01/Tsuzuku/releases/tag/atlas-v1.5.0-beta-1",
       "permanent": false
     }
   ],
